@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAIRRESTAURA CLINICAL AI PRO - Plataforma Integral de Evaluación y Formulación Clínica</title>
+  <meta name="description" content="Plataforma profesional de evaluación psicológica, formulación clínica multidimensional DSM-5-TR y PDM-2, psicometría y seguimiento terapéutico.">
+
+  <!-- CDNs permitidos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y TEMAS (MODO CLARO Y OSCURO)
+       ========================================================================== */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(226, 232, 240, 0.8);
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      
+      --accent-teal: #0d9488;
+      --accent-teal-dark: #0f766e;
+      --accent-teal-light: #ccfbf1;
+      
+      --accent-indigo: #4f46e5;
+      --accent-indigo-light: #e0e7ff;
+      
+      --danger-red: #dc2626;
+      --danger-red-light: #fee2e2;
+      
+      --warning-amber: #d97706;
+      --warning-amber-light: #fef3c7;
+      
+      --success-emerald: #059669;
+      --success-emerald-light: #d1fae5;
+
+      --sidebar-width: 270px;
+      --header-height: 64px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f172a;
+      --bg-tertiary: #1e293b;
+      --card-bg: #0f172a;
+      --card-border: #1e293b;
+      --glass-bg: rgba(15, 23, 42, 0.85);
+      --glass-border: rgba(30, 41, 59, 0.8);
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      
+      --accent-teal-light: rgba(13, 148, 136, 0.2);
+      --accent-indigo-light: rgba(79, 70, 229, 0.2);
+      --danger-red-light: rgba(220, 38, 38, 0.2);
+      --warning-amber-light: rgba(217, 119, 6, 0.2);
+      --success-emerald-light: rgba(5, 150, 105, 0.2);
+    }
+
+    /* ==========================================================================
+       RESET Y BASE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      font-size: 14px;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* ==========================================================================
+       BANNER LEGAL OBLIGATORIO PERMANENTE
+       ========================================================================== */
+    .legal-disclaimer-banner {
+      background: linear-gradient(90deg, #b45309, #d97706);
+      color: #ffffff;
+      padding: 7px 16px;
+      font-size: 11.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .legal-disclaimer-banner i {
+      font-size: 14px;
+      color: #fef3c7;
+    }
+
+    /* ==========================================================================
+       TOP NAVBAR
+       ========================================================================== */
+    .app-header {
+      height: var(--header-height);
+      background-color: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 32px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      transition: all 0.2s ease;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-indigo));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(13, 148, 136, 0.25);
+    }
+    .brand-text h1 {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .brand-badge {
+      font-size: 9px;
+      background: var(--accent-teal);
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .patient-selector-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--card-border);
+      padding: 4px 10px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+    }
+    .patient-selector-wrap select {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-teal {
+      background-color: var(--accent-teal);
+      color: white;
+    }
+    .btn-teal:hover {
+      background-color: var(--accent-teal-dark);
+    }
+    .btn-danger {
+      background-color: var(--danger-red);
+      color: white;
+    }
+    .btn-danger:hover {
+      background-color: #b91c1c;
+    }
+    .btn-outline {
+      background-color: var(--bg-secondary);
+      border-color: var(--card-border);
+      color: var(--text-secondary);
+    }
+    .btn-outline:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+    .btn-icon {
+      padding: 8px;
+      border-radius: var(--radius-md);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .btn-icon:hover {
+      color: var(--text-primary);
+      background-color: var(--card-border);
+    }
+
+    /* ==========================================================================
+       LAYOUT PRINCIPAL (SIDEBAR + MAIN CONTENT)
+       ========================================================================== */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      min-height: calc(100vh - var(--header-height) - 32px);
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: calc(var(--header-height) + 32px);
+      height: calc(100vh - var(--header-height) - 32px);
+      overflow-y: auto;
+      padding: 16px 12px;
+      gap: 4px;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      padding: 12px 10px 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 12.5px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .nav-item i {
+      width: 18px;
+      font-size: 14px;
+      text-align: center;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+    .nav-item:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+    .nav-item:hover i {
+      color: var(--accent-teal);
+    }
+    .nav-item.active {
+      background: linear-gradient(90deg, var(--accent-teal-light), transparent);
+      color: var(--accent-teal-dark);
+      border-color: rgba(13, 148, 136, 0.2);
+      font-weight: 700;
+    }
+    [data-theme="dark"] .nav-item.active {
+      color: #2dd4bf;
+    }
+    .nav-item.active i {
+      color: var(--accent-teal);
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 24px;
+      max-width: 1380px;
+      margin: 0 auto;
+      width: 100%;
+      overflow-y: auto;
+    }
+
+    /* ==========================================================================
+       COMPONENTES Y TARJETAS CLINICAS
+       ========================================================================== */
+    .view-section {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+    .view-section.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease;
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+    }
+    .card-title i {
+      margin-right: 8px;
+      color: var(--accent-teal);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sidebar { width: 72px; padding: 12px 6px; }
+      .sidebar .nav-item span, .sidebar .nav-label { display: none; }
+      .sidebar .nav-item { justify-content: center; padding: 12px 0; }
+    }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .app-layout { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; flex-direction: row; overflow-x: auto; padding: 8px; }
+      .sidebar .nav-item span { display: inline; }
+      .main-content { padding: 16px; }
+    }
+
+    /* Formularios Clínicos */
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-control:focus {
+      border-color: var(--accent-teal);
+      box-shadow: 0 0 0 3px var(--accent-teal-light);
+    }
+    textarea.form-control {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* Badges & Chips */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-teal { background: var(--accent-teal-light); color: var(--accent-teal-dark); }
+    .badge-danger { background: var(--danger-red-light); color: var(--danger-red); }
+    .badge-warning { background: var(--warning-amber-light); color: var(--warning-amber); }
+    .badge-success { background: var(--success-emerald-light); color: var(--success-emerald); }
+    .badge-indigo { background: var(--accent-indigo-light); color: var(--accent-indigo); }
+
+    /* Semáforo de riesgo */
+    .risk-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 11.5px;
+    }
+    .risk-leve { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .risk-moderado { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+    .risk-alto { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .risk-critico { background: #7f1d1d; color: #ffffff; border: 1px solid #991b1b; animation: pulse 1.5s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+
+    /* Tablas Clínicas */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .clinical-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+    .clinical-table th {
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .clinical-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-primary);
+    }
+    .clinical-table tr:hover td {
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Acordeones de la Entrevista */
+    .accordion-item {
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: var(--card-bg);
+    }
+    .accordion-header {
+      padding: 12px 16px;
+      background: var(--bg-tertiary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .accordion-header i.chevron {
+      transition: transform 0.2s ease;
+    }
+    .accordion-item.open .accordion-header i.chevron {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid var(--card-border);
+    }
+    .accordion-item.open .accordion-content {
+      display: block;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+    .modal-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-body {
+      padding: 24px;
+    }
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Impresión */
+    @media print {
+      .legal-disclaimer-banner, .app-header, .sidebar, .btn, .no-print {
+        display: none !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .app-layout {
+        display: block !important;
+      }
+      .main-content {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .print-header {
+        display: block !important;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+      }
+    }
+    .print-header { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER LEGAL OBLIGATORIO PERMANENTE -->
+  <aside class="legal-disclaimer-banner" role="alert">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>
+      <strong>AVISO LEGAL CLÍNICO:</strong>
+      "Esta plataforma genera hipótesis clínicas orientativas y apoyo a la toma de decisiones. No reemplaza el juicio clínico ni constituye un diagnóstico médico o psicológico definitivo."
+    </span>
+  </aside>
+
+  <!-- TOP HEADER -->
+  <header class="app-header">
+    <div class="brand-wrap">
+      <div class="brand-icon">
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <div class="brand-text">
+        <h1>JAIRRESTAURA <span class="brand-badge">CLINICAL AI PRO</span></h1>
+        <p>Evaluación, Formulación DSM-5-TR / PDM-2 & Psicoterapia</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- Selector de paciente activo -->
+      <div class="patient-selector-wrap">
+        <i class="fa-solid fa-user-check text-muted"></i>
+        <label for="select-patient" class="sr-only">Paciente:</label>
+        <select id="select-patient" onchange="app.switchPatient(this.value)">
+          <!-- Poblado dinámicamente -->
+        </select>
+        <button class="btn btn-outline" style="padding: 2px 8px; font-size: 11px;" onclick="app.openNewPatientModal()" title="Registrar Nuevo Paciente">
+          <i class="fa-solid fa-user-plus"></i>
+        </button>
+      </div>
+
+      <!-- Protocolo de seguridad rápido -->
+      <button class="btn btn-danger" onclick="app.openSafetyModal()">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span class="no-mobile">Protocolo de Seguridad</span>
+      </button>
+
+      <!-- Exportar PDF Oficial -->
+      <button class="btn btn-teal" onclick="app.openReportModal()">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span class="no-mobile">Informe PDF</span>
+      </button>
+
+      <!-- Toggle Modo Oscuro -->
+      <button class="btn-icon" onclick="app.toggleTheme()" title="Modo Oscuro/Claro">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+
+      <!-- Backup JSON -->
+      <button class="btn-icon" onclick="app.exportDatabaseJSON()" title="Descargar Copia de Seguridad JSON">
+        <i class="fa-solid fa-download"></i>
+      </button>
+      <button class="btn-icon" onclick="document.getElementById('import-file').click()" title="Restaurar Copia de Seguridad JSON">
+        <i class="fa-solid fa-upload"></i>
+      </button>
+      <input type="file" id="import-file" style="display:none;" onchange="app.importDatabaseJSON(event)">
+    </div>
+  </header>
+
+  <!-- CUERPO PRINCIPAL CON SIDEBAR Y CONTENIDO -->
+  <div class="app-layout">
+    <!-- MENU LATERAL -->
+    <nav class="sidebar" aria-label="Menú principal">
+      <div class="nav-label">Panel Principal</div>
+      <div class="nav-item active" onclick="app.navigate('dashboard')">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard Clínico</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('pacientes')">
+        <i class="fa-solid fa-users"></i>
+        <span>Gestión de Pacientes</span>
+      </div>
+
+      <div class="nav-label">Evaluación Integral</div>
+      <div class="nav-item" onclick="app.navigate('historia')">
+        <i class="fa-solid fa-notes-medical"></i>
+        <span>Historia Clínica & MSE</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('entrevista')">
+        <i class="fa-solid fa-comments"></i>
+        <span>Entrevista Adaptativa (15D)</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('escalas')">
+        <i class="fa-solid fa-square-poll-vertical"></i>
+        <span>Batería Psicométrica (8)</span>
+      </div>
+
+      <div class="nav-label">Diagnóstico & Formulación</div>
+      <div class="nav-item" onclick="app.navigate('dsm_pdm')">
+        <i class="fa-solid fa-book-medical"></i>
+        <span>Motores DSM-5-TR & PDM-2</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('formulacion')">
+        <i class="fa-solid fa-diagram-project"></i>
+        <span>Formulación de Caso (4P)</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('terapias')">
+        <i class="fa-solid fa-heart-pulse"></i>
+        <span>Modelos Psicoterapéuticos</span>
+      </div>
+
+      <div class="nav-label">Tratamiento & Informes</div>
+      <div class="nav-item" onclick="app.navigate('plan')">
+        <i class="fa-solid fa-list-check"></i>
+        <span>Plan Terapéutico SMART</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('sesiones')">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span>Seguimiento SOAP / BIRP</span>
+      </div>
+      <div class="nav-item" onclick="app.navigate('informes')">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Generador de Informes</span>
+      </div>
+    </nav>
+
+    <!-- AREA DE VISTAS PRINCIPALES -->
+    <main class="main-content">
+
+      <!-- ==============================================================
+           1. DASHBOARD PRINCIPAL
+           ============================================================== -->
+      <section id="view-dashboard" class="view-section active">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-chart-pie text-teal"></i> Dashboard Clínico General</h2>
+            <p class="section-subtitle">Monitoreo de actividad clínica, alertas psicopatológicas y evolución longitudinal.</p>
+          </div>
+          <div class="risk-indicator" id="dash-risk-badge">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span id="dash-risk-text">Riesgo: Evaluando...</span>
+          </div>
+        </div>
+
+        <!-- Métricas Rápidas -->
+        <div class="grid-4">
+          <div class="card" style="border-left: 4px solid var(--accent-teal);">
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Pacientes Activos</div>
+            <div style="font-size: 28px; font-weight: 800; color: var(--text-primary); margin-top: 4px;" id="stat-total-patients">3</div>
+            <div style="font-size: 11px; color: var(--success-emerald);"><i class="fa-solid fa-arrow-trend-up"></i> Expedientes al día</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--danger-red);">
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Depresión PHQ-9 (Actual)</div>
+            <div style="font-size: 28px; font-weight: 800; color: var(--danger-red); margin-top: 4px;" id="stat-phq-score">20/27</div>
+            <div style="font-size: 11px; color: var(--danger-red);" id="stat-phq-label">Severa | Alerta Ítem 9</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--warning-amber);">
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Ansiedad GAD-7 (Actual)</div>
+            <div style="font-size: 28px; font-weight: 800; color: var(--warning-amber); margin-top: 4px;" id="stat-gad-score">14/21</div>
+            <div style="font-size: 11px; color: var(--warning-amber);" id="stat-gad-label">Moderada</div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--accent-indigo);">
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Sesiones Registradas</div>
+            <div style="font-size: 28px; font-weight: 800; color: var(--accent-indigo); margin-top: 4px;" id="stat-sessions-count">4</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Alianza media: 4.8 / 5</div>
+          </div>
+        </div>
+
+        <!-- Gráficos de Evolución y Diagnóstico -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">
+              <span><i class="fa-solid fa-chart-line"></i> Curva de Evolución Psicométrica (PHQ-9 vs GAD-7)</span>
+              <span class="badge badge-teal">Sesión por Sesión</span>
+            </div>
+            <div style="height: 240px; position: relative;">
+              <canvas id="chart-evolution"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span><i class="fa-solid fa-spider"></i> Perfil de Capacidades Mentales PDM-2 (Eje M)</span>
+              <span class="badge badge-indigo">9 Capacidades</span>
+            </div>
+            <div style="height: 240px; position: relative;">
+              <canvas id="chart-pdm"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alertas y Resumen del Paciente Activo -->
+        <div class="card">
+          <div class="card-title">
+            <span><i class="fa-solid fa-triangle-exclamation text-danger"></i> Síntesis Clínica Inmediata & Alertas del Paciente Activo</span>
+            <button class="btn btn-outline" style="padding: 2px 8px; font-size: 11px;" onclick="app.navigate('formulacion')">Ver Formulación Completa</button>
+          </div>
+          <div class="grid-2" style="font-size: 12.5px;">
+            <div style="background: var(--bg-tertiary); padding: 14px; border-radius: var(--radius-md);">
+              <strong>Diagnóstico de Trabajo DSM-5-TR:</strong>
+              <p style="color: var(--accent-teal-dark); font-weight: 700; margin-top: 2px;" id="dash-dsm-summary">F33.1 Trastorno de Depresión Mayor, Recurrente, Moderado-Severo</p>
+              <p style="font-size: 11.5px; color: var(--text-secondary); margin-top: 4px;" id="dash-dsm-spec">Con síntomas ansiosos comórbidos y reactividad al trauma relacional.</p>
+            </div>
+            <div style="background: var(--bg-tertiary); padding: 14px; border-radius: var(--radius-md);">
+              <strong>Diagnóstico Estructural PDM-2:</strong>
+              <p style="color: var(--accent-indigo); font-weight: 700; margin-top: 2px;" id="dash-pdm-summary">Organización Limítrofe Alta | Patrón Depresivo-Autocrítico</p>
+              <p style="font-size: 11.5px; color: var(--text-secondary); margin-top: 4px;" id="dash-pdm-spec">Defensas: Introyeción, vuelta contra sí mismo y escisión parcial ante pérdidas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           2. GESTION DE PACIENTES
+           ============================================================== -->
+      <section id="view-pacientes" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-users text-teal"></i> Directorio y Gestión de Pacientes</h2>
+            <p class="section-subtitle">Gestión centralizada de expedientes, filtros de búsqueda y creación de nuevos historiales.</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.openNewPatientModal()">
+            <i class="fa-solid fa-plus"></i> Registrar Nuevo Paciente
+          </button>
+        </div>
+
+        <div class="card">
+          <div style="margin-bottom: 14px; display: flex; gap: 10px;">
+            <input type="text" id="patient-search-input" class="form-control" placeholder="Buscar por nombre, documento o expediente..." oninput="app.filterPatientsTable(this.value)">
+          </div>
+
+          <div class="table-responsive">
+            <table class="clinical-table">
+              <thead>
+                <tr>
+                  <th>Expediente</th>
+                  <th>Paciente</th>
+                  <th>Edad / Sexo</th>
+                  <th>Diagnóstico DSM-5-TR</th>
+                  <th>Nivel de Riesgo</th>
+                  <th>Última Sesión</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="patients-table-body">
+                <!-- Poblado dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           3. HISTORIA CLINICA & EXAMEN DEL ESTADO MENTAL (MSE)
+           ============================================================== -->
+      <section id="view-historia" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-notes-medical text-teal"></i> Historia Clínica & Examen del Estado Mental (MSE)</h2>
+            <p class="section-subtitle">Exploración psicopatológica completa en 10 dimensiones con descriptores semiológicos estandarizados.</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.saveCurrentPatientData()">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span><i class="fa-solid fa-id-card"></i> 1. Identificación y Antecedentes Médicos</span></div>
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label">Nombre Completo:</label>
+              <input type="text" id="hc-fullname" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Edad y Estado Civil:</label>
+              <input type="text" id="hc-age-marital" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ocupación & Escolaridad:</label>
+              <input type="text" id="hc-occupation" class="form-control">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Enfermedades Médicas & Alergias:</label>
+              <textarea id="hc-medical-history" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Medicación Psiquiátrica / Farmacológica Actual:</label>
+              <textarea id="hc-medications" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- MSE 10 Dimensiones -->
+        <div class="card">
+          <div class="card-title"><span><i class="fa-solid fa-brain"></i> 2. Examen del Estado Mental (MSE en 10 Esferas)</span></div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">1. Porte, Apariencia y Conducta Motora:</label>
+              <input type="text" id="mse-appearance" class="form-control" value="Higiene adecuada, enlentecimiento psicomotor leve, contacto visual adecuado.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">2. Conciencia y Nivel de Alerta:</label>
+              <select id="mse-consciousness" class="form-control">
+                <option value="Vigil y lúcido">Vigil y lúcido</option>
+                <option value="Somnoliento / Obnubilado">Somnoliento / Obnubilado</option>
+                <option value="Fluctuante / Confusional">Fluctuante / Confusional</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">3. Orientación en 4 Esferas (Tiempo, Espacio, Persona, Situación):</label>
+              <input type="text" id="mse-orientation" class="form-control" value="Orientado en las 4 esferas.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">4. Atención y Concentración:</label>
+              <select id="mse-attention" class="form-control">
+                <option value="Normoprosexia">Normoprosexia</option>
+                <option value="Hipoprosexia">Hipoprosexia (Disminuida)</option>
+                <option value="Hiperprosexia / Hipervigilancia">Hiperprosexia / Hipervigilancia</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">5. Memoria (Inmediata, Reciente y Remota):</label>
+              <input type="text" id="mse-memory" class="form-control" value="Memoria inmediata y remota preservada; leve bradipsiquia reciente.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">6. Lenguaje y Habla (Tono, Ritmo, Coherencia):</label>
+              <input type="text" id="mse-speech" class="form-control" value="Bradilálico, tono apagado, coherente y fluido sin afasias.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">7. Pensamiento (Curso y Contenido):</label>
+              <input type="text" id="mse-thought" class="form-control" value="Curso bradipsíquico. Ideas sobrevaloradas de culpa y minusvalía. Niega delirios.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">8. Afecto y Humor:</label>
+              <input type="text" id="mse-mood" class="form-control" value="Humor deprimido con labilidad ocasional, afecto congruente y constreñido.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">9. Sensopercepción (Alucinaciones / Disociación):</label>
+              <input type="text" id="mse-perception" class="form-control" value="Sin alucinaciones activas. Episodios transitorios de despersonalización.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">10. Juicio e Introspección (Insight):</label>
+              <select id="mse-insight" class="form-control">
+                <option value="Grado 4: Conciencia intelectual sin cambio">Grado 4: Conciencia intelectual</option>
+                <option value="Grado 5: Conciencia emocional auténtica">Grado 5: Conciencia emocional auténtica</option>
+                <option value="Grado 3: Atribución orgánica externa">Grado 3: Atribución externa</option>
+                <option value="Grado 1-2: Negación parcial o total">Grado 1-2: Negación</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           4. ENTREVISTA PSICOLOGICA INTELIGENTE (15 DIMENSIONES)
+           ============================================================== -->
+      <section id="view-entrevista" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-comments text-teal"></i> Entrevista Psicológica Inteligente Adaptativa</h2>
+            <p class="section-subtitle">15 dimensiones adaptativas con preguntas abiertas, cerradas y detección de factores de vulnerabilidad.</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.saveCurrentPatientData()">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar Entrevista
+          </button>
+        </div>
+
+        <div id="interview-accordions">
+          <!-- 1. Motivo de Consulta -->
+          <div class="accordion-item open">
+            <div class="accordion-header" onclick="app.toggleAccordion(this)">
+              <span><i class="fa-solid fa-circle-question text-teal"></i> 1. Motivo de Consulta Manifiesto vs Latente</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="form-group">
+                <label class="form-label">Demanda Manifiesta (En palabras textuales del paciente):</label>
+                <textarea id="ent-motivo-manifiesto" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Demanda Latente / Inconsciente (Formulación clínica inicial):</label>
+                <textarea id="ent-motivo-latente" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Historia del Problema Actual -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="app.toggleAccordion(this)">
+              <span><i class="fa-solid fa-clock-rotate-left text-teal"></i> 2. Historia del Problema Actual & Cronología</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Tiempo de Evolución & Desencadenante:</label>
+                  <input type="text" id="ent-tiempo-desencadenante" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Intensidad Subjetiva (1 a 10) & Frecuencia:</label>
+                  <input type="text" id="ent-intensidad-frecuencia" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Narrativa Cronológica de los Síntomas:</label>
+                <textarea id="ent-narrativa-sintomas" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Historia Familiar y Genograma -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="app.toggleAccordion(this)">
+              <span><i class="fa-solid fa-people-roof text-teal"></i> 3. Dinámica Familiar & Genograma</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="form-group">
+                <label class="form-label">Genograma Estructural & Antecedentes Psiquiátricos Familiares:</label>
+                <textarea id="ent-genograma" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Desarrollo, Apego & ACEs -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="app.toggleAccordion(this)">
+              <span><i class="fa-solid fa-baby text-teal"></i> 4. Historia del Desarrollo, Apego & Experiencias Adversas (ACEs)</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Estilo de Apego Predominante:</label>
+                  <select id="ent-apego" class="form-control">
+                    <option value="Apego Ansioso-Preocupado">Apego Ansioso-Preocupado</option>
+                    <option value="Apego Seguro">Apego Seguro</option>
+                    <option value="Apego Evitativo-Desestimante">Apego Evitativo-Desestimante</option>
+                    <option value="Apego Desorganizado / No Resuelto">Apego Desorganizado</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Puntaje ACEs y Experiencias Adversas:</label>
+                  <input type="text" id="ent-aces" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Consumo de Sustancias -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="app.toggleAccordion(this)">
+              <span><i class="fa-solid fa-wine-glass text-teal"></i> 5. Consumo de Sustancias & Patrones de Uso</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="form-group">
+                <label class="form-label">Alcohol, Tabaco, Fármacos no prescritos y Otras Sustancias:</label>
+                <textarea id="ent-sustancias" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Factores Protectores y de Riesgo -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="app.toggleAccordion(this)">
+              <span><i class="fa-solid fa-shield-halved text-teal"></i> 6. Factores Protectores y Factores de Riesgo</span>
+              <i class="fa-solid fa-chevron-down chevron"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Factores Protectores (Red de apoyo, resiliencia, valores):</label>
+                  <textarea id="ent-protectores" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Factores de Riesgo (Desesperanza, aislamiento, acceso a medios):</label>
+                  <textarea id="ent-riesgo" class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           5. BATERIA PSICOMETRICA COMPLETA (8 ESCALAS)
+           ============================================================== -->
+      <section id="view-escalas" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-square-poll-vertical text-teal"></i> Batería Psicométrica Estandarizada</h2>
+            <p class="section-subtitle">Evaluación interactiva con cálculo automático de puntajes, puntos de corte y alertas clínicas.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-teal" onclick="app.recalculateAllScales()">
+              <i class="fa-solid fa-calculator"></i> Recalcular Batería
+            </button>
+          </div>
+        </div>
+
+        <!-- Selector de escala -->
+        <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px;">
+          <button class="btn btn-teal" onclick="app.showScaleTab('phq9')">PHQ-9 (Depresión)</button>
+          <button class="btn btn-outline" onclick="app.showScaleTab('gad7')">GAD-7 (Ansiedad)</button>
+          <button class="btn btn-outline" onclick="app.showScaleTab('pcl5')">PCL-5 (Trauma)</button>
+          <button class="btn btn-outline" onclick="app.showScaleTab('bdiii')">BDI-II (Beck Depresión)</button>
+          <button class="btn btn-outline" onclick="app.showScaleTab('bai')">BAI (Beck Ansiedad)</button>
+          <button class="btn btn-outline" onclick="app.showScaleTab('audit')">AUDIT (Alcohol)</button>
+          <button class="btn btn-outline" onclick="app.showScaleTab('dast')">DAST-10 (Drogas)</button>
+          <button class="btn btn-danger" onclick="app.showScaleTab('cssrs')">C-SSRS (Suicidio)</button>
+        </div>
+
+        <!-- Escala PHQ-9 -->
+        <div id="scale-card-phq9" class="card scale-container">
+          <div class="card-title">
+            <span>PHQ-9 (Patient Health Questionnaire - Depresión)</span>
+            <span class="badge badge-danger" id="phq-badge-score">Puntaje: 20/27 (Severa)</span>
+          </div>
+          <div id="phq-items-list" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Reactivos generados por JS -->
+          </div>
+        </div>
+
+        <!-- Escala GAD-7 -->
+        <div id="scale-card-gad7" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>GAD-7 (Generalized Anxiety Disorder 7 - Ansiedad)</span>
+            <span class="badge badge-warning" id="gad-badge-score">Puntaje: 14/21 (Moderada)</span>
+          </div>
+          <div id="gad-items-list" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Reactivos generados por JS -->
+          </div>
+        </div>
+
+        <!-- Escala PCL-5 -->
+        <div id="scale-card-pcl5" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>PCL-5 (Screening de Estrés Postraumático / TEPT)</span>
+            <span class="badge badge-danger" id="pcl-badge-score">Puntaje: 20/32 (Screening Positivo)</span>
+          </div>
+          <div id="pcl-items-list" style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- Reactivos generados por JS -->
+          </div>
+        </div>
+
+        <!-- Escala BDI-II -->
+        <div id="scale-card-bdiii" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>BDI-II (Inventario de Depresión de Beck - 2da Edición)</span>
+            <span class="badge badge-danger" id="bdiii-badge-score">Puntaje: 32/63 (Depresión Severa)</span>
+          </div>
+          <div id="bdiii-items-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <!-- Escala BAI -->
+        <div id="scale-card-bai" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>BAI (Inventario de Ansiedad de Beck)</span>
+            <span class="badge badge-warning" id="bai-badge-score">Puntaje: 26/63 (Ansiedad Moderada-Severa)</span>
+          </div>
+          <div id="bai-items-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <!-- Escala AUDIT -->
+        <div id="scale-card-audit" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>AUDIT (Alcohol Use Disorders Identification Test)</span>
+            <span class="badge badge-success" id="audit-badge-score">Puntaje: 2/40 (Bajo Riesgo)</span>
+          </div>
+          <div id="audit-items-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <!-- Escala DAST-10 -->
+        <div id="scale-card-dast" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>DAST-10 (Drug Abuse Screening Test)</span>
+            <span class="badge badge-success" id="dast-badge-score">Puntaje: 0/10 (Sin Problemas Reportados)</span>
+          </div>
+          <div id="dast-items-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <!-- Escala C-SSRS -->
+        <div id="scale-card-cssrs" class="card scale-container" style="display: none;">
+          <div class="card-title">
+            <span>C-SSRS (Columbia Suicide Severity Rating Scale - Evaluación de Suicidio)</span>
+            <span class="badge badge-danger" id="cssrs-badge-score">Riesgo: Leve (Ideación Pasiva)</span>
+          </div>
+          <div id="cssrs-items-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           6. MOTORES DSM-5-TR & PDM-2
+           ============================================================== -->
+      <section id="view-dsm_pdm" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-book-medical text-teal"></i> Motores Nosológicos DSM-5-TR & PDM-2</h2>
+            <p class="section-subtitle">Categorización categorial de síntomas (DSM-5-TR) articulada con la estructura de personalidad y funcionamiento mental (PDM-2).</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.runDiagnosticReasoningEngine()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Ejecutar Motor Diagnóstico
+          </button>
+        </div>
+
+        <div class="grid-2">
+          <!-- Motor DSM-5-TR -->
+          <div class="card">
+            <div class="card-title">
+              <span><i class="fa-solid fa-check-double text-teal"></i> Diagnóstico Categorial DSM-5-TR</span>
+              <span class="badge badge-teal" id="dsm-code-badge">CIE-10: F33.1</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trastorno Principal:</label>
+              <input type="text" id="diag-dsm-title" class="form-control" style="font-weight: 700;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Especificadores Diagnósticos:</label>
+              <input type="text" id="diag-dsm-specifiers" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Criterios Cumplidos Evidenciados:</label>
+              <textarea id="diag-dsm-criteria" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Diagnósticos Diferenciales Descartados:</label>
+              <textarea id="diag-dsm-differentials" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- Motor PDM-2 -->
+          <div class="card">
+            <div class="card-title">
+              <span><i class="fa-solid fa-compass text-indigo"></i> Diagnóstico Psicodinámico PDM-2</span>
+              <span class="badge badge-indigo">Ejes P, M & S</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Eje P - Nivel de Organización:</label>
+              <select id="diag-pdm-org" class="form-control">
+                <option value="Nivel Limítrofe Alto (Borderline Alto)">Nivel Limítrofe Alto (Borderline Alto)</option>
+                <option value="Nivel Neurótico">Nivel Neurótico</option>
+                <option value="Nivel Limítrofe Bajo (Borderline Bajo)">Nivel Limítrofe Bajo (Borderline Bajo)</option>
+                <option value="Nivel Psicótico">Nivel Psicótico</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Eje P - Síndrome o Estilo de Personalidad:</label>
+              <input type="text" id="diag-pdm-style" class="form-control" value="Patrón Depresivo-Autocrítico (Introjectivo)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Eje P - Defensas Primarias:</label>
+              <input type="text" id="diag-pdm-defenses" class="form-control" value="Introyeción, vuelta contra sí mismo, idealización y escisión parcial.">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Eje S - Experiencia Subjetiva de Síntomas:</label>
+              <textarea id="diag-pdm-axis-s" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           7. FORMULACION DE CASO (MATRIZ 4P)
+           ============================================================== -->
+      <section id="view-formulacion" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-diagram-project text-teal"></i> Formulación Biopsicosocial de Caso (Matriz 4P)</h2>
+            <p class="section-subtitle">Conceptualización clínica de vulnerabilidades, estresores desencadenantes, bucles de mantenimiento y factores protectores.</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.saveCurrentPatientData()">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar Formulación
+          </button>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" style="border-left: 4px solid var(--accent-indigo);">
+            <div class="card-title"><span><i class="fa-solid fa-dna text-indigo"></i> 1. Factores Predisponentes (Vulnerabilidades)</span></div>
+            <textarea id="form-predisposing" class="form-control" rows="4"></textarea>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--danger-red);">
+            <div class="card-title"><span><i class="fa-solid fa-bolt text-danger"></i> 2. Factores Precipitantes (Desencadenantes)</span></div>
+            <textarea id="form-precipitating" class="form-control" rows="4"></textarea>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--warning-amber);">
+            <div class="card-title"><span><i class="fa-solid fa-arrows-spin text-warning"></i> 3. Factores Mantenedores (Perpetuadores)</span></div>
+            <textarea id="form-perpetuating" class="form-control" rows="4"></textarea>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--success-emerald);">
+            <div class="card-title"><span><i class="fa-solid fa-shield-heart text-success"></i> 4. Factores Protectores (Recursos & Resiliencia)</span></div>
+            <textarea id="form-protective" class="form-control" rows="4"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           8. MODELOS PSICOTERAPEUTICOS INTEGRADOS
+           ============================================================== -->
+      <section id="view-terapias" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-heart-pulse text-teal"></i> Modelos Psicoterapéuticos Integrados</h2>
+            <p class="section-subtitle">TCC (Beck), Terapia de Esquemas (Young), DBT (Linehan), ACT (Hayes) y Protocolo de Trauma EMDR (Shapiro).</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- TCC -->
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-brain"></i> Conceptualización Cognitiva (TCC Beck)</span></div>
+            <div class="form-group">
+              <label class="form-label">Creencia Nuclear Sí Mismo:</label>
+              <input type="text" id="tcc-core-self" class="form-control" value='"Soy defectuosa y no merezco amor"'>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pensamientos Automáticos Frecuentes:</label>
+              <textarea id="tcc-auto-thoughts" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pensamiento Alternativo Equilibrado (Reestructuración):</label>
+              <textarea id="tcc-balanced" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- Esquemas Young -->
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-layer-group"></i> Terapia de Esquemas (Jeffrey Young)</span></div>
+            <div class="form-group">
+              <label class="form-label">Esquemas Desadaptativos Activos:</label>
+              <input type="text" id="schema-active" class="form-control" value="Abandono / Inestabilidad, Defectuosidad, Autosacrificio">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Modos de Esquema Activos:</label>
+              <input type="text" id="schema-modes" class="form-control" value="Niño Vulnerable, Padre Punitivo, Protector Desconectado">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Objetivo de Reparentalización:</label>
+              <textarea id="schema-reparenting" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- DBT Linehan -->
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-repeat"></i> Análisis en Cadena & Habilidades (DBT Linehan)</span></div>
+            <div class="form-group">
+              <label class="form-label">Conducta Problema / Blanco:</label>
+              <input type="text" id="dbt-problem-behavior" class="form-control" value="Llamadas desesperadas y aislamiento prolongado en cama">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Habilidades de Tolerancia al Malestar Prioritarias:</label>
+              <input type="text" id="dbt-skills" class="form-control" value="TIPP (frío, respiración pausada), Habilidad STOP, Aceptación Radical">
+            </div>
+          </div>
+
+          <!-- ACT & EMDR -->
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-bullseye"></i> Flexibilidad ACT & Protocolo EMDR</span></div>
+            <div class="form-group">
+              <label class="form-label">Fusión Cognitiva & Evitación Experiencial (ACT):</label>
+              <input type="text" id="act-fusion" class="form-control" value="Fusión con 'estoy rota', evitación mediante sueño inducido">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Acción Comprometida con Valores:</label>
+              <input type="text" id="act-action" class="form-control" value="Caminar 20 min al día y reconectar con su vocación docente">
+            </div>
+            <div class="form-group">
+              <label class="form-label">EMDR: Creencia Negativa (CN) vs Positiva (CP):</label>
+              <input type="text" id="emdr-cognitions" class="form-control" value="CN: 'Estoy indefensa' (SUD: 8/10) | CP: 'Puedo cuidarme' (VoC: 3/7)">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           9. PLAN TERAPEUTICO SMART & PRONOSTICO
+           ============================================================== -->
+      <section id="view-plan" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-list-check text-teal"></i> Plan Terapéutico SMART & Pronóstico Clínico</h2>
+            <p class="section-subtitle">Objetivos medibles a corto, mediano y largo plazo con predicción algorítmica de mejoría clínica.</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.saveCurrentPatientData()">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar Plan
+          </button>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-hourglass-start"></i> Fase 1: Corto Plazo (Sem 1-4)</span></div>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">Estabilización y Alivio Sintomático:</p>
+            <textarea id="plan-short" class="form-control" rows="5"></textarea>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-hourglass-half"></i> Fase 2: Mediano Plazo (Sem 5-12)</span></div>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">Reestructuración y Procesamiento:</p>
+            <textarea id="plan-medium" class="form-control" rows="5"></textarea>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><span><i class="fa-solid fa-hourglass-end"></i> Fase 3: Largo Plazo & Alta</span></div>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">Consolidación y Prevención de Recaídas:</p>
+            <textarea id="plan-long" class="form-control" rows="5"></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span><i class="fa-solid fa-crystal-ball text-indigo"></i> Pronóstico Clínico & Predicción de Respuesta</span></div>
+          <div class="grid-2" style="font-size: 12.5px;">
+            <div class="form-group">
+              <label class="form-label">Pronóstico Estimado:</label>
+              <select id="plan-prognosis" class="form-control">
+                <option value="Favorable con psicoterapia combinada y soporte farmacológico">Favorable con psicoterapia combinada y soporte farmacológico</option>
+                <option value="Favorable únicamente con intervención psicoterapéutica">Favorable con intervención psicoterapéutica</option>
+                <option value="Reservado / Crónico con necesidad de monitorización continua">Reservado con necesidad de monitorización continua</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Factores Moduladores de la Respuesta:</label>
+              <input type="text" id="plan-modulators" class="form-control" value="Excelente nivel de introspección e intelecto; co-terapeuta familiar comprometida.">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           10. SEGUIMIENTO DE SESIONES (SOAP & BIRP)
+           ============================================================== -->
+      <section id="view-sesiones" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-calendar-check text-teal"></i> Registro de Sesiones Clínicas (SOAP / BIRP)</h2>
+            <p class="section-subtitle">Historial de intervenciones sesión por sesión, alianza de trabajo y notas estructuradas.</p>
+          </div>
+          <button class="btn btn-teal" onclick="app.openNewSessionModal()">
+            <i class="fa-solid fa-plus"></i> Registrar Nueva Sesión
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="clinical-table">
+              <thead>
+                <tr>
+                  <th># Sesión</th>
+                  <th>Fecha</th>
+                  <th>Formato</th>
+                  <th>Alianza Terapéutica</th>
+                  <th>Resumen de Análisis (A)</th>
+                  <th>Plan Acordado (P)</th>
+                </tr>
+              </thead>
+              <tbody id="sessions-table-body">
+                <!-- Poblado dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           11. GENERADOR DE INFORMES CLINICOS Y ALTA
+           ============================================================== -->
+      <section id="view-informes" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-file-lines text-teal"></i> Generador de Informes Psicológicos & Alta</h2>
+            <p class="section-subtitle">Emisión instantánea de documentos oficiales en formato PDF o listos para impresión profesional.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card" style="text-align: center; padding: 24px;">
+            <i class="fa-solid fa-file-medical" style="font-size: 36px; color: var(--accent-teal); margin-bottom: 12px;"></i>
+            <h3 style="font-size: 15px; font-weight: 800;">Informe Psicológico Integral</h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0 16px;">Incluye historia clínica, MSE, diagnóstico DSM-5-TR, PDM-2 y batería de escalas.</p>
+            <button class="btn btn-teal" style="width: 100%; justify-content: center;" onclick="app.generateOfficialReport('integral')">
+              <i class="fa-solid fa-file-pdf"></i> Generar & Imprimir
+            </button>
+          </div>
+
+          <div class="card" style="text-align: center; padding: 24px;">
+            <i class="fa-solid fa-chart-line" style="font-size: 36px; color: var(--accent-indigo); margin-bottom: 12px;"></i>
+            <h3 style="font-size: 15px; font-weight: 800;">Informe de Evolución de Sesiones</h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0 16px;">Consolidado de notas SOAP, curva de mejoría psicométrica y alianza terapéutica.</p>
+            <button class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="app.generateOfficialReport('evolucion')">
+              <i class="fa-solid fa-file-pdf"></i> Generar & Imprimir
+            </button>
+          </div>
+
+          <div class="card" style="text-align: center; padding: 24px;">
+            <i class="fa-solid fa-award" style="font-size: 36px; color: var(--success-emerald); margin-bottom: 12px;"></i>
+            <h3 style="font-size: 15px; font-weight: 800;">Informe de Alta & Prevención</h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0 16px;">Resumen de objetivos alcanzados, remisión sintomática y plan anti-recaídas.</p>
+            <button class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="app.generateOfficialReport('alta')">
+              <i class="fa-solid fa-file-pdf"></i> Generar & Imprimir
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==============================================================
+       MODAL 1: NUEVO / EDITAR PACIENTE
+       ============================================================== -->
+  <div id="modal-patient" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-user-plus text-teal"></i> Registrar Nuevo Expediente Clínico</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-patient')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Nombre Completo:</label>
+            <input type="text" id="new-patient-name" class="form-control" placeholder="Ej. Carlos Alberto Gómez">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Documento / Cédula:</label>
+            <input type="text" id="new-patient-id" class="form-control" placeholder="Ej. CC 1020304050">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Edad:</label>
+            <input type="number" id="new-patient-age" class="form-control" value="30">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Género:</label>
+            <select id="new-patient-gender" class="form-control">
+              <option value="Femenino">Femenino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="No binario">No binario</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Motivo de Consulta Inicial:</label>
+          <textarea id="new-patient-reason" class="form-control" rows="2" placeholder="Describa el motivo de consulta manifiesto..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="app.closeModal('modal-patient')">Cancelar</button>
+        <button class="btn btn-teal" onclick="app.saveNewPatient()"><i class="fa-solid fa-check"></i> Crear Expediente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL 2: PROTOCOLO DE SEGURIDAD STANLEY & BROWN
+       ============================================================== -->
+  <div id="modal-safety" class="modal-backdrop">
+    <div class="modal-box" style="border: 2px solid var(--danger-red);">
+      <div class="modal-header" style="background: var(--danger-red); color: white;">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-shield-halved"></i> Protocolo de Seguridad y Manejo de Crisis Suicida (Stanley & Brown)</h3>
+        <button class="btn-icon" style="background: rgba(255,255,255,0.2); color: white; border: none;" onclick="app.closeModal('modal-safety')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body space-y-4">
+        <div style="background: #fee2e2; border: 1px solid #f87171; color: #7f1d1d; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 600;">
+          <i class="fa-solid fa-triangle-exclamation"></i> Herramienta clínica de contingencia. Active acompañamiento permanente en casos de riesgo inminente.
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">1. Señales de Advertencia (Disparadores de la crisis):</label>
+          <textarea id="safety-step-1" class="form-control" rows="2">Aislamiento por más de 24h, llanto no regulado, rumiación de "ser una carga", insomnio severo.</textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">2. Estrategias de Afrontamiento Interno (Sin contactar a otros):</label>
+          <textarea id="safety-step-2" class="form-control" rows="2">Técnica TIPP (compresa fría en rostro), respiración diafragmática 4-7-8, caminata breve.</textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">3. Personas y Lugares de Distracción Saludable:</label>
+          <textarea id="safety-step-3" class="form-control" rows="2">Ir a cafetería cercana, escuchar música instrumental, visitar librería.</textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">4. Personas de Confianza a Quienes Pedir Ayuda:</label>
+          <input type="text" id="safety-step-4" class="form-control" value="Claudia Morales (Hermana) - Tel: +57 310 982 3341">
+        </div>
+        <div class="form-group">
+          <label class="form-label">5. Profesionales y Servicios de Emergencia Médica:</label>
+          <input type="text" id="safety-step-5" class="form-control" value="Terapeuta: Dr. Jair Restaura | Línea 106 Nacional | Urgencias Psiquiátricas">
+        </div>
+        <div class="form-group">
+          <label class="form-label">6. Restricción de Medios Letales:</label>
+          <input type="text" id="safety-step-6" class="form-control" value="Fármacos bajo estricta custodia de la hermana. Sin armas ni objetos lesivos en el hogar.">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Imprimir Plan</button>
+        <button class="btn btn-danger" onclick="app.closeModal('modal-safety')"><i class="fa-solid fa-check"></i> Guardar Protocolo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL 3: REGISTRO DE NUEVA SESION (SOAP / BIRP)
+       ============================================================== -->
+  <div id="modal-session" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-notes-medical text-teal"></i> Registro de Nota de Sesión</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-session')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="grid-3" style="margin-bottom: 12px;">
+          <div class="form-group">
+            <label class="form-label">Fecha de Sesión:</label>
+            <input type="date" id="sess-date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Formato de Nota:</label>
+            <select id="sess-format" class="form-control">
+              <option value="SOAP">SOAP (Subjetivo, Objetivo, Análisis, Plan)</option>
+              <option value="BIRP">BIRP (Behavior, Intervention, Response, Plan)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alianza Terapéutica (1 a 5):</label>
+            <input type="number" id="sess-alliance" class="form-control" min="1" max="5" value="5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">S - Subjetivo (Lo que refiere el paciente):</label>
+          <textarea id="sess-s" class="form-control" rows="2" placeholder="Paciente relata estado anímico en la última semana..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">O - Objetivo (Observación conductual, afecto y MSE):</label>
+          <textarea id="sess-o" class="form-control" rows="2" placeholder="Vigil, contacto ocular adecuado, afecto reactivo..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">A - Análisis / Evaluación Clínica:</label>
+          <textarea id="sess-a" class="form-control" rows="2" placeholder="Progresión en la reestructuración de pensamientos automáticos..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">P - Plan Terapéutico y Tareas Inter-sesión:</label>
+          <textarea id="sess-p" class="form-control" rows="2" placeholder="Tareas conductuales de activación y próxima cita..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="app.closeModal('modal-session')">Cancelar</button>
+        <button class="btn btn-teal" onclick="app.saveNewSession()"><i class="fa-solid fa-check"></i> Guardar Nota de Sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL 4: VISOR DE INFORME CLINICO OFICIAL (PDF & PRINT)
+       ============================================================== -->
+  <div id="modal-report" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 900px;">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-file-pdf text-teal"></i> Informe Clínico Oficial</h3>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-teal" onclick="app.downloadCurrentReportPDF()"><i class="fa-solid fa-download"></i> Descargar PDF</button>
+          <button class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Imprimir</button>
+          <button class="btn-icon" onclick="app.closeModal('modal-report')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="modal-body" id="report-modal-content" style="font-size: 12px; line-height: 1.6;">
+        <!-- Poblado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT MODULAR EMBEBIDO
+       ========================================================================== -->
+  <script>
+    /**
+     * JAIRRESTAURA CLINICAL AI PRO
+     * Motor Clínico en JavaScript Moderno y Base de Datos LocalStorage
+     */
+    const DB_KEY = 'JAIRRESTAURA_CLINICAL_PRO_DB_V3';
+
+    // Base de datos de pacientes prototipo
+    const SEED_DATA = {
+      patients: [
+        {
+          id: 'EXP-2026-0941',
+          name: 'Elena Sofía Morales Restrepo',
+          identifier: 'CC 52.894.120',
+          age: 34,
+          gender: 'Femenino',
+          maritalStatus: 'Divorciada',
+          occupation: 'Coordinadora de Proyectos Educativos',
+          medicalHistory: 'Gastritis erosiva crónica y rinitis alérgica. Alérgica a Penicilina.',
+          medications: 'Omeprazol 20mg en ayunas. Niega psicofármacos actuales.',
+          reasonComplaint: 'Siento un vacío aplastante que no me deja levantar de la cama desde hace tres meses; lloro sin razón y no puedo concentrarme.',
+          latentDemand: 'Duelo no elaborado de ruptura conyugal traumática tras 7 años; reactivación de memorias de negligencia afectiva infantil.',
+          onset: '4 meses de evolución tras abandono de su pareja conyugal.',
+          genogram: 'Padre con alcoholismo crónico; madre hipercrítica con depresión no tratada. Tía materna con suicidio consumado a los 45 años.',
+          attachment: 'Apego Ansioso-Preocupado',
+          aces: 'Score 5/10 (violencia verbal intrafamiliar, negligencia afectiva).',
+          substances: 'Consumo social ocasional de vino (1 copa/mes). Niega tabaco y sustancias ilícitas.',
+          protectiveFactors: 'Elevado nivel sociocultural, hermana como red cercana de contención, amor por su profesión docente.',
+          riskFactors: 'Antecedente familiar de suicidio, ideación pasiva de muerte, aislamiento social agudo.',
+          suicideRisk: 'Leve',
+          dsm5: {
+            code: 'F33.1 (296.32)',
+            title: 'Trastorno de Depresión Mayor, Recurrente, Moderado-Severo',
+            specifiers: 'Con síntomas de ansiedad comórbidos; con episodios disociativos reactivos',
+            criteria: 'Estado de ánimo deprimido constante, anhedonia marcada, pérdida de 4kg involuntaria, insomnio de mantenimiento, enlentecimiento psicomotor y sentimientos de inutilidad >12 semanas.',
+            differentials: 'Descartado Trastorno Bipolar (sin antecedentes hipomaníacos); descartado Trastorno Adaptativo (rebasa umbral y severidad).'
+          },
+          pdm2: {
+            org: 'Nivel Limítrofe Alto (Borderline Alto)',
+            style: 'Patrón de Personalidad Depresivo-Autocrítico (Introjectivo)',
+            defenses: 'Introyeción, vuelta contra sí mismo, idealización y escisión parcial.',
+            axisS: 'Experimenta su depresión como prueba de ser defectuosa e incapaz de retener el amor de otros.',
+            capacities: [3, 2, 2, 3, 4, 3, 3, 4, 5] // 9 capacidades Eje M
+          },
+          scales: {
+            phq9: { answers: [3, 3, 2, 3, 2, 3, 2, 1, 1], score: 20, level: 'Severa' },
+            gad7: { answers: [2, 3, 3, 2, 1, 1, 2], score: 14, level: 'Moderada' },
+            pcl5: { answers: [3, 2, 2, 3, 3, 2, 3, 2], score: 20, positive: true },
+            bdiii: { score: 32, level: 'Severa' },
+            bai: { score: 26, level: 'Moderada-Severa' },
+            audit: { score: 2, level: 'Bajo Riesgo' },
+            dast: { score: 0, level: 'Sin abuso' },
+            cssrs: { wishDead: true, activeThoughts: false, intent: false, plan: false, category: 'Leve (Ideación Pasiva)' }
+          },
+          fourP: {
+            predisposing: 'Genética psiquiátrica positiva (suicidio tía, depresión materna). Negligencia afectiva en infancia. Apego ansioso.',
+            precipitating: 'Infidelidad y abandono repentino de su pareja tras 7 años de matrimonio.',
+            perpetuating: 'Rumiación de culpa ("no fui suficiente"), aislamiento social en cama, desregulación de ritmos circadianos.',
+            protective: 'Excelente introspección, hermana Claudia de red de apoyo, ausencia de plan activo suicida.'
+          },
+          sessions: [
+            {
+              id: 'SES-001',
+              number: 1,
+              date: '2026-10-10',
+              format: 'SOAP',
+              alliance: 5,
+              s: 'Paciente acude con llanto frecuente, insomnio y sensación de parálisis.',
+              o: 'Orientada en 4 esferas. Facies depresiva, lenguaje bradilálico, afecto lábil pero congruente.',
+              a: 'Episodio depresivo mayor recurrente severo reactivo a duelo conyugal. Se establece alianza de trabajo.',
+              p: 'Firma de plan de seguridad Stanley & Brown con coterapeuta hermana. Tarea de activación conductual mínima.'
+            },
+            {
+              id: 'SES-002',
+              number: 2,
+              date: '2026-10-14',
+              format: 'SOAP',
+              alliance: 5,
+              s: 'Refiere disminución leve de la angustia tras realizar técnica de respiración y caminatas.',
+              o: 'Mayor contacto visual, arreglo personal cuidado, sin ideación autolítica activa.',
+              a: 'Buena receptividad a reestructuración cognitiva inicial sobre la creencia "soy defectuosa".',
+              p: 'Registro de pensamientos automáticos disfuncionales (RPD) y práctica de habilidad TIPP ante crisis.'
+            }
+          ]
+        },
+        {
+          id: 'EXP-2026-0812',
+          name: 'Mateo Alejandro Ramírez Torres',
+          identifier: 'CC 80.450.312',
+          age: 29,
+          gender: 'Masculino',
+          maritalStatus: 'Soltero',
+          occupation: 'Desarrollador de Software Senior',
+          medicalHistory: 'Colon irritable. Sin cirugías.',
+          medications: 'Niega.',
+          reasonComplaint: 'Tengo taquicardias y sensación de que me va a dar un infarto mientras trabajo; no puedo dejar de anticipar catástrofes.',
+          latentDemand: 'Perfeccionismo clínico desadaptativo y necesidad compulsiva de control ante miedo al rechazo.',
+          onset: '8 meses con crisis de angustia en las últimas 3 semanas.',
+          genogram: 'Padre con trastorno de ansiedad no tratado; exigencias severas de rendimiento.',
+          attachment: 'Apego Evitativo',
+          aces: 'Score 2/10.',
+          substances: 'Consumo elevado de café (6 tazas/día). Niega drogas.',
+          protectiveFactors: 'Estabilidad laboral, excelente capacidad cognitiva, orientación a soluciones.',
+          riskFactors: 'Somatizaciones intensas, agorafobia incipiente.',
+          suicideRisk: 'Sin riesgo evidente',
+          dsm5: {
+            code: 'F41.1 / F41.0',
+            title: 'Trastorno de Ansiedad Generalizada con Trastorno de Pánico',
+            specifiers: 'Con ataques de pánico paroxísticos',
+            criteria: 'Preocupación aprensiva incontrolable >6 meses, tensión muscular, palpitaciones y anticipación catastrófica.',
+            differentials: 'Descartado feocromocitoma o hipertiroidismo mediante perfil médico.'
+          },
+          pdm2: {
+            org: 'Nivel Neurótico',
+            style: 'Patrón de Personalidad Ansioso / Obsesivo-Compulsivo',
+            defenses: 'Intelectualización, anulación, aislamiento del afecto.',
+            axisS: 'Siente la ansiedad como pérdida humillante del control racional.',
+            capacities: [4, 3, 3, 3, 4, 4, 4, 4, 5]
+          },
+          scales: {
+            phq9: { answers: [1, 1, 1, 2, 0, 1, 1, 0, 0], score: 7, level: 'Leve' },
+            gad7: { answers: [3, 3, 3, 3, 2, 2, 3], score: 19, level: 'Severa' },
+            pcl5: { answers: [0, 0, 0, 0, 0, 0, 0, 0], score: 0, positive: false },
+            bdiii: { score: 10, level: 'Mínima' },
+            bai: { score: 38, level: 'Severa' },
+            audit: { score: 1, level: 'Bajo Riesgo' },
+            dast: { score: 0, level: 'Sin abuso' },
+            cssrs: { wishDead: false, activeThoughts: false, intent: false, plan: false, category: 'Sin riesgo' }
+          },
+          fourP: {
+            predisposing: 'Vulnerabilidad neurobiológica autonómica e hipervigilancia parental.',
+            precipitating: 'Promoción a puesto de liderazgo y plazos de entrega críticos.',
+            perpetuating: 'Consumo de cafeína, chequeos repetitivos de pulso, evitación de espacios abiertos.',
+            protective: 'Alta motivación para la psicoterapia, buen soporte económico.'
+          },
+          sessions: [
+            {
+              id: 'SES-M1',
+              number: 1,
+              date: '2026-10-08',
+              format: 'SOAP',
+              alliance: 5,
+              s: 'Reporta ataques de pánico nocturnos y miedo a volverse loco.',
+              o: 'Hipervigilante, inquietud motora, discurso taquilálico pero coherente.',
+              a: 'TAG y crisis de angustia comórbidas. Ausencia de riesgo autolítico.',
+              p: 'Psicoeducación sobre el sistema nervioso simpático e hiperventilación. Reducción de cafeína.'
+            }
+          ]
+        }
+      ]
+    };
+
+    class ClinicalApp {
+      constructor() {
+        this.data = this.loadDatabase();
+        this.currentPatientIndex = 0;
+        this.charts = {};
+      }
+
+      loadDatabase() {
+        const saved = localStorage.getItem(DB_KEY);
+        if (saved) {
+          try { return JSON.parse(saved); } catch (e) { console.error(e); }
+        }
+        localStorage.setItem(DB_KEY, JSON.stringify(SEED_DATA));
+        return JSON.parse(JSON.stringify(SEED_DATA));
+      }
+
+      saveDatabase() {
+        localStorage.setItem(DB_KEY, JSON.stringify(this.data));
+      }
+
+      getCurrentPatient() {
+        return this.data.patients[this.currentPatientIndex] || this.data.patients[0];
+      }
+
+      init() {
+        this.initTheme();
+        this.populatePatientSelector();
+        this.loadCurrentPatientIntoViews();
+        this.initCharts();
+        this.renderScaleQuestions();
+        this.renderSessionsTable();
+        this.renderPatientsTable();
+      }
+
+      initTheme() {
+        const savedTheme = localStorage.getItem('CLINICAL_THEME') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = document.getElementById('theme-icon');
+        if (icon) {
+          icon.className = savedTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+      }
+
+      toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('CLINICAL_THEME', next);
+        const icon = document.getElementById('theme-icon');
+        if (icon) {
+          icon.className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+        this.updateChartsTheme();
+      }
+
+      navigate(viewId) {
+        document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+        document.querySelectorAll('.sidebar .nav-item').forEach(item => item.classList.remove('active'));
+        
+        const target = document.getElementById(`view-${viewId}`);
+        if (target) target.classList.add('active');
+
+        // Buscar nav item correspondiente
+        const navMap = {
+          'dashboard': 0, 'pacientes': 1, 'historia': 2, 'entrevista': 3,
+          'escalas': 4, 'dsm_pdm': 5, 'formulacion': 6, 'terapias': 7,
+          'plan': 8, 'sesiones': 9, 'informes': 10
+        };
+        const idx = navMap[viewId];
+        const navItems = document.querySelectorAll('.sidebar .nav-item');
+        if (navItems[idx]) navItems[idx].classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      populatePatientSelector() {
+        const select = document.getElementById('select-patient');
+        if (!select) return;
+        select.innerHTML = '';
+        this.data.patients.forEach((p, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = `${p.name} (${p.id})`;
+          if (idx === this.currentPatientIndex) opt.selected = true;
+          select.appendChild(opt);
+        });
+      }
+
+      switchPatient(index) {
+        this.currentPatientIndex = parseInt(index);
+        this.loadCurrentPatientIntoViews();
+        this.updateChartsData();
+        this.renderSessionsTable();
+      }
+
+      loadCurrentPatientIntoViews() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        // Dashboard stats
+        document.getElementById('stat-total-patients').textContent = this.data.patients.length;
+        document.getElementById('stat-phq-score').textContent = `${p.scales.phq9.score}/27`;
+        document.getElementById('stat-phq-label').textContent = `${p.scales.phq9.level} | ${p.scales.phq9.answers[8] > 0 ? 'Alerta Ítem 9' : 'Ítem 9 Negativo'}`;
+        document.getElementById('stat-gad-score').textContent = `${p.scales.gad7.score}/21`;
+        document.getElementById('stat-gad-label').textContent = p.scales.gad7.level;
+        document.getElementById('stat-sessions-count').textContent = p.sessions.length;
+
+        // Riesgo badge
+        const riskBadge = document.getElementById('dash-risk-badge');
+        const riskText = document.getElementById('dash-risk-text');
+        riskText.textContent = `Riesgo: ${p.suicideRisk}`;
+        riskBadge.className = 'risk-indicator ' + (
+          p.suicideRisk === 'Sin riesgo evidente' ? 'risk-leve' :
+          p.suicideRisk === 'Leve' ? 'risk-leve' :
+          p.suicideRisk === 'Moderado' ? 'risk-moderado' :
+          p.suicideRisk === 'Alto' ? 'risk-alto' : 'risk-critico'
+        );
+
+        document.getElementById('dash-dsm-summary').textContent = `${p.dsm5.code} - ${p.dsm5.title}`;
+        document.getElementById('dash-dsm-spec').textContent = p.dsm5.specifiers;
+        document.getElementById('dash-pdm-summary').textContent = `${p.pdm2.org} | ${p.pdm2.style}`;
+        document.getElementById('dash-pdm-spec').textContent = `Defensas: ${p.pdm2.defenses}`;
+
+        // Historia Clínica
+        document.getElementById('hc-fullname').value = p.name;
+        document.getElementById('hc-age-marital').value = `${p.age} años | ${p.maritalStatus}`;
+        document.getElementById('hc-occupation').value = p.occupation;
+        document.getElementById('hc-medical-history').value = p.medicalHistory;
+        document.getElementById('hc-medications').value = p.medications;
+
+        // Entrevista
+        document.getElementById('ent-motivo-manifiesto').value = p.reasonComplaint;
+        document.getElementById('ent-motivo-latente').value = p.latentDemand;
+        document.getElementById('ent-tiempo-desencadenante').value = p.onset;
+        document.getElementById('ent-intensidad-frecuencia').value = '8/10 | Constante con picos matutinos';
+        document.getElementById('ent-narrativa-sintomas').value = p.dsm5.criteria;
+        document.getElementById('ent-genograma').value = p.genogram;
+        document.getElementById('ent-apego').value = p.attachment;
+        document.getElementById('ent-aces').value = p.aces;
+        document.getElementById('ent-sustancias').value = p.substances;
+        document.getElementById('ent-protectores').value = p.protectiveFactors;
+        document.getElementById('ent-riesgo').value = p.riskFactors;
+
+        // Motores DSM & PDM
+        document.getElementById('dsm-code-badge').textContent = `CIE-10: ${p.dsm5.code}`;
+        document.getElementById('diag-dsm-title').value = p.dsm5.title;
+        document.getElementById('diag-dsm-specifiers').value = p.dsm5.specifiers;
+        document.getElementById('diag-dsm-criteria').value = p.dsm5.criteria;
+        document.getElementById('diag-dsm-differentials').value = p.dsm5.differentials;
+        document.getElementById('diag-pdm-org').value = p.pdm2.org;
+        document.getElementById('diag-pdm-style').value = p.pdm2.style;
+        document.getElementById('diag-pdm-defenses').value = p.pdm2.defenses;
+        document.getElementById('diag-pdm-axis-s').value = p.pdm2.axisS;
+
+        // Matriz 4P
+        document.getElementById('form-predisposing').value = p.fourP.predisposing;
+        document.getElementById('form-precipitating').value = p.fourP.precipitating;
+        document.getElementById('form-perpetuating').value = p.fourP.perpetuating;
+        document.getElementById('form-protective').value = p.fourP.protective;
+
+        // Plan Terapéutico
+        document.getElementById('plan-short').value = '1. Firma de contrato de seguridad con hermana co-terapeuta.\n2. Psicoeducación ciclo depresión/apego.\n3. Activación conductual: 1 actividad de dominio y 1 de placer diaria.';
+        document.getElementById('plan-medium').value = '1. Reestructuración cognitiva de creencias de defectuosidad.\n2. Desactivación de Modo Padre Punitivo (Terapia de Esquemas).\n3. Reprocesamiento EMDR de recuerdos diana de negligencia.';
+        document.getElementById('plan-long').value = '1. Fortalecimiento del Modo Adulto Sano.\n2. Establecimiento de límites asertivos en relaciones vinculares.\n3. Elaboración de plan de prevención de recaídas y alta.';
+
+        // Renderizar escalas con sus valores
+        this.syncScalesUI();
+      }
+
+      saveCurrentPatientData() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        p.name = document.getElementById('hc-fullname').value;
+        p.occupation = document.getElementById('hc-occupation').value;
+        p.medicalHistory = document.getElementById('hc-medical-history').value;
+        p.medications = document.getElementById('hc-medications').value;
+        p.reasonComplaint = document.getElementById('ent-motivo-manifiesto').value;
+        p.latentDemand = document.getElementById('ent-motivo-latente').value;
+        p.dsm5.title = document.getElementById('diag-dsm-title').value;
+        p.dsm5.specifiers = document.getElementById('diag-dsm-specifiers').value;
+        p.dsm5.criteria = document.getElementById('diag-dsm-criteria').value;
+        p.dsm5.differentials = document.getElementById('diag-dsm-differentials').value;
+        p.pdm2.org = document.getElementById('diag-pdm-org').value;
+        p.pdm2.style = document.getElementById('diag-pdm-style').value;
+        p.pdm2.defenses = document.getElementById('diag-pdm-defenses').value;
+        p.pdm2.axisS = document.getElementById('diag-pdm-axis-s').value;
+        p.fourP.predisposing = document.getElementById('form-predisposing').value;
+        p.fourP.precipitating = document.getElementById('form-precipitating').value;
+        p.fourP.perpetuating = document.getElementById('form-perpetuating').value;
+        p.fourP.protective = document.getElementById('form-protective').value;
+
+        this.saveDatabase();
+        this.populatePatientSelector();
+        this.renderPatientsTable();
+        alert('Expediente clínico guardado exitosamente en LocalStorage.');
+      }
+
+      // ==========================================
+      // ESCALAS PSICOMETRICAS
+      // ==========================================
+      showScaleTab(scaleId) {
+        document.querySelectorAll('.scale-container').forEach(c => c.style.display = 'none');
+        const card = document.getElementById(`scale-card-${scaleId}`);
+        if (card) card.style.display = 'block';
+      }
+
+      renderScaleQuestions() {
+        const phqQuestions = [
+          '1. Poco interés o placer en hacer las cosas (anhedonia).',
+          '2. Sentirse desanimado(a), deprimido(a) o sin esperanzas.',
+          '3. Problemas para conciliar el sueño, mantenerse dormido(a) o dormir demasiado.',
+          '4. Sentirse cansado(a) o tener poca energía.',
+          '5. Poco apetito o comer en exceso.',
+          '6. Sentirse mal consigo mismo(a), o que es un fracaso o decepción.',
+          '7. Dificultad para concentrarse en la lectura, televisión o trabajo.',
+          '8. Enlentecimiento psicomotor observable o inquietud motora.',
+          '9. Pensamientos de que estaría mejor muerto(a) o de lastimarse.'
+        ];
+
+        const phqContainer = document.getElementById('phq-items-list');
+        if (phqContainer) {
+          phqContainer.innerHTML = '';
+          phqQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; align-items: center; justify-content: space-between; background: var(--bg-tertiary); padding: 8px 12px; border-radius: var(--radius-sm); font-size: 12px; gap: 8px; flex-wrap: wrap;';
+            div.innerHTML = `
+              <span style="${idx === 8 ? 'color: var(--danger-red); font-weight: 700;' : 'font-weight: 500;'}">${q}</span>
+              <div style="display: flex; gap: 4px;">
+                ${[0, 1, 2, 3].map(val => `
+                  <button type="button" class="btn btn-outline" style="padding: 2px 8px; font-size: 11px;" id="phq-btn-${idx}-${val}" onclick="app.updateScaleAnswer('phq9', ${idx}, ${val})">
+                    ${val === 0 ? 'Nunca (0)' : val === 1 ? 'Días (1)' : val === 2 ? '>Mitad (2)' : 'Siempre (3)'}
+                  </button>
+                `).join('')}
+              </div>
+            `;
+            phqContainer.appendChild(div);
+          });
+        }
+
+        const gadQuestions = [
+          '1. Sentirse nervioso(a), intranquilo(a) o con los nervios de punta.',
+          '2. No poder dejar de preocuparse o controlar la preocupación.',
+          '3. Preocuparse demasiado por diferentes cosas.',
+          '4. Dificultad para relajarse.',
+          '5. Estar tan inquieto(a) que le resulta difícil permanecer quieto(a).',
+          '6. Irritarse o enojarse fácilmente.',
+          '7. Sentir miedo como si algo terrible fuera a pasar.'
+        ];
+
+        const gadContainer = document.getElementById('gad-items-list');
+        if (gadContainer) {
+          gadContainer.innerHTML = '';
+          gadQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; align-items: center; justify-content: space-between; background: var(--bg-tertiary); padding: 8px 12px; border-radius: var(--radius-sm); font-size: 12px; gap: 8px; flex-wrap: wrap;';
+            div.innerHTML = `
+              <span style="font-weight: 500;">${q}</span>
+              <div style="display: flex; gap: 4px;">
+                ${[0, 1, 2, 3].map(val => `
+                  <button type="button" class="btn btn-outline" style="padding: 2px 8px; font-size: 11px;" id="gad-btn-${idx}-${val}" onclick="app.updateScaleAnswer('gad7', ${idx}, ${val})">
+                    ${val === 0 ? 'Nunca (0)' : val === 1 ? 'Días (1)' : val === 2 ? '>Mitad (2)' : 'Siempre (3)'}
+                  </button>
+                `).join('')}
+              </div>
+            `;
+            gadContainer.appendChild(div);
+          });
+        }
+
+        // C-SSRS items
+        const cssrsContainer = document.getElementById('cssrs-items-list');
+        if (cssrsContainer) {
+          const cssrsItems = [
+            { id: 'wishDead', text: '1. ¿Ha deseado estar muerto(a) o poder dormirse y no despertar jamás?' },
+            { id: 'activeThoughts', text: '2. ¿Ha tenido pensamientos reales de quitarse la vida (sin método)?' },
+            { id: 'thoughtsMethod', text: '3. ¿Ha pensado en un método concreto para quitarse la vida?' },
+            { id: 'intent', text: '4. ¿Ha tenido la intención de actuar según estos pensamientos?' },
+            { id: 'plan', text: '5. ¿Ha elaborado un plan y tiene la intención de llevarlo a cabo?' }
+          ];
+          cssrsContainer.innerHTML = '';
+          cssrsItems.forEach(item => {
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; align-items: center; justify-content: space-between; background: var(--bg-tertiary); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 12px;';
+            div.innerHTML = `
+              <span style="font-weight: 600;">${item.text}</span>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" class="btn btn-outline" style="padding: 2px 10px;" id="cssrs-btn-${item.id}-true" onclick="app.updateCSSRS('${item.id}', true)">Sí</button>
+                <button type="button" class="btn btn-outline" style="padding: 2px 10px;" id="cssrs-btn-${item.id}-false" onclick="app.updateCSSRS('${item.id}', false)">No</button>
+              </div>
+            `;
+            cssrsContainer.appendChild(div);
+          });
+        }
+      }
+
+      updateScaleAnswer(scale, itemIndex, value) {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+        p.scales[scale].answers[itemIndex] = value;
+        const total = p.scales[scale].answers.reduce((a, b) => a + b, 0);
+        p.scales[scale].score = total;
+
+        if (scale === 'phq9') {
+          p.scales.phq9.level = total >= 20 ? 'Severa' : total >= 15 ? 'Mod. Severa' : total >= 10 ? 'Moderada' : total >= 5 ? 'Leve' : 'Mínima';
+          document.getElementById('phq-badge-score').textContent = `Puntaje: ${total}/27 (${p.scales.phq9.level})`;
+        } else if (scale === 'gad7') {
+          p.scales.gad7.level = total >= 15 ? 'Severa' : total >= 10 ? 'Moderada' : total >= 5 ? 'Leve' : 'Mínima';
+          document.getElementById('gad-badge-score').textContent = `Puntaje: ${total}/21 (${p.scales.gad7.level})`;
+        }
+
+        this.syncScalesUI();
+        this.saveDatabase();
+        this.loadCurrentPatientIntoViews();
+        this.updateChartsData();
+      }
+
+      updateCSSRS(field, value) {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+        p.scales.cssrs[field] = value;
+
+        if (p.scales.cssrs.plan || (p.scales.cssrs.intent && p.scales.cssrs.thoughtsMethod)) {
+          p.scales.cssrs.category = 'Riesgo Crítico Inminente';
+          p.suicideRisk = 'Inminente';
+        } else if (p.scales.cssrs.intent || p.scales.cssrs.thoughtsMethod) {
+          p.scales.cssrs.category = 'Alto';
+          p.suicideRisk = 'Alto';
+        } else if (p.scales.cssrs.activeThoughts) {
+          p.scales.cssrs.category = 'Moderado';
+          p.suicideRisk = 'Moderado';
+        } else if (p.scales.cssrs.wishDead) {
+          p.scales.cssrs.category = 'Leve (Ideación Pasiva)';
+          p.suicideRisk = 'Leve';
+        } else {
+          p.scales.cssrs.category = 'Sin riesgo';
+          p.suicideRisk = 'Sin riesgo evidente';
+        }
+
+        document.getElementById('cssrs-badge-score').textContent = `Riesgo: ${p.scales.cssrs.category}`;
+        this.syncScalesUI();
+        this.saveDatabase();
+        this.loadCurrentPatientIntoViews();
+      }
+
+      syncScalesUI() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        // PHQ-9 botones
+        p.scales.phq9.answers.forEach((val, idx) => {
+          [0, 1, 2, 3].forEach(v => {
+            const btn = document.getElementById(`phq-btn-${idx}-${v}`);
+            if (btn) {
+              if (v === val) {
+                btn.className = 'btn btn-teal';
+              } else {
+                btn.className = 'btn btn-outline';
+              }
+            }
+          });
+        });
+
+        // GAD-7 botones
+        p.scales.gad7.answers.forEach((val, idx) => {
+          [0, 1, 2, 3].forEach(v => {
+            const btn = document.getElementById(`gad-btn-${idx}-${v}`);
+            if (btn) {
+              if (v === val) {
+                btn.className = 'btn btn-teal';
+              } else {
+                btn.className = 'btn btn-outline';
+              }
+            }
+          });
+        });
+
+        // C-SSRS botones
+        ['wishDead', 'activeThoughts', 'thoughtsMethod', 'intent', 'plan'].forEach(f => {
+          const val = p.scales.cssrs[f];
+          const btnTrue = document.getElementById(`cssrs-btn-${f}-true`);
+          const btnFalse = document.getElementById(`cssrs-btn-${f}-false`);
+          if (btnTrue && btnFalse) {
+            btnTrue.className = val ? 'btn btn-danger' : 'btn btn-outline';
+            btnFalse.className = !val ? 'btn btn-teal' : 'btn btn-outline';
+          }
+        });
+      }
+
+      recalculateAllScales() {
+        alert('Todas las escalas psicométricas han sido recalculadas con éxito.');
+      }
+
+      runDiagnosticReasoningEngine() {
+        const p = this.getCurrentPatient();
+        const phq = p.scales.phq9.score;
+        const gad = p.scales.gad7.score;
+
+        if (phq >= 15 && gad >= 10) {
+          p.dsm5.title = 'Trastorno de Depresión Mayor Recurrente Moderado-Severo con Ansiedad';
+          p.dsm5.code = 'F33.1 (296.32)';
+          p.pdm2.org = 'Nivel Limítrofe Alto (Borderline Alto)';
+        } else if (gad >= 15) {
+          p.dsm5.title = 'Trastorno de Ansiedad Generalizada con Crisis de Angustia';
+          p.dsm5.code = 'F41.1 / F41.0';
+          p.pdm2.org = 'Nivel Neurótico';
+        }
+        this.saveDatabase();
+        this.loadCurrentPatientIntoViews();
+        alert('Motor Nosológico DSM-5-TR & PDM-2 ejecutado: Hipótesis diagnóstica actualizada.');
+      }
+
+      // ==========================================
+      // GRAFICOS CHART.JS
+      // ==========================================
+      initCharts() {
+        // 1. Gráfico de Evolución
+        const ctxEvolution = document.getElementById('chart-evolution')?.getContext('2d');
+        if (ctxEvolution) {
+          this.charts.evolution = new Chart(ctxEvolution, {
+            type: 'line',
+            data: {
+              labels: ['Sesión 1', 'Sesión 2', 'Sesión 3', 'Sesión 4'],
+              datasets: [
+                {
+                  label: 'PHQ-9 (Depresión)',
+                  data: [24, 22, 20, 18],
+                  borderColor: '#dc2626',
+                  backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                  tension: 0.3,
+                  fill: true
+                },
+                {
+                  label: 'GAD-7 (Ansiedad)',
+                  data: [18, 16, 14, 12],
+                  borderColor: '#d97706',
+                  backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                  tension: 0.3,
+                  fill: true
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                y: { min: 0, max: 27, grid: { color: 'rgba(150, 150, 150, 0.1)' } },
+                x: { grid: { display: false } }
+              },
+              plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } }
+            }
+          });
+        }
+
+        // 2. Gráfico PDM-2 Eje M Radar
+        const ctxPDM = document.getElementById('chart-pdm')?.getContext('2d');
+        if (ctxPDM) {
+          const p = this.getCurrentPatient();
+          this.charts.pdm = new Chart(ctxPDM, {
+            type: 'radar',
+            data: {
+              labels: [
+                'Regulación/Atención', 'Apego/Vínculos', 'Autoestima',
+                'Diferenciación Afecto', 'Mentalización', 'Defensas',
+                'Identidad', 'Control Impulsos', 'Moral/Ética'
+              ],
+              datasets: [{
+                label: 'Capacidades Mentales (1-5)',
+                data: p.pdm2.capacities || [3, 2, 2, 3, 4, 3, 3, 4, 5],
+                borderColor: '#4f46e5',
+                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                pointBackgroundColor: '#4f46e5',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                r: {
+                  min: 0,
+                  max: 5,
+                  ticks: { stepSize: 1, display: false },
+                  grid: { color: 'rgba(150, 150, 150, 0.15)' },
+                  pointLabels: { font: { size: 9.5 } }
+                }
+              },
+              plugins: { legend: { display: false } }
+            }
+          });
+        }
+      }
+
+      updateChartsData() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        if (this.charts.evolution) {
+          const labels = p.sessions.map(s => `Sesión ${s.number}`);
+          if (labels.length === 0) {
+            labels.push('Basal');
+          }
+          this.charts.evolution.data.labels = labels;
+          this.charts.evolution.data.datasets[0].data = p.sessions.map((_, i) => Math.max(0, p.scales.phq9.score - i * 2));
+          this.charts.evolution.data.datasets[1].data = p.sessions.map((_, i) => Math.max(0, p.scales.gad7.score - i * 2));
+          this.charts.evolution.update();
+        }
+
+        if (this.charts.pdm) {
+          this.charts.pdm.data.datasets[0].data = p.pdm2.capacities || [3, 2, 2, 3, 4, 3, 3, 4, 5];
+          this.charts.pdm.update();
+        }
+      }
+
+      updateChartsTheme() {
+        if (this.charts.evolution) this.charts.evolution.update();
+        if (this.charts.pdm) this.charts.pdm.update();
+      }
+
+      // ==========================================
+      // TABLAS Y MODALES
+      // ==========================================
+      renderSessionsTable() {
+        const tbody = document.getElementById('sessions-table-body');
+        if (!tbody) return;
+        const p = this.getCurrentPatient();
+        tbody.innerHTML = '';
+
+        p.sessions.forEach(s => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>#${s.number}</strong></td>
+            <td>${s.date}</td>
+            <td><span class="badge badge-teal">${s.format}</span></td>
+            <td><i class="fa-solid fa-star text-warning"></i> ${s.alliance}/5</td>
+            <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.a}</td>
+            <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.p}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      renderPatientsTable() {
+        const tbody = document.getElementById('patients-table-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        this.data.patients.forEach((p, idx) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><code class="font-mono">${p.id}</code></td>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.age}a / ${p.gender}</td>
+            <td><span class="badge badge-indigo">${p.dsm5.code}</span></td>
+            <td><span class="badge ${p.suicideRisk === 'Leve' ? 'badge-success' : p.suicideRisk === 'Moderado' ? 'badge-warning' : 'badge-danger'}">${p.suicideRisk}</span></td>
+            <td>${p.sessions.length > 0 ? p.sessions[p.sessions.length - 1].date : 'Sin sesiones'}</td>
+            <td>
+              <button class="btn btn-outline" style="padding: 2px 8px; font-size: 11px;" onclick="app.switchPatient(${idx}); app.navigate('historia');">
+                <i class="fa-solid fa-folder-open"></i> Abrir
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      filterPatientsTable(query) {
+        const q = query.toLowerCase();
+        document.querySelectorAll('#patients-table-body tr').forEach(row => {
+          row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      }
+
+      openNewPatientModal() {
+        document.getElementById('modal-patient').classList.add('show');
+      }
+
+      openSafetyModal() {
+        document.getElementById('modal-safety').classList.add('show');
+      }
+
+      openNewSessionModal() {
+        document.getElementById('sess-date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('modal-session').classList.add('show');
+      }
+
+      openReportModal() {
+        this.generateOfficialReport('integral');
+        document.getElementById('modal-report').classList.add('show');
+      }
+
+      closeModal(id) {
+        document.getElementById(id).classList.remove('show');
+      }
+
+      saveNewPatient() {
+        const name = document.getElementById('new-patient-name').value;
+        const idNum = document.getElementById('new-patient-id').value;
+        const age = parseInt(document.getElementById('new-patient-age').value) || 25;
+        const gender = document.getElementById('new-patient-gender').value;
+        const reason = document.getElementById('new-patient-reason').value || 'Evaluación psicológica inicial.';
+
+        if (!name.trim()) {
+          alert('Por favor ingrese el nombre del paciente.');
+          return;
+        }
+
+        const newP = {
+          id: `EXP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+          name,
+          identifier: idNum,
+          age,
+          gender,
+          maritalStatus: 'Soltero(a)',
+          occupation: 'Por registrar',
+          medicalHistory: 'Sin antecedentes patológicos reportados.',
+          medications: 'Niega.',
+          reasonComplaint: reason,
+          latentDemand: 'Por evaluar en subsiguientes sesiones.',
+          onset: '1 mes aprox.',
+          genogram: 'Estructura familiar en anamnesis.',
+          attachment: 'Apego Seguro',
+          aces: 'Score 0/10.',
+          substances: 'Niega.',
+          protectiveFactors: 'Deseo de mejoría, red familiar presente.',
+          riskFactors: 'Por determinar.',
+          suicideRisk: 'Sin riesgo evidente',
+          dsm5: {
+            code: 'F43.20',
+            title: 'Trastorno de Adaptación no especificado',
+            specifiers: 'En evaluación',
+            criteria: 'Sintomatología reactiva a estresores cotidianos.',
+            differentials: 'Descartar cuadro depresivo mayor.'
+          },
+          pdm2: {
+            org: 'Nivel Neurótico',
+            style: 'En formulación preliminar',
+            defenses: 'Racionalización, intelectualización.',
+            axisS: 'Malestar reactivo.',
+            capacities: [4, 4, 3, 3, 4, 3, 4, 4, 4]
+          },
+          scales: {
+            phq9: { answers: [1, 1, 0, 1, 0, 0, 0, 0, 0], score: 3, level: 'Mínima' },
+            gad7: { answers: [1, 1, 1, 0, 0, 0, 0], score: 3, level: 'Mínima' },
+            pcl5: { answers: [0, 0, 0, 0, 0, 0, 0, 0], score: 0, positive: false },
+            bdiii: { score: 4, level: 'Mínima' },
+            bai: { score: 5, level: 'Mínima' },
+            audit: { score: 0, level: 'Bajo' },
+            dast: { score: 0, level: 'Sin abuso' },
+            cssrs: { wishDead: false, activeThoughts: false, intent: false, plan: false, category: 'Sin riesgo' }
+          },
+          fourP: {
+            predisposing: 'Sin vulnerabilidades marcadas.',
+            precipitating: 'Estresor reciente.',
+            perpetuating: 'Dudas decisionales.',
+            protective: 'Motivación alta.'
+          },
+          sessions: []
+        };
+
+        this.data.patients.push(newP);
+        this.saveDatabase();
+        this.currentPatientIndex = this.data.patients.length - 1;
+        this.populatePatientSelector();
+        this.loadCurrentPatientIntoViews();
+        this.renderPatientsTable();
+        this.closeModal('modal-patient');
+        alert(`Paciente ${name} registrado con expediente ${newP.id}.`);
+      }
+
+      saveNewSession() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const newS = {
+          id: `SES-${Date.now()}`,
+          number: p.sessions.length + 1,
+          date: document.getElementById('sess-date').value || new Date().toISOString().split('T')[0],
+          format: document.getElementById('sess-format').value,
+          alliance: parseInt(document.getElementById('sess-alliance').value) || 5,
+          s: document.getElementById('sess-s').value || 'Paciente reporta estabilidad relativa.',
+          o: document.getElementById('sess-o').value || 'Vigil, lúcido, colaborador.',
+          a: document.getElementById('sess-a').value || 'Evolución favorable con apego a las intervenciones.',
+          p: document.getElementById('sess-p').value || 'Continuar tareas acordadas.'
+        };
+
+        p.sessions.push(newS);
+        this.saveDatabase();
+        this.renderSessionsTable();
+        this.updateChartsData();
+        this.closeModal('modal-session');
+        alert(`Sesión #${newS.number} registrada exitosamente.`);
+      }
+
+      toggleAccordion(headerElem) {
+        const item = headerElem.parentElement;
+        item.classList.toggle('open');
+      }
+
+      // ==========================================
+      // GENERACION DE INFORMES Y PDF (jsPDF)
+      // ==========================================
+      generateOfficialReport(type) {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const container = document.getElementById('report-modal-content');
+        if (!container) return;
+
+        const disclaimer = "Esta plataforma genera hipótesis clínicas orientativas y apoyo a la toma de decisiones. No reemplaza el juicio clínico ni constituye un diagnóstico médico o psicológico definitivo.";
+
+        container.innerHTML = `
+          <div style="border-bottom: 2px solid var(--accent-teal); padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+              <h2 style="font-size: 18px; font-weight: 800; color: var(--accent-teal-dark);">JAIRRESTAURA CLINICAL AI PRO</h2>
+              <p style="font-size: 11px; color: var(--text-muted);">Unidad de Evaluación Psicológica, Formulación DSM-5-TR / PDM-2 & Neurociencias</p>
+            </div>
+            <div style="text-align: right; font-size: 11px; color: var(--text-secondary);">
+              <strong>Expediente:</strong> ${p.id}<br>
+              <strong>Fecha:</strong> ${new Date().toLocaleDateString('es-ES', { dateStyle: 'long' })}
+            </div>
+          </div>
+
+          <div style="background: #fef3c7; border: 1px solid #f59e0b; padding: 8px 12px; border-radius: 6px; font-size: 11px; color: #92400e; margin-bottom: 16px;">
+            <strong>AVISO LEGAL OBLIGATORIO:</strong> "${disclaimer}"
+          </div>
+
+          <h3 style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); border-bottom: 1px solid var(--card-border); padding-bottom: 4px; margin-bottom: 8px;">
+            1. Datos de Identificación del Paciente
+          </h3>
+          <p><strong>Nombre:</strong> ${p.name} | <strong>Documento:</strong> ${p.identifier} | <strong>Edad:</strong> ${p.age} años | <strong>Género:</strong> ${p.gender}</p>
+          <p><strong>Estado Civil:</strong> ${p.maritalStatus} | <strong>Ocupación:</strong> ${p.occupation}</p>
+
+          <h3 style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); border-bottom: 1px solid var(--card-border); padding-bottom: 4px; margin: 16px 0 8px;">
+            2. Motivo de Consulta & Enfermedad Actual
+          </h3>
+          <p><strong>Demanda Manifiesta:</strong> "${p.reasonComplaint}"</p>
+          <p><strong>Demanda Latente:</strong> ${p.latentDemand}</p>
+          <p><strong>Evolución:</strong> ${p.onset}</p>
+
+          <h3 style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); border-bottom: 1px solid var(--card-border); padding-bottom: 4px; margin: 16px 0 8px;">
+            3. Diagnóstico Nosológico Multidimensional
+          </h3>
+          <p><strong>Eje DSM-5-TR:</strong> ${p.dsm5.code} - ${p.dsm5.title} (${p.dsm5.specifiers})</p>
+          <p><strong>Criterios Evidenciados:</strong> ${p.dsm5.criteria}</p>
+          <p><strong>Diagnósticos Diferenciales Descartados:</strong> ${p.dsm5.differentials}</p>
+          <p style="margin-top: 6px;"><strong>Eje PDM-2:</strong> ${p.pdm2.org} | ${p.pdm2.style}</p>
+          <p><strong>Mecanismos de Defensa:</strong> ${p.pdm2.defenses}</p>
+
+          <h3 style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); border-bottom: 1px solid var(--card-border); padding-bottom: 4px; margin: 16px 0 8px;">
+            4. Batería Psicométrica Aplicada
+          </h3>
+          <p><strong>PHQ-9 (Depresión):</strong> ${p.scales.phq9.score}/27 (${p.scales.phq9.level}) | <strong>GAD-7 (Ansiedad):</strong> ${p.scales.gad7.score}/21 (${p.scales.gad7.level})</p>
+          <p><strong>PCL-5 (Trauma):</strong> ${p.scales.pcl5.score}/32 | <strong>C-SSRS (Riesgo Suicida):</strong> ${p.scales.cssrs.category}</p>
+
+          <h3 style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); border-bottom: 1px solid var(--card-border); padding-bottom: 4px; margin: 16px 0 8px;">
+            5. Plan de Intervención & Pronóstico
+          </h3>
+          <p><strong>Pronóstico:</strong> Favorable con psicoterapia cognitiva integrativa (TCC/Esquemas/EMDR).</p>
+          <p><strong>Nivel de Riesgo Global:</strong> ${p.suicideRisk}</p>
+
+          <div style="margin-top: 36px; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 12px;">
+            <div>
+              <div style="width: 180px; border-bottom: 1px solid #000; margin-bottom: 4px;"></div>
+              <strong>Dr. Jair Restaura</strong><br>
+              Psicólogo Clínico / Psiquiatra Evaluador<br>
+              Licencia Profesional / Registro Médico
+            </div>
+            <div style="text-align: right;">
+              Documento confidencial bajo secreto profesional médico-clínico.<br>
+              JAIRRESTAURA CLINICAL AI PRO © ${new Date().getFullYear()}
+            </div>
+          </div>
+        `;
+      }
+
+      downloadCurrentReportPDF() {
+        const { jsPDF } = window.jspdf;
+        if (!jsPDF) {
+          alert('Librería jsPDF cargando, por favor intente nuevamente.');
+          return;
+        }
+
+        const doc = new jsPDF();
+        const p = this.getCurrentPatient();
+        const disclaimer = "Esta plataforma genera hipótesis clínicas orientativas y apoyo a la toma de decisiones. No reemplaza el juicio clínico ni constituye un diagnóstico médico o psicológico definitivo.";
+
+        doc.setFontSize(16);
+        doc.setTextColor(13, 148, 136);
+        doc.text("JAIRRESTAURA CLINICAL AI PRO", 20, 20);
+
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text("Informe de Evaluación Psicológica & Formulación Clínica", 20, 26);
+        doc.text(`Expediente: ${p.id} | Fecha: ${new Date().toLocaleDateString('es-ES')}`, 20, 32);
+
+        doc.setDrawColor(200);
+        doc.line(20, 35, 190, 35);
+
+        doc.setFontSize(8);
+        doc.setTextColor(180, 83, 9);
+        const splitDisclaimer = doc.splitTextToSize(`AVISO: "${disclaimer}"`, 170);
+        doc.text(splitDisclaimer, 20, 41);
+
+        let y = 52;
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42);
+        doc.text("1. DATOS DEL PACIENTE", 20, y);
+        y += 6;
+        doc.setFontSize(10);
+        doc.setTextColor(60);
+        doc.text(`Nombre: ${p.name} | Doc: ${p.identifier} | Edad: ${p.age} años | Género: ${p.gender}`, 20, y);
+        y += 10;
+
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42);
+        doc.text("2. MOTIVO DE CONSULTA", 20, y);
+        y += 6;
+        doc.setFontSize(10);
+        doc.setTextColor(60);
+        const splitReason = doc.splitTextToSize(`"${p.reasonComplaint}"`, 170);
+        doc.text(splitReason, 20, y);
+        y += splitReason.length * 5 + 6;
+
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42);
+        doc.text("3. DIAGNÓSTICO NOSOLÓGICO", 20, y);
+        y += 6;
+        doc.setFontSize(10);
+        doc.setTextColor(60);
+        doc.text(`DSM-5-TR: ${p.dsm5.code} - ${p.dsm5.title}`, 20, y);
+        y += 5;
+        doc.text(`Especificadores: ${p.dsm5.specifiers}`, 20, y);
+        y += 5;
+        doc.text(`PDM-2: ${p.pdm2.org} | ${p.pdm2.style}`, 20, y);
+        y += 10;
+
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42);
+        doc.text("4. BATERÍA PSICOMÉTRICA", 20, y);
+        y += 6;
+        doc.setFontSize(10);
+        doc.setTextColor(60);
+        doc.text(`PHQ-9 (Depresión): ${p.scales.phq9.score}/27 (${p.scales.phq9.level})`, 20, y);
+        y += 5;
+        doc.text(`GAD-7 (Ansiedad): ${p.scales.gad7.score}/21 (${p.scales.gad7.level})`, 20, y);
+        y += 5;
+        doc.text(`PCL-5 (Trauma): ${p.scales.pcl5.score}/32 | C-SSRS (Riesgo Suicida): ${p.scales.cssrs.category}`, 20, y);
+        y += 15;
+
+        doc.line(20, y, 90, y);
+        y += 5;
+        doc.setFontSize(9);
+        doc.text("Firma y Registro del Profesional", 20, y);
+
+        doc.save(`${p.id}_INFORME_CLINICO.pdf`);
+      }
+
+      exportDatabaseJSON() {
+        const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.data, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute('href', dataStr);
+        downloadAnchor.setAttribute('download', `JAIRRESTAURA_CLINICAL_BACKUP_${new Date().toISOString().split('T')[0]}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+      }
+
+      importDatabaseJSON(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            if (parsed.patients && Array.isArray(parsed.patients)) {
+              this.data = parsed;
+              this.saveDatabase();
+              this.currentPatientIndex = 0;
+              this.init();
+              alert('Base de datos restaurada exitosamente.');
+            } else {
+              alert('Archivo de copia de seguridad no válido.');
+            }
+          } catch (err) {
+            alert('Error al leer el archivo JSON.');
+          }
+        };
+        reader.readAsText(file);
+      }
+    }
+
+    // Inicialización al cargar la ventana
+    window.addEventListener('DOMContentLoaded', () => {
+      window.app = new ClinicalApp();
+      window.app.init();
+    });
+  </script>
+</body>
+</html>
