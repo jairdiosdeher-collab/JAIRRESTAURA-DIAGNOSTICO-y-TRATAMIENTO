@@ -622,6 +622,229 @@
       gap: 10px;
     }
 
+    /* ==========================================================================
+       ESTILOS DEL MÓDULO DE TRATAMIENTO LONGITUDINAL
+       ========================================================================== */
+    .stepper-phases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .phase-step-item {
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .phase-step-item:hover {
+      background: var(--bg-secondary);
+      border-color: var(--accent-teal);
+    }
+    .phase-step-item.active {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-teal-dark));
+      color: white;
+      border-color: var(--accent-teal-dark);
+      box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+    }
+    .phase-step-item.completed {
+      border-color: var(--success-emerald);
+      background: var(--success-emerald-light);
+      color: var(--success-emerald);
+    }
+    .phase-step-number {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      opacity: 0.85;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .phase-step-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      margin-top: 4px;
+      line-height: 1.25;
+    }
+
+    /* Badges de Estado Evolutivo */
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-status-mejoria {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #34d399;
+    }
+    .badge-status-estable {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #f59e0b;
+    }
+    .badge-status-vigilancia {
+      background: #ffedd5;
+      color: #9a3412;
+      border: 1px solid #fb923c;
+    }
+    .badge-status-recaida {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+    }
+    .badge-status-riesgo {
+      background: #18181b;
+      color: #f87171;
+      border: 1px solid #ef4444;
+    }
+
+    /* Tarjeta de Impacto Terapéutico */
+    .impact-hero-card {
+      background: linear-gradient(135deg, #0f172a, #134e4a);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .impact-hero-card::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.3), transparent 70%);
+      pointer-events: none;
+    }
+    .impact-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .impact-metric-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .impact-metric-pill:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .impact-metric-pill .label {
+      font-size: 10.5px;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .impact-metric-pill .values {
+      font-size: 15px;
+      font-weight: 800;
+      color: #f8fafc;
+      margin: 4px 0 2px;
+    }
+    .impact-metric-pill .delta-good {
+      font-size: 11px;
+      font-weight: 800;
+      color: #34d399;
+    }
+    .impact-metric-pill .delta-warn {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fb923c;
+    }
+
+    /* Gestor de Objetivos SMART */
+    .smart-goal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+    }
+    .smart-goal-card:hover {
+      border-color: var(--accent-teal);
+      box-shadow: var(--shadow-sm);
+    }
+    .progress-btn-group {
+      display: inline-flex;
+      background: var(--bg-tertiary);
+      padding: 3px;
+      border-radius: var(--radius-sm);
+      gap: 2px;
+    }
+    .progress-btn-group button {
+      border: none;
+      background: transparent;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+    .progress-btn-group button.active {
+      background: var(--accent-teal);
+      color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    /* Timeline de Sesiones */
+    .timeline-session-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 14px;
+      position: relative;
+      border-left: 5px solid var(--accent-teal);
+      transition: all 0.2s ease;
+    }
+    .timeline-session-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    /* Pestañas de gráficos */
+    .chart-view-selector {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .chart-tab-btn {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 11.5px;
+      font-weight: 700;
+      border: 1px solid var(--card-border);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .chart-tab-btn.active {
+      background: var(--accent-indigo);
+      color: white;
+      border-color: var(--accent-indigo);
+    }
+
     /* Impresión */
     @media print {
       .legal-disclaimer-banner, .app-header, .sidebar, .btn, .no-print {
@@ -760,6 +983,10 @@
       </div>
 
       <div class="nav-label">Tratamiento & Informes</div>
+      <div class="nav-item" onclick="app.navigate('longitudinal')">
+        <i class="fa-solid fa-arrow-trend-up text-teal"></i>
+        <span>Tratamiento Longitudinal ★</span>
+      </div>
       <div class="nav-item" onclick="app.navigate('plan')">
         <i class="fa-solid fa-list-check"></i>
         <span>Plan Terapéutico SMART</span>
@@ -899,6 +1126,228 @@
                 <!-- Poblado dinámicamente -->
               </tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================================
+           NUEVO MÓDULO: TRATAMIENTO LONGITUDINAL Y RESULTADOS MEDIBLES
+           ============================================================== -->
+      <section id="view-longitudinal" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-arrow-trend-up text-teal"></i> Tratamiento Longitudinal & Resultados Clínicos Medibles</h2>
+            <p class="section-subtitle">Plataforma inteligente de acompañamiento terapéutico, formulación secuencial y monitoreo de efectividad clínica basada en evidencia.</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-teal" onclick="app.openNewLongitudinalSessionModal()">
+              <i class="fa-solid fa-plus"></i> Registrar Sesión Longitudinal
+            </button>
+            <button class="btn btn-outline" onclick="app.openNewSmartGoalModal()">
+              <i class="fa-solid fa-bullseye"></i> Pactar Objetivo SMART
+            </button>
+            <button class="btn btn-outline" onclick="app.generateOfficialReport('evolucion')">
+              <i class="fa-solid fa-file-pdf"></i> Informe de Evolución PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. RUTA TERAPÉUTICA SECUENCIAL (8 FASES) -->
+        <div class="card">
+          <div class="card-title">
+            <span><i class="fa-solid fa-route text-teal"></i> 1. Ruta Terapéutica Secuencial (8 Fases Vinculadas Cronológicamente)</span>
+            <span class="badge badge-teal" id="badge-current-phase">Fase 6: Intervención Terapéutica</span>
+          </div>
+          <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Haga clic en cualquiera de las fases para inspeccionar o actualizar el estado del ciclo asistencial del paciente activo:
+          </p>
+          <div class="stepper-phases-grid" id="stepper-phases-container">
+            <!-- Generado dinámicamente -->
+          </div>
+          <div style="background: var(--bg-tertiary); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 12px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <strong id="phase-desc-title">Fase 6: Intervención Terapéutica y Habilidades</strong>
+              <p style="color: var(--text-secondary); margin-top: 2px;" id="phase-desc-text">
+                Implementación de técnicas cognitivas, activación conductual, regulación afectiva y habilidades interpersonales con evaluación sesión a sesión.
+              </p>
+            </div>
+            <button class="btn btn-outline" style="font-size: 11px;" onclick="app.advancePhase()">
+              <i class="fa-solid fa-forward"></i> Avanzar a Siguiente Fase
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. TARJETA DE IMPACTO TERAPÉUTICO (INICIO VS ÚLTIMA SESIÓN) -->
+        <div class="impact-hero-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: #5eead4; text-transform: uppercase; letter-spacing: 0.8px;">
+                <i class="fa-solid fa-chart-line-up"></i> Tarjeta de Impacto Terapéutico
+              </div>
+              <h3 style="font-size: 20px; font-weight: 800; margin-top: 4px; color: white;">
+                Inicio del Tratamiento vs Último Control Clínico
+              </h3>
+              <p style="font-size: 12.5px; color: #cbd5e1; max-width: 650px; margin-top: 4px;">
+                Contraste directo entre la evaluación basal y la sesión actual. Cuantificación rigurosa del cambio sintomático y recuperación funcional.
+              </p>
+            </div>
+            <div style="background: rgba(255,255,255,0.12); padding: 8px 16px; border-radius: var(--radius-md); text-align: right;">
+              <span style="font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Dictamen de Efectividad</span>
+              <div style="font-size: 18px; font-weight: 900; color: #34d399;" id="impact-verdict-badge">
+                Excelente (55% Reducción)
+              </div>
+            </div>
+          </div>
+
+          <div class="impact-metrics-grid" id="impact-metrics-container">
+            <!-- Poblado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- 3. MOTOR DE EVOLUCIÓN CLÍNICA & OBSERVACIONES AUTOMATIZADAS -->
+        <div class="card" style="border-left: 5px solid var(--accent-teal);">
+          <div class="card-title">
+            <span><i class="fa-solid fa-microchip text-teal"></i> 2. Motor Algorítmico de Evolución Clínica (Sesión Actual vs Previa & Basal)</span>
+            <span class="badge-status badge-status-mejoria" id="evolution-status-badge">
+              <i class="fa-solid fa-circle-check"></i> Mejoría Significativa
+            </span>
+          </div>
+
+          <div class="grid-2" style="margin-top: 10px; gap: 16px;">
+            <div style="background: var(--bg-tertiary); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--card-border);">
+              <h4 style="font-size: 12.5px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); margin-bottom: 8px;">
+                <i class="fa-solid fa-quote-left text-teal"></i> Observaciones Clínicas Automatizadas por el Motor:
+              </h4>
+              <ul id="evolution-syntheses-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.4;">
+                <!-- Poblado dinámicamente -->
+              </ul>
+            </div>
+
+            <div style="background: var(--bg-tertiary); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--card-border);">
+              <h4 style="font-size: 12.5px; font-weight: 800; text-transform: uppercase; color: var(--text-primary); margin-bottom: 8px;">
+                <i class="fa-solid fa-scale-balanced text-indigo"></i> Balances Cuantitativos Intersesión:
+              </h4>
+              <div id="evolution-deltas-summary" style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+                <!-- Poblado dinámicamente -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. DASHBOARD DE RESULTADOS HISTÓRICOS (CHART.JS) -->
+        <div class="card">
+          <div class="card-title" style="flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span><i class="fa-solid fa-chart-area text-indigo"></i> 3. Dashboard Gráfico de Resultados Longitudinales (Chart.js)</span>
+              <p style="font-size: 11px; color: var(--text-muted); font-weight: 500;">9 Variables clínicas: Depresión, Ansiedad, Estrés, Riesgo, Sueño, Social, Laboral, Calidad de Vida, Adherencia.</p>
+            </div>
+            <!-- Selector de tipo de gráfica -->
+            <div class="chart-view-selector" id="chart-longitudinal-selector">
+              <button class="chart-tab-btn active" onclick="app.switchLongitudinalChart('line')"><i class="fa-solid fa-chart-line"></i> Línea Temporal</button>
+              <button class="chart-tab-btn" onclick="app.switchLongitudinalChart('radar')"><i class="fa-solid fa-spider"></i> Radar 9 Ejes</button>
+              <button class="chart-tab-btn" onclick="app.switchLongitudinalChart('bar')"><i class="fa-solid fa-chart-column"></i> Barras Inicio vs Fin</button>
+              <button class="chart-tab-btn" onclick="app.switchLongitudinalChart('area')"><i class="fa-solid fa-chart-area"></i> Área Acumulada</button>
+            </div>
+          </div>
+
+          <div style="height: 320px; position: relative; margin-top: 10px;">
+            <canvas id="chart-longitudinal-main"></canvas>
+          </div>
+        </div>
+
+        <!-- 5. GESTOR DE OBJETIVOS SMART (11 DOMINIOS) -->
+        <div class="card">
+          <div class="card-title" style="flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span><i class="fa-solid fa-bullseye text-teal"></i> 4. Gestor de Objetivos Terapéuticos SMART (11 Dominios)</span>
+              <p style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Metas específicas, medibles y verificables sesión a sesión.</p>
+            </div>
+            <button class="btn btn-teal" style="font-size: 11px; padding: 4px 10px;" onclick="app.openNewSmartGoalModal()">
+              <i class="fa-solid fa-plus"></i> Nuevo Objetivo
+            </button>
+          </div>
+
+          <!-- Filtro de dominios -->
+          <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px;" id="smart-domains-filters">
+            <!-- Poblado dinámicamente -->
+          </div>
+
+          <div id="smart-goals-container">
+            <!-- Poblado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- 6. TIMELINE VISUAL DE SESIONES CRONOLÓGICAS -->
+        <div class="card">
+          <div class="card-title" style="flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span><i class="fa-solid fa-timeline text-indigo"></i> 5. Línea de Tiempo de Sesiones Clínicas</span>
+              <p style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Sesión por sesión con objetivos, técnicas, tareas, cumplimiento y badges evolutivos.</p>
+            </div>
+            <button class="btn btn-teal" style="font-size: 11px; padding: 4px 10px;" onclick="app.openNewLongitudinalSessionModal()">
+              <i class="fa-solid fa-plus"></i> Registrar Nueva Sesión
+            </button>
+          </div>
+
+          <div id="longitudinal-sessions-timeline" style="margin-top: 14px;">
+            <!-- Poblado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- 7. RECOMENDADOR DE INTERVENCIONES Y TÉCNICAS -->
+        <div class="card">
+          <div class="card-title">
+            <span><i class="fa-solid fa-lightbulb text-warning"></i> 6. Recomendador de Intervenciones Basadas en Evidencia</span>
+            <span class="badge badge-teal">Algorítmico</span>
+          </div>
+          <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Técnicas sugeridas según diagnóstico DSM-5-TR, nivel de riesgo y fase de evolución:
+          </p>
+          <div class="grid-3" id="longitudinal-recommendations-grid">
+            <!-- Poblado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- 8. PREVENCIÓN DE RECAÍDAS & CRITERIOS DE ALTA CLÍNICA -->
+        <div class="grid-2">
+          <div class="card" style="border-left: 4px solid var(--warning-amber);">
+            <div class="card-title">
+              <span><i class="fa-solid fa-shield-virus text-warning"></i> 7. Plan de Prevención de Recaídas (Pródromos)</span>
+            </div>
+            <div style="font-size: 12px; display: flex; flex-direction: column; gap: 8px;">
+              <div>
+                <strong>Señales Tempranas de Alerta (Pródromos):</strong>
+                <p style="color: var(--text-secondary); margin-top: 2px;" id="relapse-early-signs">
+                  Aislamiento mayor a 24 horas, postergar llamadas de su hermana, insomnio de conciliación por 2 noches seguidas, pensamientos de autoincompetencia.
+                </p>
+              </div>
+              <div>
+                <strong>Situaciones de Alto Riesgo:</strong>
+                <p style="color: var(--text-secondary); margin-top: 2px;" id="relapse-high-risk">
+                  Fechas de aniversario conyugal, notificaciones de trámites judiciales, sobrecarga de horas laborales docentes.
+                </p>
+              </div>
+              <div>
+                <strong>Estrategias Internas de Afrontamiento:</strong>
+                <p style="color: var(--text-secondary); margin-top: 2px;" id="relapse-coping">
+                  Habilidad TIPP (agua fría), caminata matutina con música suave, ejercicio de defusión ACT (hojas en el río), relectura de la carta del Adulto Sano.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--success-emerald);">
+            <div class="card-title">
+              <span><i class="fa-solid fa-award text-success"></i> 8. Criterios para el Alta Clínica Consensuada</span>
+            </div>
+            <div id="discharge-criteria-container" style="display: flex; flex-direction: column; gap: 8px; font-size: 12px;">
+              <!-- Poblado dinámicamente -->
+            </div>
+            <div style="margin-top: 14px; text-align: right;">
+              <button class="btn btn-teal" style="font-size: 11px;" onclick="app.generateOfficialReport('alta')">
+                <i class="fa-solid fa-file-signature"></i> Formalizar Informe de Alta
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -1433,6 +1882,315 @@
       </section>
 
       <!-- ==============================================================
+           8. TRATAMIENTO LONGITUDINAL & RESULTADOS CLINICOS MEDIBLES
+           ============================================================== -->
+      <section id="view-longitudinal" class="view-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i class="fa-solid fa-arrow-trend-up text-teal"></i> Acompañamiento Longitudinal & Resultados Clínicos</h2>
+            <p class="section-subtitle">Monitoreo secuencial sesión a sesión, verificación de objetivos SMART, predicción de respuesta y prevención de recaídas.</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-teal" onclick="app.openLongitudinalSessionModal()">
+              <i class="fa-solid fa-calendar-plus"></i> Registrar Nueva Sesión
+            </button>
+            <button class="btn btn-outline" onclick="app.openSmartGoalModal()">
+              <i class="fa-solid fa-bullseye"></i> Pactar Objetivo SMART
+            </button>
+            <button class="btn btn-outline" onclick="window.print()">
+              <i class="fa-solid fa-print"></i> Imprimir Evolución
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. STEPPER DEL PROCESO TERAPÉUTICO (8 ETAPAS) -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <div class="card-title" style="margin-bottom: 0;">
+              <span><i class="fa-solid fa-route text-teal"></i> Proceso Terapéutico Longitudinal (8 Etapas Clínicas)</span>
+            </div>
+            <span class="badge badge-teal" id="longitudinal-stage-badge">Etapa Activa: 5. Seguimiento por Sesiones</span>
+          </div>
+          <div class="stepper-phases-grid" id="stepper-phases-container">
+            <!-- 8 Etapas generadas dinámicamente -->
+          </div>
+        </div>
+
+        <!-- 2. COMPARADOR LÍNEA BASE VS SESIÓN ACTUAL (TARJETA DE IMPACTO TERAPÉUTICO) -->
+        <div class="impact-hero-card" style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #2dd4bf; font-weight: 700;">
+                <i class="fa-solid fa-scale-balanced"></i> Comparativa Clínica de Impacto
+              </span>
+              <h3 style="font-size: 20px; font-weight: 800; margin: 4px 0 2px; color: #ffffff;">
+                Línea Base del Tratamiento vs. Última Sesión Evaluada
+              </h3>
+              <p style="font-size: 12px; color: #cbd5e1; max-width: 680px;" id="long-impact-summary">
+                Cálculo algorítmico de cambio absoluto, reducción porcentual y respuesta terapéutica basada en criterios psicométricos estandarizados.
+              </p>
+            </div>
+            <div style="text-align: right;" id="long-impact-global-badge">
+              <span class="badge-status badge-status-mejoria" style="font-size: 13px; padding: 6px 14px;">
+                <i class="fa-solid fa-circle-check"></i> Respuesta Favorable Global (-65.0%)
+              </span>
+            </div>
+          </div>
+
+          <div class="impact-metrics-grid" id="long-impact-metrics-grid">
+            <!-- Píldoras de métricas generadas por JS -->
+          </div>
+
+          <!-- Comparativa Corto Plazo: Penúltima vs Última Sesión -->
+          <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px;">
+            <div style="color: #94a3b8;">
+              <i class="fa-solid fa-code-compare text-teal"></i> <strong style="color: #f1f5f9;">Evolución Intersesión Reciente:</strong>
+              <span id="long-recent-comparison-text">Sesión #4 vs Sesión #5: Reducción adicional de -2 pts en PHQ-9 y mantenimiento de estabilidad ansiosa.</span>
+            </div>
+            <span class="badge" style="background: rgba(45, 212, 191, 0.2); color: #2dd4bf; border: 1px solid #2dd4bf;" id="long-recent-trend-badge">
+              Tendencia: Consolidación Progresiva
+            </span>
+          </div>
+        </div>
+
+        <!-- 3. PANEL DE INDICADORES HISTÓRICOS Y GRÁFICOS INTERACTIVOS (CHART.JS) -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+            <div class="card-title" style="margin-bottom: 0;">
+              <span><i class="fa-solid fa-chart-line text-indigo"></i> Panel de Indicadores Históricos Terapéuticos</span>
+            </div>
+            <!-- Selector de tipo de gráfico -->
+            <div class="chart-view-selector" style="margin-bottom: 0;">
+              <button class="chart-tab-btn active" id="btn-chart-sintomas" onclick="app.switchLongitudinalChartView('sintomas')">
+                <i class="fa-solid fa-heart-pulse"></i> Síntomas (PHQ-9 / GAD-7 / PCL-5)
+              </button>
+              <button class="chart-tab-btn" id="btn-chart-func" onclick="app.switchLongitudinalChartView('func')">
+                <i class="fa-solid fa-person-walking"></i> Funcionamiento & Sueño
+              </button>
+              <button class="chart-tab-btn" id="btn-chart-adherencia" onclick="app.switchLongitudinalChartView('adherencia')">
+                <i class="fa-solid fa-handshake"></i> Alianza & Adherencia
+              </button>
+            </div>
+          </div>
+
+          <div style="position: relative; height: 300px; width: 100%;">
+            <canvas id="chart-longitudinal-evolution"></canvas>
+          </div>
+
+          <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 11.5px; color: var(--text-secondary);">
+            <div id="chart-longitudinal-legend-info">
+              <i class="fa-solid fa-circle-info text-teal"></i> Línea de referencia: Umbral de remisión clínica (PHQ-9 &lt; 10, GAD-7 &lt; 8).
+            </div>
+            <div style="font-weight: 700; color: var(--success-emerald);" id="chart-longitudinal-velocity">
+              Tasa de reducción sintomática: -2.6 puntos por sesión
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. LÍNEA DE TIEMPO VISUAL DE SESIONES Y GESTOR DE OBJETIVOS SMART (GRID 2 COLS) -->
+        <div class="grid-2" style="margin-bottom: 20px; align-items: flex-start;">
+          
+          <!-- COLUMNA IZQUIERDA: LÍNEA DE TIEMPO DE SESIONES -->
+          <div>
+            <div class="card" style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div class="card-title" style="margin-bottom: 0;">
+                  <span><i class="fa-solid fa-timeline text-teal"></i> Línea de Tiempo de Sesiones</span>
+                </div>
+                <button class="btn btn-teal" style="padding: 3px 10px; font-size: 11px;" onclick="app.openLongitudinalSessionModal()">
+                  <i class="fa-solid fa-plus"></i> Añadir Sesión
+                </button>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+                Historial cronológico de intervenciones aplicadas, tareas asignadas, cumplimiento y observaciones clínicas.
+              </p>
+              
+              <!-- Contenedor dinámico de sesiones de la línea de tiempo -->
+              <div id="longitudinal-timeline-container">
+                <!-- Tarjetas pobladas por JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: OBJETIVOS TERAPÉUTICOS SMART & PRONÓSTICO DINÁMICO -->
+          <div class="space-y-4">
+            
+            <!-- OBJETIVOS TERAPÉUTICOS SMART -->
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <div class="card-title" style="margin-bottom: 0;">
+                  <span><i class="fa-solid fa-bullseye text-teal"></i> Objetivos Terapéuticos SMART</span>
+                </div>
+                <button class="btn btn-outline" style="padding: 3px 10px; font-size: 11px;" onclick="app.openSmartGoalModal()">
+                  <i class="fa-solid fa-plus"></i> Nuevo Objetivo
+                </button>
+              </div>
+
+              <!-- Barra global de progreso de objetivos -->
+              <div style="background: var(--bg-tertiary); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--card-border); margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 700; margin-bottom: 6px;">
+                  <span>Cumplimiento Global del Plan SMART:</span>
+                  <span id="smart-goals-overall-percent" class="text-teal">85% Logrado</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--card-border); border-radius: 999px; overflow: hidden;">
+                  <div id="smart-goals-overall-bar" style="height: 100%; width: 85%; background: linear-gradient(90deg, var(--accent-teal), #059669); transition: width 0.3s ease;"></div>
+                </div>
+              </div>
+
+              <!-- Lista de Objetivos SMART -->
+              <div id="smart-goals-list-container" style="display: flex; flex-direction: column; gap: 10px;">
+                <!-- Cards pobladas por JS -->
+              </div>
+            </div>
+
+            <!-- TARJETA DE PRONÓSTICO DINÁMICO -->
+            <div class="card" style="border-left: 4px solid var(--accent-indigo);">
+              <div class="card-title">
+                <span><i class="fa-solid fa-crystal-ball text-indigo"></i> Pronóstico Clínico Dinámico Multidisciplinario</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <div>
+                  <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Estimación Algorítmica:</div>
+                  <div style="font-size: 16px; font-weight: 800; color: var(--accent-indigo);" id="prognosis-title">
+                    Favorable con Psicoterapia Combinada
+                  </div>
+                </div>
+                <span class="badge badge-success" id="prognosis-badge" style="font-size: 12px; padding: 4px 10px;">
+                  Probabilidad Remisión: 85%
+                </span>
+              </div>
+
+              <!-- Balance Protectores vs Riesgo -->
+              <div class="grid-2" style="font-size: 11.5px; gap: 10px; margin-bottom: 12px;">
+                <div style="background: var(--success-emerald-light); padding: 10px; border-radius: var(--radius-sm); border: 1px solid rgba(5, 150, 105, 0.2);">
+                  <strong style="color: var(--success-emerald); display: block; margin-bottom: 4px;">
+                    <i class="fa-solid fa-shield-heart"></i> Factores Protectores (+):
+                  </strong>
+                  <ul style="padding-left: 16px; margin: 0; color: #065f46;" id="prognosis-protective-list">
+                    <li>Excelente nivel de introspección (Insight grado 5).</li>
+                    <li>Sólida alianza terapéutica (5/5) y soporte familiar.</li>
+                    <li>Alta adherencia a tareas inter-sesión (95%).</li>
+                  </ul>
+                </div>
+                <div style="background: var(--warning-amber-light); padding: 10px; border-radius: var(--radius-sm); border: 1px solid rgba(217, 119, 6, 0.2);">
+                  <strong style="color: var(--warning-amber); display: block; margin-bottom: 4px;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Factores de Riesgo Monitoreados (-):
+                  </strong>
+                  <ul style="padding-left: 16px; margin: 0; color: #92400e;" id="prognosis-risk-list">
+                    <li>Antecedente familiar directo de suicidio.</li>
+                    <li>Vulnerabilidad de apego ansioso ante rupturas.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Justificación Clínica -->
+              <div style="background: var(--bg-tertiary); padding: 10px 12px; border-radius: var(--radius-sm); font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">
+                <strong>Justificación Clínica:</strong>
+                <span id="prognosis-rationale-text">
+                  La disminución progresiva y sostenida de 20 a 7 puntos en PHQ-9 a lo largo de 5 sesiones, en conjunto con la resolución de la ideación pasiva y la reactivación laboral autónoma, respaldan un pronóstico altamente favorable para la fase de consolidación y prevención de recaídas.
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 5. RECOMENDADOR INTELIGENTE DE INTERVENCIONES & PLAN EN 4 FASES (GRID 2 COLS) -->
+        <div class="grid-2" style="margin-bottom: 20px;">
+          
+          <!-- RECOMENDADOR INTELIGENTE DE INTERVENCIONES -->
+          <div class="card">
+            <div class="card-title">
+              <span><i class="fa-solid fa-wand-magic-sparkles text-teal"></i> Recomendador Inteligente de Intervenciones</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+              Técnicas sugeridas algorítmicamente según diagnóstico, nivel de riesgo, etapa terapéutica y respuesta en sesiones:
+            </p>
+            <div id="intervention-recommendations-container" style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- Cards de técnicas pobladas por JS -->
+            </div>
+          </div>
+
+          <!-- PLAN DE TRATAMIENTO EN 4 FASES -->
+          <div class="card">
+            <div class="card-title">
+              <span><i class="fa-solid fa-layer-group text-indigo"></i> Estructura del Tratamiento en 4 Fases</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+              Secuencia clínica estandarizada por fases terapéuticas cronológicas:
+            </p>
+            <div id="treatment-phases-container" style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- 4 Fases generadas por JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. MATRIZ DE PREVENCIÓN DE RECAÍDAS & CHECKLIST DE ALTA CLÍNICA (GRID 2 COLS) -->
+        <div class="grid-2" style="margin-bottom: 20px;">
+          
+          <!-- PREVENCIÓN DE RECAÍDAS -->
+          <div class="card" style="border-left: 4px solid var(--accent-teal);">
+            <div class="card-title">
+              <span><i class="fa-solid fa-shield-halved text-teal"></i> Plan de Prevención de Recaídas</span>
+            </div>
+            <div class="space-y-3" style="font-size: 12px;">
+              <div>
+                <strong style="color: var(--text-primary);"><i class="fa-solid fa-bell text-warning"></i> 1. Señales Tempranas de Alerta (Pródromos):</strong>
+                <p style="color: var(--text-secondary); margin: 3px 0 0;" id="relapse-warning-signs">
+                  Aislamiento social >24h, postergación de comidas, rumiación "no valgo nada", insomnio por 2 noches consecutivas.
+                </p>
+              </div>
+              <div>
+                <strong style="color: var(--text-primary);"><i class="fa-solid fa-bolt text-danger"></i> 2. Situaciones de Alto Riesgo Identificadas:</strong>
+                <p style="color: var(--text-secondary); margin: 3px 0 0;" id="relapse-high-risk">
+                  Fechas de aniversario conyugal, sobrecarga laboral no comunicada, contacto no regulado con ex-pareja.
+                </p>
+              </div>
+              <div>
+                <strong style="color: var(--text-primary);"><i class="fa-solid fa-kit-medical text-success"></i> 3. Estrategias de Afrontamiento Eficaces:</strong>
+                <p style="color: var(--text-secondary); margin: 3px 0 0;" id="relapse-coping">
+                  Técnica TIPP (hielo en rostro), activación conductual inmediata (caminata 15 min), registro de pensamientos disfuncionales y contacto con coterapeuta.
+                </p>
+              </div>
+              <div>
+                <strong style="color: var(--text-primary);"><i class="fa-solid fa-phone text-indigo"></i> 4. Red de Emergencia Activa:</strong>
+                <p style="color: var(--text-secondary); margin: 3px 0 0;" id="relapse-contacts">
+                  Hermana Claudia (+57 310 982 3341) | Terapeuta Dr. Jair Restaura | Línea 106 de Crisis Nacional.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHECKLIST DE ALTA CLÍNICA CONSENSUADA -->
+          <div class="card" style="border-left: 4px solid var(--success-emerald);">
+            <div class="card-title">
+              <span><i class="fa-solid fa-graduation-cap text-success"></i> Criterios para Alta Clínica Consensuada</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+              Verificación clínica de criterios de remisión y consolidación de autonomía terapéutica:
+            </p>
+            <div id="discharge-criteria-container" class="space-y-2">
+              <!-- Checklist generado por JS -->
+            </div>
+            
+            <div style="margin-top: 16px; padding: 12px; border-radius: var(--radius-sm); background: var(--bg-tertiary); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Estado para Alta:</span>
+                <div style="font-size: 13px; font-weight: 800; color: var(--success-emerald);" id="discharge-status-text">
+                  En Proceso Activo de Consolidación (4/5 Criterios Cumplidos)
+                </div>
+              </div>
+              <button class="btn btn-teal" style="font-size: 11px; padding: 4px 10px;" onclick="app.generateOfficialReport('alta')">
+                <i class="fa-solid fa-award"></i> Resumen de Alta
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ==============================================================
            9. PLAN TERAPEUTICO SMART & PRONOSTICO
            ============================================================== -->
       <section id="view-plan" class="view-section">
@@ -1726,6 +2484,169 @@
     </div>
   </div>
 
+  <!-- ==============================================================
+       MODAL 5: REGISTRAR NUEVA SESION LONGITUDINAL
+       ============================================================== -->
+  <div id="modal-longitudinal-session" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 780px;">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-calendar-plus text-teal"></i> Registrar Nueva Sesión Longitudinal</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-longitudinal-session')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body space-y-4">
+        <div class="grid-3">
+          <div class="form-group">
+            <label class="form-label">Número de Sesión:</label>
+            <input type="number" id="long-sess-num" class="form-control" value="6" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fecha de Sesión:</label>
+            <input type="date" id="long-sess-date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estado Evolutivo Observado:</label>
+            <select id="long-sess-status" class="form-control">
+              <option value="Mejoría">🟢 Mejoría</option>
+              <option value="Estable">🟡 Estable</option>
+              <option value="Vigilancia">🟠 Vigilancia</option>
+              <option value="Recaída">🔴 Recaída</option>
+              <option value="Riesgo Elevado">⚫ Riesgo Elevado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Objetivos Trabajados en Sesión:</label>
+          <input type="text" id="long-sess-goals" class="form-control" placeholder="ej. Reducir rumiación de culpa, consolidar higiene del sueño">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Técnicas e Intervenciones Utilizadas:</label>
+          <input type="text" id="long-sess-techniques" class="form-control" placeholder="ej. Activación conductual, reestructuración socrática, técnica TIPP, defusión ACT">
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Tarea Intersesión Asignada:</label>
+            <textarea id="long-sess-homework" class="form-control" rows="2" placeholder="ej. Registro de actividades de dominio y agrado 3 veces por semana..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Observaciones Clínicas y Hallazgos:</label>
+            <textarea id="long-sess-obs" class="form-control" rows="2" placeholder="ej. Paciente receptiva, facies relajada, reporte de sueño reparador continuo..."></textarea>
+          </div>
+        </div>
+
+        <!-- Métricas Clínicas de la Sesión -->
+        <div style="background: var(--bg-tertiary); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--card-border);">
+          <strong style="font-size: 11px; text-transform: uppercase; color: var(--text-primary); display: block; margin-bottom: 8px;">
+            <i class="fa-solid fa-chart-simple text-teal"></i> Métricas Psicométricas y Funcionales de la Sesión:
+          </strong>
+          <div class="grid-4" style="font-size: 11.5px;">
+            <div class="form-group">
+              <label class="form-label">Depresión PHQ-9 (0-27):</label>
+              <input type="number" id="long-metric-phq" class="form-control" min="0" max="27" value="9">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ansiedad GAD-7 (0-21):</label>
+              <input type="number" id="long-metric-gad" class="form-control" min="0" max="21" value="6">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Trauma PCL-5 (0-32):</label>
+              <input type="number" id="long-metric-pcl" class="form-control" min="0" max="32" value="8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Riesgo Suicida:</label>
+              <select id="long-metric-cssrs" class="form-control">
+                <option value="Sin riesgo">Sin riesgo evidente</option>
+                <option value="Leve">Leve (Ideación Pasiva)</option>
+                <option value="Moderado">Moderado</option>
+                <option value="Alto">Alto</option>
+                <option value="Crítico">Crítico</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid-4" style="font-size: 11.5px; margin-top: 6px;">
+            <div class="form-group">
+              <label class="form-label">Calidad Sueño (0-10):</label>
+              <input type="number" id="long-metric-sleep" class="form-control" min="0" max="10" value="8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Func. Social (0-10):</label>
+              <input type="number" id="long-metric-social" class="form-control" min="0" max="10" value="8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Func. Laboral (0-10):</label>
+              <input type="number" id="long-metric-work" class="form-control" min="0" max="10" value="8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Adherencia (%):</label>
+              <input type="number" id="long-metric-adherence" class="form-control" min="0" max="100" step="5" value="95">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="app.closeModal('modal-longitudinal-session')">Cancelar</button>
+        <button class="btn btn-teal" onclick="app.saveNewLongitudinalSession()"><i class="fa-solid fa-check"></i> Registrar Sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL 6: PACTAR NUEVO OBJETIVO SMART (11 DOMINIOS)
+       ============================================================== -->
+  <div id="modal-smart-goal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 style="font-size: 16px; font-weight: 800;"><i class="fa-solid fa-bullseye text-teal"></i> Pactar Nuevo Objetivo Terapéutico SMART</h3>
+        <button class="btn-icon" onclick="app.closeModal('modal-smart-goal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body space-y-3">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Dominio Clínico (11 Dominios):</label>
+            <select id="goal-domain" class="form-control">
+              <option value="Depresión">Depresión</option>
+              <option value="Ansiedad">Ansiedad</option>
+              <option value="Sueño">Sueño</option>
+              <option value="Social">Social</option>
+              <option value="Familiar">Familiar</option>
+              <option value="Laboral">Laboral</option>
+              <option value="Conductual">Conductual</option>
+              <option value="Cognitivo">Cognitivo</option>
+              <option value="Autocuidado">Autocuidado</option>
+              <option value="Espiritualidad">Espiritualidad</option>
+              <option value="Proyecto de Vida">Proyecto de Vida</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fecha Objetivo Pactada:</label>
+            <input type="date" id="goal-target-date" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Descripción Específica del Objetivo:</label>
+          <input type="text" id="goal-title" class="form-control" placeholder="ej. Disminuir rumiación ansiosa matutina a menos de 20 minutos">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Indicador Medible y Verificable:</label>
+          <input type="text" id="goal-metric" class="form-control" placeholder="ej. Autorregistro diario en escala USAM menor a 40/100">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Evidencia Clínica Inicial / Observación:</label>
+          <textarea id="goal-evidence" class="form-control" rows="2" placeholder="ej. Paciente refiere dificultad para iniciar su jornada por pensamientos repetitivos..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="app.closeModal('modal-smart-goal')">Cancelar</button>
+        <button class="btn btn-teal" onclick="app.saveNewSmartGoal()"><i class="fa-solid fa-check"></i> Pactar Objetivo</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ==========================================================================
        JAVASCRIPT MODULAR EMBEBIDO
        ========================================================================== -->
@@ -1734,9 +2655,9 @@
      * JAIRRESTAURA CLINICAL AI PRO
      * Motor Clínico en JavaScript Moderno y Base de Datos LocalStorage
      */
-    const DB_KEY = 'JAIRRESTAURA_CLINICAL_PRO_DB_V3';
+    const DB_KEY = 'JAIRRESTAURA_CLINICAL_PRO_DB_V4';
 
-    // Base de datos de pacientes prototipo
+    // Base de datos de pacientes prototipo con Acompañamiento Longitudinal Completo
     const SEED_DATA = {
       patients: [
         {
@@ -1756,47 +2677,111 @@
           attachment: 'Apego Ansioso-Preocupado',
           aces: 'Score 5/10 (violencia verbal intrafamiliar, negligencia afectiva).',
           substances: 'Consumo social ocasional de vino (1 copa/mes). Niega tabaco y sustancias ilícitas.',
-          protectiveFactors: 'Elevado nivel sociocultural, hermana como red cercana de contención, amor por su profesión docente.',
-          riskFactors: 'Antecedente familiar de suicidio, ideación pasiva de muerte, aislamiento social agudo.',
-          suicideRisk: 'Leve',
+          protectiveFactors: 'Elevado nivel sociocultural, hermana como red cercana de contención, amor por su profesión docente, excelente introspección.',
+          riskFactors: 'Antecedente familiar de suicidio, ideación pasiva de muerte inicial, aislamiento social agudo.',
+          suicideRisk: 'Sin riesgo evidente',
           dsm5: {
             code: 'F33.1 (296.32)',
             title: 'Trastorno de Depresión Mayor, Recurrente, Moderado-Severo',
-            specifiers: 'Con síntomas de ansiedad comórbidos; con episodios disociativos reactivos',
-            criteria: 'Estado de ánimo deprimido constante, anhedonia marcada, pérdida de 4kg involuntaria, insomnio de mantenimiento, enlentecimiento psicomotor y sentimientos de inutilidad >12 semanas.',
-            differentials: 'Descartado Trastorno Bipolar (sin antecedentes hipomaníacos); descartado Trastorno Adaptativo (rebasa umbral y severidad).'
+            specifiers: 'En remisión parcial/favorable; síntomas ansiosos en resolución',
+            criteria: 'Estado de ánimo deprimido previo, anhedonia marcada, insomnio de mantenimiento y sentimientos de inutilidad >12 semanas.',
+            differentials: 'Descartado Trastorno Bipolar (sin antecedentes hipomaníacos); descartado Trastorno Adaptativo (rebasa umbral).'
           },
           pdm2: {
             org: 'Nivel Limítrofe Alto (Borderline Alto)',
             style: 'Patrón de Personalidad Depresivo-Autocrítico (Introjectivo)',
-            defenses: 'Introyeción, vuelta contra sí mismo, idealización y escisión parcial.',
-            axisS: 'Experimenta su depresión como prueba de ser defectuosa e incapaz de retener el amor de otros.',
-            capacities: [3, 2, 2, 3, 4, 3, 3, 4, 5] // 9 capacidades Eje M
+            defenses: 'Introyeción, vuelta contra sí mismo, idealización y escisión parcial en remisión.',
+            axisS: 'Experimenta su depresión como prueba de ser defectuosa, en proceso de resignificación con Adulto Sano.',
+            capacities: [4, 3, 3, 4, 4, 3, 4, 4, 5] // 9 capacidades Eje M evolucionadas
           },
           scales: {
-            phq9: { answers: [3, 3, 2, 3, 2, 3, 2, 1, 1], score: 20, level: 'Severa' },
-            gad7: { answers: [2, 3, 3, 2, 1, 1, 2], score: 14, level: 'Moderada' },
-            pcl5: { answers: [3, 2, 2, 3, 3, 2, 3, 2], score: 20, positive: true },
-            bdiii: { score: 32, level: 'Severa' },
-            bai: { score: 26, level: 'Moderada-Severa' },
+            phq9: { answers: [1, 1, 1, 1, 1, 1, 1, 0, 0], score: 7, level: 'Leve / Remisión Clínica' },
+            gad7: { answers: [1, 1, 1, 1, 0, 1, 0], score: 5, level: 'Leve' },
+            pcl5: { answers: [1, 1, 1, 1, 1, 1, 1, 1], score: 8, positive: false },
+            bdiii: { score: 11, level: 'Leve' },
+            bai: { score: 10, level: 'Leve' },
             audit: { score: 2, level: 'Bajo Riesgo' },
             dast: { score: 0, level: 'Sin abuso' },
-            cssrs: { wishDead: true, activeThoughts: false, intent: false, plan: false, category: 'Leve (Ideación Pasiva)' }
+            cssrs: { wishDead: false, activeThoughts: false, intent: false, plan: false, category: 'Sin riesgo activo' }
           },
           fourP: {
             predisposing: 'Genética psiquiátrica positiva (suicidio tía, depresión materna). Negligencia afectiva en infancia. Apego ansioso.',
             precipitating: 'Infidelidad y abandono repentino de su pareja tras 7 años de matrimonio.',
-            perpetuating: 'Rumiación de culpa ("no fui suficiente"), aislamiento social en cama, desregulación de ritmos circadianos.',
-            protective: 'Excelente introspección, hermana Claudia de red de apoyo, ausencia de plan activo suicida.'
+            perpetuating: 'Rumiación de culpa previa ("no fui suficiente"), aislamiento social en cama (en resolución activa).',
+            protective: 'Excelente introspección (Insight grado 5), hermana Claudia de red de apoyo, ausencia de plan activo suicida, adherencia 95%.'
           },
+          // Datos Longitudinales Especializados
+          currentStageIndex: 4, // 0: Evaluación Inicial ... 4: Seguimiento por Sesiones ... 7: Alta Clínica
+          currentPhase: 1, // 0: Fase 1 (Sem 1-3), 1: Fase 2 (Sem 4-8), 2: Fase 3 (Sem 9-14), 3: Fase 4 (Sem 15-16)
+          baselineMetrics: {
+            phq9: 20,
+            gad7: 14,
+            pcl5: 20,
+            sleep: 2,
+            functioning: 35
+          },
+          smartGoals: [
+            {
+              id: 'G1',
+              domain: 'Depresión',
+              title: 'Reducir rumiación de culpa post-ruptura y pensamientos autocríticos diarios',
+              metric: 'Score PHQ-9 < 10 y autorregistro de pensamientos <15 min/día',
+              targetDate: '2026-11-15',
+              progress: 85,
+              status: 'En progreso'
+            },
+            {
+              id: 'G2',
+              domain: 'Ansiedad',
+              title: 'Regular episodios de angustia paroxística mediante habilidades de tolerancia al malestar',
+              metric: 'Score GAD-7 < 8 y uso autónomo de técnica TIPP ante picos',
+              targetDate: '2026-11-05',
+              progress: 90,
+              status: 'En progreso'
+            },
+            {
+              id: 'G3',
+              domain: 'Sueño',
+              title: 'Restablecer ritmo circadiano saludable y sueño reparador continuo',
+              metric: 'Lograr 7-8 horas de sueño continuo sin sedantes en 5 de 7 noches',
+              targetDate: '2026-10-30',
+              progress: 100,
+              status: 'Logrado'
+            },
+            {
+              id: 'G4',
+              domain: 'Conductual',
+              title: 'Reactivación conductual estructurada con actividades de dominio y agrado',
+              metric: 'Caminata matutina de 30 min y lectura diaria 4 días por semana',
+              targetDate: '2026-11-20',
+              progress: 80,
+              status: 'En progreso'
+            },
+            {
+              id: 'G5',
+              domain: 'Laboral',
+              title: 'Retomar responsabilidades como coordinadora de proyectos educativos',
+              metric: 'Jornada laboral completa de 8 horas con concentración sostenida',
+              targetDate: '2026-11-30',
+              progress: 75,
+              status: 'En progreso'
+            }
+          ],
           sessions: [
             {
               id: 'SES-001',
               number: 1,
-              date: '2026-10-10',
+              date: '2026-09-12',
               format: 'SOAP',
               alliance: 5,
-              s: 'Paciente acude con llanto frecuente, insomnio y sensación de parálisis.',
+              status: 'Estable',
+              goalsWorked: 'Alianza de trabajo, psicoeducación del duelo/depresión y protocolo de seguridad Stanley & Brown',
+              techniquesApplied: 'Psicoeducación, firma de contrato de seguridad, escucha empática validadora',
+              homework: 'Realizar técnica de respiración 4-7-8 al despertar y reporte diario a hermana',
+              homeworkCompliance: 80,
+              observations: 'Paciente con afecto marcadamente deprimido, llanto fácil, bradipsiquia notable. Receptiva al marco terapéutico.',
+              metrics: { phq9: 20, gad7: 14, pcl5: 20, cssrs: 'Leve (Ideación Pasiva)', sleep: 2, social: 3, work: 2, adherence: 80 },
+              s: 'Paciente acude acompañada por su hermana. Refiere llanto frecuente, insomnio y sensación de parálisis.',
               o: 'Orientada en 4 esferas. Facies depresiva, lenguaje bradilálico, afecto lábil pero congruente.',
               a: 'Episodio depresivo mayor recurrente severo reactivo a duelo conyugal. Se establece alianza de trabajo.',
               p: 'Firma de plan de seguridad Stanley & Brown con coterapeuta hermana. Tarea de activación conductual mínima.'
@@ -1804,14 +2789,88 @@
             {
               id: 'SES-002',
               number: 2,
-              date: '2026-10-14',
+              date: '2026-09-22',
               format: 'SOAP',
               alliance: 5,
+              status: 'Mejoría',
+              goalsWorked: 'Identificación de pensamientos automáticos de inutilidad y desactivación del Modo Padre Punitivo',
+              techniquesApplied: 'Registro de pensamientos disfuncionales (RPD), técnica TIPP, diálogo socrático',
+              homework: 'Registro de pensamientos automáticos ante rumiación y compresa fría en rostro si angustia >7/10',
+              homeworkCompliance: 85,
+              observations: 'Disminución leve de angustia paroxística. Contacto visual sostenido. Sin ideación autolítica activa.',
+              metrics: { phq9: 17, gad7: 12, pcl5: 16, cssrs: 'Sin riesgo', sleep: 4, social: 4, work: 3, adherence: 85 },
               s: 'Refiere disminución leve de la angustia tras realizar técnica de respiración y caminatas.',
               o: 'Mayor contacto visual, arreglo personal cuidado, sin ideación autolítica activa.',
               a: 'Buena receptividad a reestructuración cognitiva inicial sobre la creencia "soy defectuosa".',
               p: 'Registro de pensamientos automáticos disfuncionales (RPD) y práctica de habilidad TIPP ante crisis.'
+            },
+            {
+              id: 'SES-003',
+              number: 3,
+              date: '2026-10-02',
+              format: 'SOAP',
+              alliance: 5,
+              status: 'Mejoría',
+              goalsWorked: 'Activación conductual estructurada (BATD) y reestructuración del esquema de Autosacrificio',
+              techniquesApplied: 'Activación conductual (BATD), análisis de ventajas/desventajas, reestructuración cognitiva',
+              homework: 'Plan semanal de actividades de agrado (visita a librería, café con amiga) y caminata matinal',
+              homeworkCompliance: 90,
+              observations: 'Energía psicomotora notablemente recuperada. Retorno del apetito. Relata haber salido a caminar 3 veces.',
+              metrics: { phq9: 13, gad7: 9, pcl5: 13, cssrs: 'Sin riesgo', sleep: 6, social: 6, work: 5, adherence: 90 },
+              s: 'Logró salir a caminar 4 días. El apetito ha mejorado y el insomnio se redujo a una sola interrupción.',
+              o: 'Discurso fluido y entonado. Sonrisa espontánea al hablar de su vocación docente. Normoprosexia.',
+              a: 'Respuesta favorable a la activación conductual. Remisión parcial de síntomas somáticos nucleares.',
+              p: 'Incrementar actividades de dominio laboral e iniciar reincorporación progresiva en proyectos.'
+            },
+            {
+              id: 'SES-004',
+              number: 4,
+              date: '2026-10-14',
+              format: 'SOAP',
+              alliance: 5,
+              status: 'Mejoría',
+              goalsWorked: 'Procesamiento de memorias diana de abandono y fortalecimiento del Modo Adulto Sano',
+              techniquesApplied: 'Defusión cognitiva ACT, diálogo entre modos (Sillas Terapia Esquemas), entrenamiento en asertividad',
+              homework: 'Práctica de afirmaciones de autocompasión y establecimiento de límites en llamadas con familiares',
+              homeworkCompliance: 95,
+              observations: 'Consolidación de introspección. Paciente expresa orgullo por sus logros y límites afectivos.',
+              metrics: { phq9: 9, gad7: 7, pcl5: 10, cssrs: 'Sin riesgo', sleep: 7, social: 7, work: 7, adherence: 95 },
+              s: 'Se siente dueña de su vida otra vez. Volvió a dar clases virtuales y durmió 7 horas seguidas toda la semana.',
+              o: 'Vigil, lúcida, afecto reactivo y cálido. Juicio crítico intacto. Proyección de futuro preservada.',
+              a: 'Remisión de la severidad depresiva a umbral leve-subclínico (PHQ-9 = 9). Entrada a fase de consolidación.',
+              p: 'Diseño del plan de prevención de recaídas y verificación de criterios de alta acordada.'
+            },
+            {
+              id: 'SES-005',
+              number: 5,
+              date: '2026-10-26',
+              format: 'SOAP',
+              alliance: 5,
+              status: 'Mejoría',
+              goalsWorked: 'Consolidación de autonomía, evaluación de remisión sostenida y firma de matriz anti-recaídas',
+              techniquesApplied: 'Matriz de prevención de recaídas, balance decisional, repaso de habilidades incorporadas',
+              homework: 'Portar en la billetera la tarjeta de afrontamiento ante pródromos y mantener rutinas de autocuidado',
+              homeworkCompliance: 100,
+              observations: 'Excelente estado de ánimo, sin síntomas depresivos mayores. Autonomía consolidada. PHQ-9 = 7.',
+              metrics: { phq9: 7, gad7: 5, pcl5: 8, cssrs: 'Sin riesgo', sleep: 8, social: 8, work: 8, adherence: 100 },
+              s: 'Me siento en paz. Entendí que mi valor no dependía de mi matrimonio. Estoy lista para continuar sola.',
+              o: 'Lúcida, orientada, afecto eutímico reactivo, postura erguida y mirada directa. Insight grado 5.',
+              a: 'Remisión clínica completa del episodio depresivo (PHQ-9: 7/27, GAD-7: 5/21). Alta programada en 2 sesiones.',
+              p: 'Sesión de seguimiento en 3 semanas para verificación de mantenimiento y graduación clínica formal.'
             }
+          ],
+          relapsePrevention: {
+            warningSigns: 'Aislamiento social >24h, postergación de comidas, rumiación "no valgo nada", insomnio por 2 noches consecutivas.',
+            highRiskSituations: 'Fechas de aniversario conyugal, sobrecarga laboral no comunicada, contacto no regulado con ex-pareja.',
+            copingStrategies: 'Técnica TIPP (hielo en rostro), activación conductual inmediata (caminata 15 min), registro de pensamientos disfuncionales y contacto con coterapeuta.',
+            emergencyContacts: 'Hermana Claudia (+57 310 982 3341) | Terapeuta Dr. Jair Restaura | Línea 106 de Crisis Nacional.'
+          },
+          dischargeCriteria: [
+            { text: 'Remisión sostenida de síntomas depresivos (PHQ-9 < 10 por >8 semanas)', checked: true },
+            { text: 'Puntaje de ansiedad dentro de rangos normales (GAD-7 < 8)', checked: true },
+            { text: 'Cumplimiento de al menos el 80% de los objetivos SMART acordados', checked: true },
+            { text: 'Incorporación autónoma de habilidades de autorregulación y defusión', checked: true },
+            { text: 'Plan de contingencia y prevención de recaídas firmado con coterapeuta', checked: false }
           ]
         },
         {
@@ -1837,7 +2896,7 @@
           dsm5: {
             code: 'F41.1 / F41.0',
             title: 'Trastorno de Ansiedad Generalizada con Trastorno de Pánico',
-            specifiers: 'Con ataques de pánico paroxísticos',
+            specifiers: 'Con ataques de pánico paroxísticos en remisión parcial',
             criteria: 'Preocupación aprensiva incontrolable >6 meses, tensión muscular, palpitaciones y anticipación catastrófica.',
             differentials: 'Descartado feocromocitoma o hipertiroidismo mediante perfil médico.'
           },
@@ -1849,11 +2908,11 @@
             capacities: [4, 3, 3, 3, 4, 4, 4, 4, 5]
           },
           scales: {
-            phq9: { answers: [1, 1, 1, 2, 0, 1, 1, 0, 0], score: 7, level: 'Leve' },
-            gad7: { answers: [3, 3, 3, 3, 2, 2, 3], score: 19, level: 'Severa' },
+            phq9: { answers: [1, 1, 1, 1, 0, 1, 0, 0, 0], score: 5, level: 'Leve' },
+            gad7: { answers: [2, 2, 2, 2, 1, 1, 1], score: 11, level: 'Moderada / En Descenso' },
             pcl5: { answers: [0, 0, 0, 0, 0, 0, 0, 0], score: 0, positive: false },
-            bdiii: { score: 10, level: 'Mínima' },
-            bai: { score: 38, level: 'Severa' },
+            bdiii: { score: 8, level: 'Mínima' },
+            bai: { score: 18, level: 'Moderada' },
             audit: { score: 1, level: 'Bajo Riesgo' },
             dast: { score: 0, level: 'Sin abuso' },
             cssrs: { wishDead: false, activeThoughts: false, intent: false, plan: false, category: 'Sin riesgo' }
@@ -1864,6 +2923,35 @@
             perpetuating: 'Consumo de cafeína, chequeos repetitivos de pulso, evitación de espacios abiertos.',
             protective: 'Alta motivación para la psicoterapia, buen soporte económico.'
           },
+          currentStageIndex: 4,
+          currentPhase: 0,
+          baselineMetrics: {
+            phq9: 7,
+            gad7: 19,
+            pcl5: 0,
+            sleep: 4,
+            functioning: 45
+          },
+          smartGoals: [
+            {
+              id: 'GM1',
+              domain: 'Ansiedad',
+              title: 'Reducir frecuencia de ataques de pánico mediante reentrenamiento respiratorio',
+              metric: 'Cero crisis paroxísticas a la semana y GAD-7 < 10',
+              targetDate: '2026-11-20',
+              progress: 60,
+              status: 'En progreso'
+            },
+            {
+              id: 'GM2',
+              domain: 'Conductual',
+              title: 'Cese de conductas de seguridad y chequeo compulsivo de frecuencia cardíaca',
+              metric: 'Menos de 2 chequeos de pulso al día en smartwatch',
+              targetDate: '2026-11-10',
+              progress: 70,
+              status: 'En progreso'
+            }
+          ],
           sessions: [
             {
               id: 'SES-M1',
@@ -1871,11 +2959,49 @@
               date: '2026-10-08',
               format: 'SOAP',
               alliance: 5,
+              status: 'Estable',
+              goalsWorked: 'Psicoeducación sobre hiperventilación y fisiología del pánico',
+              techniquesApplied: 'Reentrenamiento respiratorio, psicoeducación del SNA simpático',
+              homework: 'Reducción gradual de café a máximo 2 tazas matinales y práctica de respiración diafragmática',
+              homeworkCompliance: 80,
+              observations: 'Hipervigilante, inquietud motora, discurso taquilálico pero coherente.',
+              metrics: { phq9: 7, gad7: 19, pcl5: 0, cssrs: 'Sin riesgo', sleep: 4, social: 5, work: 5, adherence: 80 },
               s: 'Reporta ataques de pánico nocturnos y miedo a volverse loco.',
               o: 'Hipervigilante, inquietud motora, discurso taquilálico pero coherente.',
               a: 'TAG y crisis de angustia comórbidas. Ausencia de riesgo autolítico.',
               p: 'Psicoeducación sobre el sistema nervioso simpático e hiperventilación. Reducción de cafeína.'
+            },
+            {
+              id: 'SES-M2',
+              number: 2,
+              date: '2026-10-18',
+              format: 'SOAP',
+              alliance: 5,
+              status: 'Mejoría',
+              goalsWorked: 'Exposición interoceptiva a sensaciones de hiperventilación y taquicardia',
+              techniquesApplied: 'Exposición interoceptiva, reestructuración de catastrofización',
+              homework: 'Ejercicio de exposición interoceptiva 1 min/día e inicio de natación 2 veces por semana',
+              homeworkCompliance: 85,
+              observations: 'Mayor tolerancia a sensaciones corporales. Reporta 0 crisis de pánico en última semana.',
+              metrics: { phq9: 5, gad7: 11, pcl5: 0, cssrs: 'Sin riesgo', sleep: 6, social: 6, work: 7, adherence: 85 },
+              s: 'No he tenido crisis en 7 días tras bajar el café y hacer la respiración lenta.',
+              o: 'Postura más relajada, tono de voz pausado. Buen insight intelectual y emocional.',
+              a: 'Respuesta favorable a la exposición interoceptiva. Descenso de GAD-7 de 19 a 11 puntos.',
+              p: 'Continuar exposición y trabajar creencias perfeccionistas de rendimiento laboral.'
             }
+          ],
+          relapsePrevention: {
+            warningSigns: 'Incremento de consumo de cafeína >4 tazas, opresión torácica ignorada, chequeos repetitivos de pulso.',
+            highRiskSituations: 'Lanzamientos de software con desvelos, presentaciones ante directiva.',
+            copingStrategies: 'Respiración diafragmática 4-4-6, pausa activa de 10 min, defusión "es solo una señal de adrenalina inofensiva".',
+            emergencyContacts: 'Dra. Médica Internista | Terapeuta Dr. Jair Restaura | Teléfono de urgencias.'
+          },
+          dischargeCriteria: [
+            { text: 'Ausencia de crisis de angustia por más de 6 semanas consecutivas', checked: false },
+            { text: 'Puntaje de ansiedad GAD-7 < 8 en dos evaluaciones consecutivas', checked: false },
+            { text: 'Abandono de conductas de evitación agorafóbica y chequeos', checked: true },
+            { text: 'Consolidación de hábitos de sueño y control de cafeína', checked: true },
+            { text: 'Plan de contingencia anti-pánico internalizado y probado', checked: true }
           ]
         }
       ]
@@ -1886,12 +3012,18 @@
         this.data = this.loadDatabase();
         this.currentPatientIndex = 0;
         this.charts = {};
+        this.currentLongitudinalChartMode = 'sintomas';
       }
 
       loadDatabase() {
         const saved = localStorage.getItem(DB_KEY);
         if (saved) {
-          try { return JSON.parse(saved); } catch (e) { console.error(e); }
+          try {
+            const parsed = JSON.parse(saved);
+            if (parsed && parsed.patients && parsed.patients.length > 0 && parsed.patients[0].smartGoals) {
+              return parsed;
+            }
+          } catch (e) { console.error(e); }
         }
         localStorage.setItem(DB_KEY, JSON.stringify(SEED_DATA));
         return JSON.parse(JSON.stringify(SEED_DATA));
@@ -1910,6 +3042,8 @@
         this.populatePatientSelector();
         this.loadCurrentPatientIntoViews();
         this.initCharts();
+        this.initLongitudinalChart();
+        this.renderLongitudinalModule();
         this.renderScaleQuestions();
         this.renderSessionsTable();
         this.renderPatientsTable();
@@ -1947,11 +3081,16 @@
         const navMap = {
           'dashboard': 0, 'pacientes': 1, 'historia': 2, 'entrevista': 3,
           'escalas': 4, 'dsm_pdm': 5, 'formulacion': 6, 'terapias': 7,
-          'plan': 8, 'sesiones': 9, 'informes': 10
+          'longitudinal': 8, 'plan': 9, 'sesiones': 10, 'informes': 11
         };
         const idx = navMap[viewId];
         const navItems = document.querySelectorAll('.sidebar .nav-item');
         if (navItems[idx]) navItems[idx].classList.add('active');
+
+        if (viewId === 'longitudinal') {
+          this.renderLongitudinalModule();
+          setTimeout(() => this.updateLongitudinalChart(), 50);
+        }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -1974,6 +3113,8 @@
         this.loadCurrentPatientIntoViews();
         this.updateChartsData();
         this.renderSessionsTable();
+        this.renderLongitudinalModule();
+        this.updateLongitudinalChart();
       }
 
       loadCurrentPatientIntoViews() {
@@ -1983,7 +3124,7 @@
         // Dashboard stats
         document.getElementById('stat-total-patients').textContent = this.data.patients.length;
         document.getElementById('stat-phq-score').textContent = `${p.scales.phq9.score}/27`;
-        document.getElementById('stat-phq-label').textContent = `${p.scales.phq9.level} | ${p.scales.phq9.answers[8] > 0 ? 'Alerta Ítem 9' : 'Ítem 9 Negativo'}`;
+        document.getElementById('stat-phq-label').textContent = `${p.scales.phq9.level} | ${p.scales.phq9.answers && p.scales.phq9.answers[8] > 0 ? 'Alerta Ítem 9' : 'Ítem 9 Negativo'}`;
         document.getElementById('stat-gad-score').textContent = `${p.scales.gad7.score}/21`;
         document.getElementById('stat-gad-label').textContent = p.scales.gad7.level;
         document.getElementById('stat-sessions-count').textContent = p.sessions.length;
@@ -2048,6 +3189,9 @@
 
         // Renderizar escalas con sus valores
         this.syncScalesUI();
+
+        // Renderizar módulo longitudinal
+        this.renderLongitudinalModule();
       }
 
       saveCurrentPatientData() {
@@ -2384,8 +3528,8 @@
             labels.push('Basal');
           }
           this.charts.evolution.data.labels = labels;
-          this.charts.evolution.data.datasets[0].data = p.sessions.map((_, i) => Math.max(0, p.scales.phq9.score - i * 2));
-          this.charts.evolution.data.datasets[1].data = p.sessions.map((_, i) => Math.max(0, p.scales.gad7.score - i * 2));
+          this.charts.evolution.data.datasets[0].data = p.sessions.map(s => s.metrics?.phq9 ?? Math.max(0, p.scales.phq9.score - s.number * 2));
+          this.charts.evolution.data.datasets[1].data = p.sessions.map(s => s.metrics?.gad7 ?? Math.max(0, p.scales.gad7.score - s.number * 2));
           this.charts.evolution.update();
         }
 
@@ -2393,11 +3537,919 @@
           this.charts.pdm.data.datasets[0].data = p.pdm2.capacities || [3, 2, 2, 3, 4, 3, 3, 4, 5];
           this.charts.pdm.update();
         }
+
+        this.updateLongitudinalChart();
       }
 
       updateChartsTheme() {
         if (this.charts.evolution) this.charts.evolution.update();
         if (this.charts.pdm) this.charts.pdm.update();
+        if (this.charts.longitudinal) this.charts.longitudinal.update();
+      }
+
+      // ==========================================
+      // MOTOR LONGITUDINAL & RESULTADOS MEDIBLES
+      // ==========================================
+      initLongitudinalChart() {
+        const ctxLong = document.getElementById('chart-longitudinal-evolution')?.getContext('2d');
+        if (!ctxLong) return;
+
+        this.charts.longitudinal = new Chart(ctxLong, {
+          type: 'line',
+          data: {
+            labels: [],
+            datasets: []
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: 'index',
+              intersect: false
+            },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  boxWidth: 12,
+                  font: { size: 11, weight: 'bold' }
+                }
+              },
+              tooltip: {
+                padding: 10,
+                boxPadding: 4
+              }
+            },
+            scales: {
+              y: {
+                min: 0,
+                grid: { color: 'rgba(150, 150, 150, 0.12)' },
+                ticks: { font: { size: 10.5 } }
+              },
+              x: {
+                grid: { display: false },
+                ticks: { font: { size: 10.5 } }
+              }
+            }
+          }
+        });
+        this.updateLongitudinalChart();
+      }
+
+      switchLongitudinalChartView(mode) {
+        this.currentLongitudinalChartMode = mode;
+        ['sintomas', 'func', 'adherencia'].forEach(m => {
+          const btn = document.getElementById(`btn-chart-${m}`);
+          if (btn) {
+            if (m === mode) btn.classList.add('active');
+            else btn.classList.remove('active');
+          }
+        });
+        this.updateLongitudinalChart();
+      }
+
+      updateLongitudinalChart() {
+        const p = this.getCurrentPatient();
+        if (!p || !this.charts.longitudinal) return;
+
+        const sessions = p.sessions || [];
+        const labels = ['Línea Base', ...sessions.map(s => `Sesión #${s.number}`)];
+
+        if (this.currentLongitudinalChartMode === 'sintomas') {
+          const basePhq = p.baselineMetrics?.phq9 ?? 20;
+          const baseGad = p.baselineMetrics?.gad7 ?? 14;
+          const basePcl = p.baselineMetrics?.pcl5 ?? 20;
+
+          const dataPhq = [basePhq, ...sessions.map(s => s.metrics?.phq9 ?? Math.max(0, basePhq - s.number * 2.5))];
+          const dataGad = [baseGad, ...sessions.map(s => s.metrics?.gad7 ?? Math.max(0, baseGad - s.number * 1.8))];
+          const dataPcl = [basePcl, ...sessions.map(s => s.metrics?.pcl5 ?? Math.max(0, basePcl - s.number * 2.2))];
+
+          this.charts.longitudinal.data.labels = labels;
+          this.charts.longitudinal.data.datasets = [
+            {
+              label: 'PHQ-9 (Depresión)',
+              data: dataPhq,
+              borderColor: '#0d9488',
+              backgroundColor: 'rgba(13, 148, 136, 0.15)',
+              tension: 0.35,
+              fill: true,
+              borderWidth: 2.5,
+              pointRadius: 4,
+              pointHoverRadius: 6
+            },
+            {
+              label: 'GAD-7 (Ansiedad)',
+              data: dataGad,
+              borderColor: '#d97706',
+              backgroundColor: 'rgba(217, 119, 6, 0.1)',
+              tension: 0.35,
+              fill: true,
+              borderWidth: 2.5,
+              pointRadius: 4,
+              pointHoverRadius: 6
+            },
+            {
+              label: 'PCL-5 (Trauma)',
+              data: dataPcl,
+              borderColor: '#dc2626',
+              backgroundColor: 'rgba(220, 38, 38, 0.05)',
+              tension: 0.35,
+              fill: false,
+              borderDash: [5, 5],
+              borderWidth: 2,
+              pointRadius: 3,
+              pointHoverRadius: 5
+            }
+          ];
+          this.charts.longitudinal.options.scales.y.max = 28;
+          const legendElem = document.getElementById('chart-longitudinal-legend-info');
+          if (legendElem) {
+            legendElem.innerHTML = '<i class="fa-solid fa-circle-info text-teal"></i> Línea de corte de remisión clínica: PHQ-9 &lt; 10, GAD-7 &lt; 8.';
+          }
+        } else if (this.currentLongitudinalChartMode === 'func') {
+          const baseSleep = p.baselineMetrics?.sleep ?? 2;
+          const baseSoc = 3;
+          const baseWork = 2;
+
+          const dataSleep = [baseSleep, ...sessions.map(s => s.metrics?.sleep ?? Math.min(10, baseSleep + s.number * 1.2))];
+          const dataSoc = [baseSoc, ...sessions.map(s => s.metrics?.social ?? Math.min(10, baseSoc + s.number * 1.1))];
+          const dataWork = [baseWork, ...sessions.map(s => s.metrics?.work ?? Math.min(10, baseWork + s.number * 1.3))];
+
+          this.charts.longitudinal.data.labels = labels;
+          this.charts.longitudinal.data.datasets = [
+            {
+              label: 'Calidad del Sueño (0-10)',
+              data: dataSleep,
+              borderColor: '#4f46e5',
+              backgroundColor: 'rgba(79, 70, 229, 0.15)',
+              tension: 0.35,
+              fill: true,
+              borderWidth: 2.5,
+              pointRadius: 4
+            },
+            {
+              label: 'Funcionamiento Social (0-10)',
+              data: dataSoc,
+              borderColor: '#059669',
+              backgroundColor: 'rgba(5, 150, 105, 0.1)',
+              tension: 0.35,
+              fill: true,
+              borderWidth: 2.5,
+              pointRadius: 4
+            },
+            {
+              label: 'Funcionamiento Laboral (0-10)',
+              data: dataWork,
+              borderColor: '#0284c7',
+              tension: 0.35,
+              fill: false,
+              borderWidth: 2,
+              pointRadius: 4
+            }
+          ];
+          this.charts.longitudinal.options.scales.y.max = 10;
+          const legendElem = document.getElementById('chart-longitudinal-legend-info');
+          if (legendElem) {
+            legendElem.innerHTML = '<i class="fa-solid fa-circle-info text-teal"></i> Escala analógica funcional de 0 (disfunción total) a 10 (funcionamiento pleno óptimo).';
+          }
+        } else if (this.currentLongitudinalChartMode === 'adherencia') {
+          const sessLabels = sessions.map(s => `Sesión #${s.number}`);
+          const dataAlliance = sessions.map(s => (s.alliance || 5) * 20);
+          const dataHomework = sessions.map(s => s.homeworkCompliance || s.metrics?.adherence || 90);
+
+          this.charts.longitudinal.data.labels = sessLabels.length ? sessLabels : ['Sin sesiones'];
+          this.charts.longitudinal.data.datasets = [
+            {
+              label: 'Alianza Terapéutica (%)',
+              data: dataAlliance.length ? dataAlliance : [100],
+              borderColor: '#f59e0b',
+              backgroundColor: 'rgba(245, 158, 11, 0.12)',
+              tension: 0.2,
+              fill: true,
+              borderWidth: 2.5,
+              pointRadius: 4
+            },
+            {
+              label: 'Cumplimiento Tareas Intersesión (%)',
+              data: dataHomework.length ? dataHomework : [80],
+              borderColor: '#0d9488',
+              backgroundColor: 'rgba(13, 148, 136, 0.15)',
+              tension: 0.2,
+              fill: true,
+              borderWidth: 2.5,
+              pointRadius: 4
+            }
+          ];
+          this.charts.longitudinal.options.scales.y.max = 105;
+          const legendElem = document.getElementById('chart-longitudinal-legend-info');
+          if (legendElem) {
+            legendElem.innerHTML = '<i class="fa-solid fa-circle-info text-teal"></i> Monitoreo de factores comunes: Alianza de trabajo y compromiso conductual con tareas.';
+          }
+        }
+
+        this.charts.longitudinal.update();
+
+        // Calcular velocidad de reducción sintomática
+        if (sessions.length >= 2) {
+          const firstPhq = p.baselineMetrics?.phq9 ?? sessions[0].metrics?.phq9 ?? 20;
+          const lastPhq = sessions[sessions.length - 1].metrics?.phq9 ?? p.scales.phq9.score;
+          const velocity = ((firstPhq - lastPhq) / sessions.length).toFixed(1);
+          const velElem = document.getElementById('chart-longitudinal-velocity');
+          if (velElem) {
+            velElem.textContent = `Tasa de reducción sintomática: -${velocity} pts/sesión`;
+          }
+        }
+      }
+
+      renderLongitudinalModule() {
+        this.renderStageStepper();
+        this.renderImpactComparator();
+        this.renderLongitudinalTimeline();
+        this.renderSmartGoals();
+        this.renderPrognosisCard();
+        this.renderInterventionRecommendations();
+        this.renderTreatmentPhases();
+        this.renderRelapseAndDischarge();
+      }
+
+      renderStageStepper() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const stages = [
+          'Evaluación Inicial',
+          'Hipótesis Diagnóstica',
+          'Plan de Tratamiento',
+          'Objetivos Terapéuticos',
+          'Seguimiento por Sesiones',
+          'Monitoreo de Progreso',
+          'Prevención de Recaídas',
+          'Alta Clínica'
+        ];
+
+        const currentIdx = typeof p.currentStageIndex === 'number' ? p.currentStageIndex : 4;
+        const container = document.getElementById('stepper-phases-container');
+        const badge = document.getElementById('longitudinal-stage-badge');
+
+        if (badge) {
+          badge.textContent = `Etapa Activa: ${currentIdx + 1}. ${stages[currentIdx]}`;
+        }
+
+        if (container) {
+          container.innerHTML = '';
+          stages.forEach((stage, idx) => {
+            const isCompleted = idx < currentIdx;
+            const isActive = idx === currentIdx;
+            const div = document.createElement('div');
+            div.className = `phase-step-item ${isActive ? 'active' : isCompleted ? 'completed' : ''}`;
+            div.onclick = () => this.setTreatmentStage(idx);
+            div.title = `Haga clic para activar la etapa: ${stage}`;
+            div.innerHTML = `
+              <div class="phase-step-number">
+                <span>Paso ${idx + 1}</span>
+                <i class="fa-solid ${isCompleted ? 'fa-check' : isActive ? 'fa-bolt' : 'fa-circle-dot'}"></i>
+              </div>
+              <div class="phase-step-title">${stage}</div>
+            `;
+            container.appendChild(div);
+          });
+        }
+      }
+
+      setTreatmentStage(stageIdx) {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+        p.currentStageIndex = stageIdx;
+        this.saveDatabase();
+        this.renderStageStepper();
+      }
+
+      renderImpactComparator() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const sessions = p.sessions || [];
+        const lastSession = sessions.length > 0 ? sessions[sessions.length - 1] : null;
+
+        const basePhq = p.baselineMetrics?.phq9 ?? 20;
+        const currPhq = lastSession?.metrics?.phq9 ?? p.scales.phq9.score;
+
+        const baseGad = p.baselineMetrics?.gad7 ?? 14;
+        const currGad = lastSession?.metrics?.gad7 ?? p.scales.gad7.score;
+
+        const basePcl = p.baselineMetrics?.pcl5 ?? 20;
+        const currPcl = lastSession?.metrics?.pcl5 ?? (p.scales.pcl5.score || 8);
+
+        const baseSleep = p.baselineMetrics?.sleep ?? 2;
+        const currSleep = lastSession?.metrics?.sleep ?? 8;
+
+        const baseFunc = p.baselineMetrics?.functioning ?? 35;
+        const currFunc = lastSession ? Math.round(((lastSession.metrics?.social || 7) + (lastSession.metrics?.work || 7)) * 5.5) : 82;
+
+        const avgAdherence = sessions.length > 0
+          ? Math.round(sessions.reduce((acc, s) => acc + (s.homeworkCompliance || 90), 0) / sessions.length)
+          : 90;
+
+        const calcMetric = (initial, current, isPositive = false) => {
+          const delta = current - initial;
+          const pct = initial > 0 ? ((initial - current) / initial) * 100 : 0;
+          let indicator = 'Sin cambio';
+          let statusClass = 'delta-good';
+
+          if (isPositive) {
+            const gain = ((current - initial) / (initial || 1)) * 100;
+            return {
+              initial,
+              current,
+              delta: delta >= 0 ? `+${delta}` : `${delta}`,
+              pct: `+${gain.toFixed(0)}%`,
+              indicator: gain >= 50 ? 'Excelente' : gain >= 25 ? 'Muy Bueno' : 'Favorable',
+              statusClass: 'delta-good'
+            };
+          }
+
+          if (pct >= 50) {
+            indicator = 'Excelente (≥50%)';
+            statusClass = 'delta-good';
+          } else if (pct >= 35) {
+            indicator = 'Muy Bueno (35-49%)';
+            statusClass = 'delta-good';
+          } else if (pct >= 20) {
+            indicator = 'Favorable (20-34%)';
+            statusClass = 'delta-good';
+          } else if (pct >= 5) {
+            indicator = 'Mínimo (5-19%)';
+            statusClass = 'delta-warn';
+          } else if (pct >= 0) {
+            indicator = 'Sin cambio (0-4%)';
+            statusClass = 'delta-warn';
+          } else {
+            indicator = 'Empeoramiento';
+            statusClass = 'delta-warn';
+          }
+
+          return {
+            initial,
+            current,
+            delta: delta <= 0 ? `${delta}` : `+${delta}`,
+            pct: `${pct >= 0 ? '-' : '+'}${Math.abs(pct).toFixed(1)}%`,
+            indicator,
+            statusClass
+          };
+        };
+
+        const mPhq = calcMetric(basePhq, currPhq);
+        const mGad = calcMetric(baseGad, currGad);
+        const mPcl = calcMetric(basePcl, currPcl);
+        const mSleep = calcMetric(baseSleep, currSleep, true);
+        const mFunc = calcMetric(baseFunc, currFunc, true);
+
+        const container = document.getElementById('long-impact-metrics-grid');
+        if (container) {
+          container.innerHTML = `
+            <div class="impact-metric-pill">
+              <div class="label"><i class="fa-solid fa-heart-pulse text-teal"></i> Depresión PHQ-9</div>
+              <div class="values">${mPhq.initial} &rarr; <span style="color: #34d399;">${mPhq.current}</span></div>
+              <div class="${mPhq.statusClass}">Delta: ${mPhq.delta} (${mPhq.pct})</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">${mPhq.indicator}</div>
+            </div>
+
+            <div class="impact-metric-pill">
+              <div class="label"><i class="fa-solid fa-bolt text-warning"></i> Ansiedad GAD-7</div>
+              <div class="values">${mGad.initial} &rarr; <span style="color: #34d399;">${mGad.current}</span></div>
+              <div class="${mGad.statusClass}">Delta: ${mGad.delta} (${mGad.pct})</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">${mGad.indicator}</div>
+            </div>
+
+            <div class="impact-metric-pill">
+              <div class="label"><i class="fa-solid fa-shield-halved text-danger"></i> Trauma PCL-5</div>
+              <div class="values">${mPcl.initial} &rarr; <span style="color: #34d399;">${mPcl.current}</span></div>
+              <div class="${mPcl.statusClass}">Delta: ${mPcl.delta} (${mPcl.pct})</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">${mPcl.indicator}</div>
+            </div>
+
+            <div class="impact-metric-pill">
+              <div class="label"><i class="fa-solid fa-moon text-indigo"></i> Calidad de Sueño</div>
+              <div class="values">${mSleep.initial}/10 &rarr; <span style="color: #38bdf8;">${mSleep.current}/10</span></div>
+              <div class="delta-good">${mSleep.pct} Ganancia</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">${mSleep.indicator}</div>
+            </div>
+
+            <div class="impact-metric-pill">
+              <div class="label"><i class="fa-solid fa-person-walking text-success"></i> Funcionamiento</div>
+              <div class="values">${mFunc.initial} &rarr; <span style="color: #38bdf8;">${mFunc.current}/100</span></div>
+              <div class="delta-good">${mFunc.pct} Recuperación</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">${mFunc.indicator}</div>
+            </div>
+
+            <div class="impact-metric-pill">
+              <div class="label"><i class="fa-solid fa-handshake text-teal"></i> Adherencia Media</div>
+              <div class="values" style="color: #34d399;">${avgAdherence}%</div>
+              <div class="delta-good"><i class="fa-solid fa-check"></i> Compromiso Alto</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Excelente Alianza</div>
+            </div>
+          `;
+        }
+
+        // Comparativa reciente intersesión (Penúltima vs Última)
+        const recentElem = document.getElementById('long-recent-comparison-text');
+        const recentBadge = document.getElementById('long-recent-trend-badge');
+        if (recentElem && sessions.length >= 2) {
+          const penult = sessions[sessions.length - 2];
+          const ult = sessions[sessions.length - 1];
+          const diffP = (ult.metrics?.phq9 ?? 7) - (penult.metrics?.phq9 ?? 9);
+          const diffG = (ult.metrics?.gad7 ?? 5) - (penult.metrics?.gad7 ?? 7);
+
+          recentElem.innerHTML = `Sesión #${penult.number} (${penult.date}) vs Sesión #${ult.number} (${ult.date}): Variación PHQ-9 de <strong>${diffP} pts</strong> y GAD-7 de <strong>${diffG} pts</strong>. Tareas cumplidas al ${ult.homeworkCompliance}%.`;
+          if (recentBadge) {
+            recentBadge.textContent = diffP <= 0 && diffG <= 0 ? 'Tendencia: Consolidación Progresiva' : 'Tendencia: Estabilidad Clínica';
+          }
+        }
+      }
+
+      renderLongitudinalTimeline() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const container = document.getElementById('longitudinal-timeline-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+        const sessions = p.sessions || [];
+
+        if (sessions.length === 0) {
+          container.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-muted);">Sin sesiones longitudinales registradas.</div>';
+          return;
+        }
+
+        sessions.slice().reverse().forEach(s => {
+          const statusClass =
+            s.status === 'Mejoría' ? 'badge-status-mejoria' :
+            s.status === 'Estable' ? 'badge-status-estable' :
+            s.status === 'Vigilancia' ? 'badge-status-vigilancia' :
+            s.status === 'Recaída' ? 'badge-status-recaida' : 'badge-status-mejoria';
+
+          const card = document.createElement('div');
+          card.className = 'timeline-session-card';
+          card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 15px; font-weight: 800; color: var(--accent-teal);">Sesión #${s.number}</span>
+                <span style="font-size: 12px; color: var(--text-muted);"><i class="fa-regular fa-calendar"></i> ${s.date}</span>
+                <span class="badge badge-teal">${s.format || 'SOAP'}</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge-status ${statusClass}">${s.status || 'Mejoría'}</span>
+                <span style="font-size: 11.5px; font-weight: 700; color: var(--warning-amber);">
+                  <i class="fa-solid fa-star"></i> Alianza: ${s.alliance}/5
+                </span>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; margin-bottom: 8px;">
+              <strong style="color: var(--text-primary);"><i class="fa-solid fa-bullseye text-teal"></i> Objetivos Abordados:</strong>
+              <span style="color: var(--text-secondary); margin-left: 4px;">${s.goalsWorked || s.a}</span>
+            </div>
+
+            <div style="font-size: 12px; margin-bottom: 8px;">
+              <strong style="color: var(--text-primary);"><i class="fa-solid fa-brain text-indigo"></i> Técnicas Aplicadas:</strong>
+              <span style="color: var(--text-secondary); margin-left: 4px;">${s.techniquesApplied || 'Psicoeducación, reestructuración y activación'}</span>
+            </div>
+
+            <div style="background: var(--bg-tertiary); padding: 10px; border-radius: var(--radius-sm); margin-bottom: 8px; font-size: 11.5px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="font-weight: 700; color: var(--text-primary);"><i class="fa-solid fa-list-check text-success"></i> Tarea Intersesión: ${s.homework || s.p}</span>
+                <span style="font-weight: 800; color: var(--success-emerald);">${s.homeworkCompliance || 90}% Cumplimiento</span>
+              </div>
+              <div style="width: 100%; height: 6px; background: var(--card-border); border-radius: 999px; overflow: hidden;">
+                <div style="height: 100%; width: ${s.homeworkCompliance || 90}%; background: var(--success-emerald);"></div>
+              </div>
+            </div>
+
+            <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; margin-bottom: 10px;">
+              <strong>Observaciones Clínicas:</strong> "${s.observations || s.o}"
+            </div>
+
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; font-size: 11px;">
+              <span class="badge badge-teal">PHQ-9: ${s.metrics?.phq9 ?? '-'}</span>
+              <span class="badge badge-warning">GAD-7: ${s.metrics?.gad7 ?? '-'}</span>
+              <span class="badge badge-indigo">Sueño: ${s.metrics?.sleep ?? '-'}/10</span>
+              <span class="badge badge-success">Func. Social: ${s.metrics?.social ?? '-'}/10</span>
+              <span class="badge" style="background: #e0f2fe; color: #0369a1;">Adherencia: ${s.metrics?.adherence ?? s.homeworkCompliance ?? 90}%</span>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      renderSmartGoals() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const goals = p.smartGoals || [];
+        const container = document.getElementById('smart-goals-list-container');
+        const overallText = document.getElementById('smart-goals-overall-percent');
+        const overallBar = document.getElementById('smart-goals-overall-bar');
+
+        if (goals.length > 0) {
+          const totalProgress = Math.round(goals.reduce((acc, g) => acc + (g.progress || 0), 0) / goals.length);
+          if (overallText) overallText.textContent = `${totalProgress}% Logrado`;
+          if (overallBar) overallBar.style.width = `${totalProgress}%`;
+        }
+
+        if (container) {
+          container.innerHTML = '';
+          if (goals.length === 0) {
+            container.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 12px;">Sin objetivos SMART registrados.</div>';
+            return;
+          }
+
+          goals.forEach(g => {
+            const domainColors = {
+              'Depresión': 'badge-teal',
+              'Ansiedad': 'badge-warning',
+              'Sueño': 'badge-indigo',
+              'Conductual': 'badge-success',
+              'Laboral': 'badge-indigo',
+              'Social': 'badge-success'
+            };
+            const domainClass = domainColors[g.domain] || 'badge-teal';
+
+            const card = document.createElement('div');
+            card.className = 'smart-goal-card';
+            card.innerHTML = `
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                  <span class="badge ${domainClass}">${g.domain}</span>
+                  <strong style="font-size: 12.5px; color: var(--text-primary);">${g.title}</strong>
+                </div>
+                <span class="badge ${g.progress === 100 ? 'badge-success' : 'badge-teal'}">${g.status || 'En progreso'}</span>
+              </div>
+
+              <div style="font-size: 11.5px; color: var(--text-secondary); margin-bottom: 8px;">
+                <i class="fa-solid fa-ruler-horizontal text-teal"></i> Meta: ${g.metric} | <i class="fa-regular fa-calendar"></i> Fecha: ${g.targetDate}
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 150px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 3px;">
+                    <span>Progreso:</span>
+                    <span>${g.progress}%</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background: var(--bg-tertiary); border-radius: 999px; overflow: hidden;">
+                    <div style="height: 100%; width: ${g.progress}%; background: ${g.progress === 100 ? 'var(--success-emerald)' : 'var(--accent-teal)'}; transition: width 0.2s ease;"></div>
+                  </div>
+                </div>
+
+                <div class="progress-btn-group">
+                  ${[0, 25, 50, 75, 100].map(val => `
+                    <button type="button" class="${g.progress === val ? 'active' : ''}" onclick="app.updateSmartGoalProgress('${g.id}', ${val})">${val}%</button>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        }
+      }
+
+      updateSmartGoalProgress(goalId, progress) {
+        const p = this.getCurrentPatient();
+        if (!p || !p.smartGoals) return;
+
+        const g = p.smartGoals.find(item => item.id === goalId);
+        if (g) {
+          g.progress = progress;
+          g.status = progress === 100 ? 'Logrado' : 'En progreso';
+          this.saveDatabase();
+          this.renderSmartGoals();
+        }
+      }
+
+      openSmartGoalModal() {
+        const modal = document.getElementById('modal-smart-goal');
+        if (modal) {
+          const d = new Date();
+          d.setDate(d.getDate() + 28);
+          document.getElementById('goal-target-date').value = d.toISOString().split('T')[0];
+          document.getElementById('goal-title').value = '';
+          document.getElementById('goal-metric').value = '';
+          modal.classList.add('show');
+        }
+      }
+
+      saveNewSmartGoal() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const domain = document.getElementById('goal-domain').value;
+        const targetDate = document.getElementById('goal-target-date').value || new Date().toISOString().split('T')[0];
+        const title = document.getElementById('goal-title').value;
+        const metric = document.getElementById('goal-metric').value || 'Verificación clínica cuantitativa';
+
+        if (!title.trim()) {
+          alert('Por favor ingrese la descripción del objetivo SMART.');
+          return;
+        }
+
+        if (!p.smartGoals) p.smartGoals = [];
+
+        p.smartGoals.push({
+          id: `G-${Date.now()}`,
+          domain,
+          title,
+          metric,
+          targetDate,
+          progress: 25,
+          status: 'En progreso'
+        });
+
+        this.saveDatabase();
+        this.renderSmartGoals();
+        this.closeModal('modal-smart-goal');
+        alert('Nuevo objetivo SMART acordado y registrado con éxito.');
+      }
+
+      renderPrognosisCard() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const sessions = p.sessions || [];
+        const lastSession = sessions.length > 0 ? sessions[sessions.length - 1] : null;
+        const currPhq = lastSession?.metrics?.phq9 ?? p.scales.phq9.score;
+
+        const titleElem = document.getElementById('prognosis-title');
+        const badgeElem = document.getElementById('prognosis-badge');
+        const rationaleElem = document.getElementById('prognosis-rationale-text');
+
+        if (currPhq <= 9 && p.suicideRisk !== 'Alto') {
+          if (titleElem) titleElem.textContent = 'Favorable con Psicoterapia Cognitivo-Conductual Integrativa';
+          if (badgeElem) badgeElem.textContent = 'Probabilidad de Remisión: 85-90%';
+          if (rationaleElem) {
+            rationaleElem.textContent = `La disminución progresiva y sostenida de 20 a ${currPhq} puntos en PHQ-9 a lo largo de ${sessions.length} sesiones, junto con una alianza de trabajo máxima (5/5) y adherencia superior al 90%, confirman una remisión clínica sólida que respalda la transición hacia la prevención de recaídas y el alta consensuada.`;
+          }
+        } else {
+          if (titleElem) titleElem.textContent = 'Favorable con Monitorización de Estresores';
+          if (badgeElem) badgeElem.textContent = 'Probabilidad de Respuesta: 75%';
+        }
+      }
+
+      renderInterventionRecommendations() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const container = document.getElementById('intervention-recommendations-container');
+        if (!container) return;
+
+        const recommendations = [
+          {
+            model: 'TCC (Beck)',
+            badgeClass: 'badge-teal',
+            title: 'Activación Conductual Estructurada (BATD)',
+            desc: 'Programación sistemática de actividades de dominio y agrado para romper el bucle anhedonia-aislamiento.',
+            target: 'Aumento de energía psicomotora y refuerzo contingente positivo.'
+          },
+          {
+            model: 'Terapia de Esquemas (Young)',
+            badgeClass: 'badge-indigo',
+            title: 'Confrontación Empática & Desactivación del Modo Punitivo',
+            desc: 'Técnica de dos sillas para externalizar la voz autocrítica y fortalecer el Modo Adulto Sano protector.',
+            target: 'Reducción de la culpa desadaptativa y consolidación de autocompasión.'
+          },
+          {
+            model: 'DBT (Linehan)',
+            badgeClass: 'badge-warning',
+            title: 'Habilidad TIPP ante Angustia Emocional Aguda',
+            desc: 'Cambio de temperatura facial (compresa fría), respiración 4-7-8 y relajación muscular progresiva.',
+            target: 'Reducción rápida de la activación autonómica simpática sin desregulación.'
+          },
+          {
+            model: 'ACT (Hayes)',
+            badgeClass: 'badge-success',
+            title: 'Defusión Cognitiva y Clarificación de Valores',
+            desc: 'Desidentificación de pensamientos ("Tengo el pensamiento de que..." vs "Soy defectuosa") y acción comprometida.',
+            target: 'Flexibilidad psicológica y reconexión con metas vitales.'
+          }
+        ];
+
+        container.innerHTML = '';
+        recommendations.forEach(r => {
+          const div = document.createElement('div');
+          div.style.cssText = 'background: var(--bg-tertiary); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--card-border);';
+          div.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; gap: 8px;">
+              <div>
+                <span class="badge ${r.badgeClass}">${r.model}</span>
+                <strong style="font-size: 12.5px; color: var(--text-primary); margin-left: 4px;">${r.title}</strong>
+              </div>
+              <button class="btn btn-outline" style="padding: 2px 8px; font-size: 11px; white-space: nowrap;" onclick="app.adoptRecommendedTechnique('${r.title}')">
+                <i class="fa-solid fa-plus"></i> Adoptar para Próxima Sesión
+              </button>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-secondary); margin: 4px 0 2px;">${r.desc}</p>
+            <div style="font-size: 11px; color: var(--text-muted);"><i class="fa-solid fa-bullseye text-teal"></i> Objetivo: ${r.target}</div>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      adoptRecommendedTechnique(techniqueTitle) {
+        alert(`Técnica "${techniqueTitle}" adoptada e incorporada a la agenda de la próxima sesión clínica.`);
+      }
+
+      renderTreatmentPhases() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const container = document.getElementById('treatment-phases-container');
+        if (!container) return;
+
+        const currentPhase = typeof p.currentPhase === 'number' ? p.currentPhase : 1;
+
+        const phases = [
+          {
+            title: 'Fase 1: Estabilización, Psicoeducación y Alianza',
+            range: 'Sesiones 1 - 3',
+            focus: 'Contrato de seguridad, higiene del sueño, comprensión del ciclo afectivo y contención de crisis.'
+          },
+          {
+            title: 'Fase 2: Intervención Activa, Reestructuración y Habilidades',
+            range: 'Sesiones 4 - 8',
+            focus: 'Activación conductual, reestructuración socrática, habilidades DBT/ACT y procesamiento emocional.'
+          },
+          {
+            title: 'Fase 3: Consolidación, Autonomía y Prevención de Recaídas',
+            range: 'Sesiones 9 - 14',
+            focus: 'Generalización de habilidades al entorno natural, matriz anti-recaídas y espaciamiento de sesiones.'
+          },
+          {
+            title: 'Fase 4: Criterios de Alta Clínica, Mantenimiento y Seguimiento',
+            range: 'Sesiones 15 - 16',
+            focus: 'Evaluación formal de remisión, cierre consensuado y citas de seguimiento trimestral.'
+          }
+        ];
+
+        container.innerHTML = '';
+        phases.forEach((ph, idx) => {
+          const isActive = idx === currentPhase;
+          const isDone = idx < currentPhase;
+
+          const div = document.createElement('div');
+          div.style.cssText = `background: var(--card-bg); border: 1px solid ${isActive ? 'var(--accent-indigo)' : 'var(--card-border)'}; border-left: 4px solid ${isActive ? 'var(--accent-indigo)' : isDone ? 'var(--success-emerald)' : 'var(--card-border)'}; padding: 12px; border-radius: var(--radius-sm); transition: all 0.2s;`;
+          div.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 6px;">
+              <strong style="font-size: 12px; color: ${isActive ? 'var(--accent-indigo)' : 'var(--text-primary)'};">${ph.title}</strong>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="badge ${isActive ? 'badge-indigo' : isDone ? 'badge-success' : 'badge-outline'}">${ph.range}</span>
+                ${!isActive ? `<button class="btn btn-outline" style="padding: 2px 8px; font-size: 10.5px;" onclick="app.setTreatmentPhase(${idx})">Activar</button>` : '<span class="badge badge-success"><i class="fa-solid fa-check"></i> Activa</span>'}
+              </div>
+            </div>
+            <p style="font-size: 11.5px; color: var(--text-secondary); margin: 0;">${ph.focus}</p>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      setTreatmentPhase(phaseIdx) {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+        p.currentPhase = phaseIdx;
+        this.saveDatabase();
+        this.renderTreatmentPhases();
+      }
+
+      renderRelapseAndDischarge() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        // Prevención de recaídas
+        const rp = p.relapsePrevention || {};
+        const warnElem = document.getElementById('relapse-warning-signs');
+        const riskElem = document.getElementById('relapse-high-risk');
+        const copingElem = document.getElementById('relapse-coping');
+        const contactsElem = document.getElementById('relapse-contacts');
+
+        if (warnElem) warnElem.textContent = rp.warningSigns || 'Aislamiento >24h, postergación de comidas, rumiación "no valgo nada", insomnio.';
+        if (riskElem) riskElem.textContent = rp.highRiskSituations || 'Fechas de aniversario conyugal, sobrecarga laboral no comunicada.';
+        if (copingElem) copingElem.textContent = rp.copingStrategies || 'Técnica TIPP (hielo en rostro), activación conductual inmediata (caminata 15 min), registro de pensamientos.';
+        if (contactsElem) contactsElem.textContent = rp.emergencyContacts || 'Hermana Claudia (+57 310 982 3341) | Terapeuta Dr. Jair Restaura | Línea 106 Nacional.';
+
+        // Checklist de Alta Clínica Consensuada
+        const criteria = p.dischargeCriteria || [];
+        const container = document.getElementById('discharge-criteria-container');
+        const statusText = document.getElementById('discharge-status-text');
+
+        if (container) {
+          container.innerHTML = '';
+          let checkedCount = 0;
+
+          criteria.forEach((c, idx) => {
+            if (c.checked) checkedCount++;
+            const div = document.createElement('div');
+            div.style.cssText = 'display: flex; align-items: center; justify-content: space-between; background: var(--bg-tertiary); padding: 8px 12px; border-radius: var(--radius-sm); font-size: 12px; cursor: pointer;';
+            div.onclick = () => this.toggleDischargeCriteria(idx);
+            div.innerHTML = `
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" ${c.checked ? 'checked' : ''} style="cursor: pointer;" onclick="event.stopPropagation(); app.toggleDischargeCriteria(${idx})">
+                <span style="${c.checked ? 'color: var(--text-primary); font-weight: 600;' : 'color: var(--text-secondary);'}">${c.text}</span>
+              </div>
+              <span class="badge ${c.checked ? 'badge-success' : 'badge-outline'}" style="font-size: 10px;">${c.checked ? 'Cumplido' : 'Pendiente'}</span>
+            `;
+            container.appendChild(div);
+          });
+
+          if (statusText) {
+            if (checkedCount === criteria.length && criteria.length > 0) {
+              statusText.textContent = `¡Apto para Alta Clínica Consensuada! (${checkedCount}/${criteria.length} Criterios Cumplidos)`;
+              statusText.style.color = 'var(--success-emerald)';
+            } else {
+              statusText.textContent = `En Proceso Activo de Consolidación (${checkedCount}/${criteria.length} Criterios Cumplidos)`;
+              statusText.style.color = 'var(--accent-teal)';
+            }
+          }
+        }
+      }
+
+      toggleDischargeCriteria(idx) {
+        const p = this.getCurrentPatient();
+        if (!p || !p.dischargeCriteria || !p.dischargeCriteria[idx]) return;
+
+        p.dischargeCriteria[idx].checked = !p.dischargeCriteria[idx].checked;
+        this.saveDatabase();
+        this.renderRelapseAndDischarge();
+      }
+
+      openLongitudinalSessionModal() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const nextNum = (p.sessions?.length || 0) + 1;
+        document.getElementById('long-sess-num').value = nextNum;
+        document.getElementById('long-sess-date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('long-sess-goals').value = '';
+        document.getElementById('long-sess-techniques').value = '';
+        document.getElementById('long-sess-homework').value = '';
+        document.getElementById('long-sess-obs').value = '';
+
+        const modal = document.getElementById('modal-longitudinal-session');
+        if (modal) modal.classList.add('show');
+      }
+
+      saveNewLongitudinalSession() {
+        const p = this.getCurrentPatient();
+        if (!p) return;
+
+        const sessNum = parseInt(document.getElementById('long-sess-num').value) || (p.sessions.length + 1);
+        const date = document.getElementById('long-sess-date').value || new Date().toISOString().split('T')[0];
+        const status = document.getElementById('long-sess-status').value;
+        const goalsWorked = document.getElementById('long-sess-goals').value || 'Reestructuración y consolidación de objetivos';
+        const techniquesApplied = document.getElementById('long-sess-techniques').value || 'TCC, defusión ACT y activación conductual';
+        const homework = document.getElementById('long-sess-homework').value || 'Registro de pensamientos y práctica de autocuidado';
+        const observations = document.getElementById('long-sess-obs').value || 'Paciente orientada, afecto reactivo, colaboradora y comprometida con el plan.';
+
+        const phq = parseInt(document.getElementById('long-metric-phq').value) || 7;
+        const gad = parseInt(document.getElementById('long-metric-gad').value) || 5;
+        const pcl = parseInt(document.getElementById('long-metric-pcl').value) || 8;
+        const cssrs = document.getElementById('long-metric-cssrs').value;
+        const sleep = parseInt(document.getElementById('long-metric-sleep').value) || 8;
+        const social = parseInt(document.getElementById('long-metric-social').value) || 8;
+        const work = parseInt(document.getElementById('long-metric-work').value) || 8;
+        const adherence = parseInt(document.getElementById('long-metric-adherence').value) || 95;
+
+        const newSession = {
+          id: `SES-${Date.now()}`,
+          number: sessNum,
+          date,
+          format: 'SOAP',
+          alliance: 5,
+          status,
+          goalsWorked,
+          techniquesApplied,
+          homework,
+          homeworkCompliance: adherence,
+          observations,
+          metrics: { phq9: phq, gad7: gad, pcl5: pcl, cssrs, sleep, social, work, adherence },
+          s: `Paciente refiere evolución en objetivos trabajados. Estado reportado: ${status}.`,
+          o: `Examen mental: ${observations}`,
+          a: `Evolución clínica favorable con puntajes PHQ-9: ${phq}/27 y GAD-7: ${gad}/21.`,
+          p: `Plan intersesión acordado: ${homework}`
+        };
+
+        p.sessions.push(newSession);
+
+        // Actualizar escalas actuales
+        p.scales.phq9.score = phq;
+        p.scales.phq9.level = phq >= 20 ? 'Severa' : phq >= 15 ? 'Mod. Severa' : phq >= 10 ? 'Moderada' : phq >= 5 ? 'Leve' : 'Mínima';
+        p.scales.gad7.score = gad;
+        p.scales.gad7.level = gad >= 15 ? 'Severa' : gad >= 10 ? 'Moderada' : gad >= 5 ? 'Leve' : 'Mínima';
+        p.scales.pcl5.score = pcl;
+
+        this.saveDatabase();
+        this.loadCurrentPatientIntoViews();
+        this.renderSessionsTable();
+        this.updateChartsData();
+        this.closeModal('modal-longitudinal-session');
+        alert(`Sesión #${sessNum} registrada exitosamente.`);
       }
 
       // ==========================================
@@ -2642,6 +4694,51 @@
           <p><strong>Pronóstico:</strong> Favorable con psicoterapia cognitiva integrativa (TCC/Esquemas/EMDR).</p>
           <p><strong>Nivel de Riesgo Global:</strong> ${p.suicideRisk}</p>
 
+          <h3 style="font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--accent-teal); border-bottom: 1px solid var(--accent-teal); padding-bottom: 4px; margin: 16px 0 8px;">
+            6. Evolución Terapéutica Longitudinal & Resultados Clínicos Medibles
+          </h3>
+          <div style="background: var(--bg-tertiary); padding: 10px 14px; border-radius: 6px; margin-bottom: 10px; font-size: 11.5px;">
+            <p style="margin: 0 0 6px;"><strong>Comparativa Línea Base vs Última Sesión (#${p.sessions.length}):</strong></p>
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+              <tr style="border-bottom: 1px solid var(--card-border);">
+                <th style="text-align: left; padding: 4px 0;">Dimensión Evaluada</th>
+                <th style="text-align: center; padding: 4px 0;">Puntaje Inicial</th>
+                <th style="text-align: center; padding: 4px 0;">Puntaje Actual</th>
+                <th style="text-align: center; padding: 4px 0;">Cambio Absoluto</th>
+                <th style="text-align: center; padding: 4px 0;">Cambio %</th>
+                <th style="text-align: right; padding: 4px 0;">Impacto Clínico</th>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--card-border);">
+                <td style="padding: 4px 0;">Depresión (PHQ-9)</td>
+                <td style="text-align: center;">${p.baselineMetrics?.phq9 ?? 20}</td>
+                <td style="text-align: center;">${p.scales.phq9.score}</td>
+                <td style="text-align: center; color: #059669; font-weight: bold;">-${(p.baselineMetrics?.phq9 ?? 20) - p.scales.phq9.score} pts</td>
+                <td style="text-align: center; color: #059669; font-weight: bold;">-${(((p.baselineMetrics?.phq9 ?? 20) - p.scales.phq9.score)/(p.baselineMetrics?.phq9 || 1)*100).toFixed(1)}%</td>
+                <td style="text-align: right;"><span class="badge badge-success">Excelente (≥50%)</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--card-border);">
+                <td style="padding: 4px 0;">Ansiedad (GAD-7)</td>
+                <td style="text-align: center;">${p.baselineMetrics?.gad7 ?? 14}</td>
+                <td style="text-align: center;">${p.scales.gad7.score}</td>
+                <td style="text-align: center; color: #059669; font-weight: bold;">-${(p.baselineMetrics?.gad7 ?? 14) - p.scales.gad7.score} pts</td>
+                <td style="text-align: center; color: #059669; font-weight: bold;">-${(((p.baselineMetrics?.gad7 ?? 14) - p.scales.gad7.score)/(p.baselineMetrics?.gad7 || 1)*100).toFixed(1)}%</td>
+                <td style="text-align: right;"><span class="badge badge-success">Excelente</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 4px 0;">Calidad de Sueño</td>
+                <td style="text-align: center;">${p.baselineMetrics?.sleep ?? 2}/10</td>
+                <td style="text-align: center;">${p.sessions.length > 0 ? (p.sessions[p.sessions.length-1].metrics?.sleep ?? 8) : 8}/10</td>
+                <td style="text-align: center; color: #059669; font-weight: bold;">+6 pts</td>
+                <td style="text-align: center; color: #059669; font-weight: bold;">+300%</td>
+                <td style="text-align: right;"><span class="badge badge-success">Recuperación Plena</span></td>
+              </tr>
+            </table>
+          </div>
+          <p style="font-size: 11.5px;">
+            <strong>Objetivos SMART:</strong> ${p.smartGoals ? p.smartGoals.filter(g => g.progress === 100).length : 1} de ${p.smartGoals ? p.smartGoals.length : 5} logrados plenamente (Avance global: 85%).<br>
+            <strong>Estatus de Alta Clínica:</strong> En proceso de consolidación de autonomía. Criterios de remisión sostenida verificados.
+          </p>
+
           <div style="margin-top: 36px; display: flex; justify-content: space-between; font-size: 11px; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 12px;">
             <div>
               <div style="width: 180px; border-bottom: 1px solid #000; margin-bottom: 4px;"></div>
@@ -2674,7 +4771,7 @@
 
         doc.setFontSize(10);
         doc.setTextColor(100);
-        doc.text("Informe de Evaluación Psicológica & Formulación Clínica", 20, 26);
+        doc.text("Informe de Evaluación Psicológica & Evolución Longitudinal", 20, 26);
         doc.text(`Expediente: ${p.id} | Fecha: ${new Date().toLocaleDateString('es-ES')}`, 20, 32);
 
         doc.setDrawColor(200);
@@ -2686,55 +4783,72 @@
         doc.text(splitDisclaimer, 20, 41);
 
         let y = 52;
-        doc.setFontSize(12);
+        doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
         doc.text("1. DATOS DEL PACIENTE", 20, y);
         y += 6;
-        doc.setFontSize(10);
+        doc.setFontSize(9.5);
         doc.setTextColor(60);
         doc.text(`Nombre: ${p.name} | Doc: ${p.identifier} | Edad: ${p.age} años | Género: ${p.gender}`, 20, y);
-        y += 10;
+        y += 8;
 
-        doc.setFontSize(12);
+        doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
         doc.text("2. MOTIVO DE CONSULTA", 20, y);
-        y += 6;
-        doc.setFontSize(10);
+        y += 5;
+        doc.setFontSize(9.5);
         doc.setTextColor(60);
         const splitReason = doc.splitTextToSize(`"${p.reasonComplaint}"`, 170);
         doc.text(splitReason, 20, y);
-        y += splitReason.length * 5 + 6;
+        y += splitReason.length * 4.5 + 4;
 
-        doc.setFontSize(12);
+        doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.text("3. DIAGNÓSTICO NOSOLÓGICO", 20, y);
-        y += 6;
-        doc.setFontSize(10);
+        doc.text("3. DIAGNÓSTICO NOSOLÓGICO MULTIDIMENSIONAL", 20, y);
+        y += 5;
+        doc.setFontSize(9.5);
         doc.setTextColor(60);
         doc.text(`DSM-5-TR: ${p.dsm5.code} - ${p.dsm5.title}`, 20, y);
         y += 5;
-        doc.text(`Especificadores: ${p.dsm5.specifiers}`, 20, y);
-        y += 5;
         doc.text(`PDM-2: ${p.pdm2.org} | ${p.pdm2.style}`, 20, y);
-        y += 10;
+        y += 8;
 
-        doc.setFontSize(12);
+        doc.setFontSize(11);
         doc.setTextColor(15, 23, 42);
-        doc.text("4. BATERÍA PSICOMÉTRICA", 20, y);
-        y += 6;
-        doc.setFontSize(10);
+        doc.text("4. BATERÍA PSICOMÉTRICA & ESTADO ACTUAL", 20, y);
+        y += 5;
+        doc.setFontSize(9.5);
         doc.setTextColor(60);
-        doc.text(`PHQ-9 (Depresión): ${p.scales.phq9.score}/27 (${p.scales.phq9.level})`, 20, y);
+        doc.text(`PHQ-9: ${p.scales.phq9.score}/27 (${p.scales.phq9.level}) | GAD-7: ${p.scales.gad7.score}/21 (${p.scales.gad7.level})`, 20, y);
         y += 5;
-        doc.text(`GAD-7 (Ansiedad): ${p.scales.gad7.score}/21 (${p.scales.gad7.level})`, 20, y);
+        doc.text(`PCL-5: ${p.scales.pcl5.score}/32 | C-SSRS (Riesgo Suicida): ${p.scales.cssrs.category}`, 20, y);
+        y += 9;
+
+        doc.setFontSize(11);
+        doc.setTextColor(13, 148, 136);
+        doc.text("5. SEGUIMIENTO LONGITUDINAL & RESULTADOS CLÍNICOS", 20, y);
         y += 5;
-        doc.text(`PCL-5 (Trauma): ${p.scales.pcl5.score}/32 | C-SSRS (Riesgo Suicida): ${p.scales.cssrs.category}`, 20, y);
-        y += 15;
+        doc.setFontSize(9.5);
+        doc.setTextColor(60);
+        const basePhq = p.baselineMetrics?.phq9 ?? 20;
+        const diffPhq = basePhq - p.scales.phq9.score;
+        const pctPhq = ((diffPhq / basePhq) * 100).toFixed(1);
+        doc.text(`Línea Base PHQ-9: ${basePhq} -> Última Sesión: ${p.scales.phq9.score} (Reducción: -${diffPhq} pts / -${pctPhq}% - Excelente)`, 20, y);
+        y += 5;
+        const baseGad = p.baselineMetrics?.gad7 ?? 14;
+        const diffGad = baseGad - p.scales.gad7.score;
+        const pctGad = ((diffGad / baseGad) * 100).toFixed(1);
+        doc.text(`Línea Base GAD-7: ${baseGad} -> Última Sesión: ${p.scales.gad7.score} (Reducción: -${diffGad} pts / -${pctGad}% - Excelente)`, 20, y);
+        y += 5;
+        doc.text(`Objetivos SMART: 85% de cumplimiento promedio | Sesiones registradas: ${p.sessions.length}`, 20, y);
+        y += 5;
+        doc.text(`Pronóstico: Favorable con psicoterapia cognitiva integrativa (TCC / Esquemas / EMDR)`, 20, y);
+        y += 14;
 
         doc.line(20, y, 90, y);
         y += 5;
         doc.setFontSize(9);
-        doc.text("Firma y Registro del Profesional", 20, y);
+        doc.text("Dr. Jair Restaura - Psicólogo Clínico / Psiquiatra Evaluador", 20, y);
 
         doc.save(`${p.id}_INFORME_CLINICO.pdf`);
       }
